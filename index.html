@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta
+            name="viewport"
+            content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"
+        />
+        <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+        <title>Paste</title>
+        <script src="https://cdn.jsdelivr.net/combine/
+npm/codeflask@1.4.1/build/codeflask.min.js,
+npm/prismjs@1.14.0/components/prism-markup-templating.min.js,
+npm/lzma@2.3.2/src/lzma.min.js,
+npm/slim-select@1.25.0/dist/slimselect.min.js,
+npm/clipboard@2/dist/clipboard.min.js
+"></script>
+        <script src="languages.js"></script>
+        <link
+            rel="stylesheet"
+            type="text/css"
+            href="https://cdn.jsdelivr.net/npm/slim-select@1.25.0/dist/slimselect.min.css"
+        />
+        <link rel="stylesheet" href="theme.css" />
+        <link rel="stylesheet" href="styles.css" />
+        <style></style>
+    </head>
+    <body>
+        <div id="editor"></div>
+        <div id="footer">
+            <div class="select-wrapper d-inline-block">
+                <select id="language"></select>
+            </div>
+            <div class="d-inline-block">
+                <button onclick="generateLink()" type="button">Generate link</button>
+            </div>
+        </div>
+        <div id="copy" style="display: none">
+            <input type="text" value="copy me" id="copy-link" />
+            <button class="clipboard" data-clipboard-target="#copy-link" type="button">Copy</button>
+            <button onclick="copyElement.style.display = 'none'" type="button">Cancel</button>
+        </div>
+    </body>
+
+    <script src="index.js"></script>
+</html>
