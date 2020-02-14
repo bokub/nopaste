@@ -9,9 +9,9 @@
         <meta http-equiv="X-UA-Compatible" content="ie=edge" />
         <title>Paste</title>
         <script src="https://cdn.jsdelivr.net/combine/
-npm/codeflask@1.4.1/build/codeflask.min.js,
-npm/prismjs@1.14.0/components/prism-markup-templating.min.js,
 npm/lzma@2.3.2/src/lzma.min.js,
+npm/codeflask@1.4.1/build/codeflask.min.js,
+npm/prismjs@1.14.0/plugins/autoloader/prism-autoloader.min.js,
 npm/slim-select@1.25.0/dist/slimselect.min.js,
 npm/clipboard@2/dist/clipboard.min.js
 "></script>
@@ -21,9 +21,7 @@ npm/clipboard@2/dist/clipboard.min.js
             type="text/css"
             href="https://cdn.jsdelivr.net/npm/slim-select@1.25.0/dist/slimselect.min.css"
         />
-        <link rel="stylesheet" href="theme.css" />
-        <link rel="stylesheet" href="styles.css" />
-        <style></style>
+        <link rel="stylesheet" href="style.css" />
     </head>
     <body>
         <div id="editor"></div>
@@ -36,7 +34,7 @@ npm/clipboard@2/dist/clipboard.min.js
             </div>
         </div>
         <div id="copy" style="display: none">
-            <input type="text" value="copy me" id="copy-link" />
+            <input type="text" value="copy me" id="copy-link" onClick="this.setSelectionRange(0, this.value.length)" />
             <button class="clipboard" data-clipboard-target="#copy-link" type="button">Copy</button>
             <button onclick="copyElement.style.display = 'none'" type="button">Cancel</button>
         </div>

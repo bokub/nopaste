@@ -1,6 +1,7 @@
 let copyElement = document.getElementById('copy');
 const flask = new CodeFlask('#editor', { language: 'javascript', lineNumbers: true, defaultTheme: false });
 const lzma = new LZMA('lzma.min.js');
+Prism.plugins.autoloader.languages_path = 'https://cdn.jsdelivr.net/npm/prismjs@1.14.0/components/';
 let select;
 
 function init() {
@@ -17,14 +18,14 @@ function initLangSelector() {
         select: '#language',
         data: Object.entries(languages).map(([value, text]) => ({ text, value })),
         showContent: 'up',
-        onChange: () => {
-            updateLanguage();
+        onChange: e => {
+            console.log(e.value);
+            flask.updateLanguage(e.value);
         }
     });
 
     const urlParams = new URLSearchParams(window.location.search);
     select.set(Object.keys(languages).indexOf(urlParams.get('lang')) === -1 ? 'javascript' : urlParams.get('lang'));
-    updateLanguage();
 }
 
 function initCode() {
@@ -53,32 +54,6 @@ function initCode() {
             };
             reader.readAsArrayBuffer(blob);
         });
-}
-
-function updateLanguage() {
-    const lang = select.selected();
-    if (!Prism.languages.hasOwnProperty(lang)) {
-        addLanguage(lang);
-        return;
-    }
-    flask.updateLanguage(lang);
-}
-
-function addLanguage(lang) {
-    // Add a setter to detect when a language is available
-    Object.defineProperty(Prism.languages, lang, {
-        set: function(val) {
-            Prism.languages['_custom_' + lang] = val;
-            flask.updateLanguage(lang);
-        },
-        get: function() {
-            return Prism.languages['_custom_' + lang];
-        }
-    });
-
-    const script = document.createElement('script');
-    script.setAttribute('src', `https://cdn.jsdelivr.net/npm/prismjs@1.14.0/components/prism-${lang}.min.js`);
-    document.getElementsByTagName('head')[0].appendChild(script);
 }
 
 function generateLink() {
