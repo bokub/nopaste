@@ -19,7 +19,6 @@ function initLangSelector() {
         data: Object.entries(languages).map(([value, text]) => ({ text, value })),
         showContent: 'up',
         onChange: e => {
-            console.log(e.value);
             flask.updateLanguage(e.value);
         }
     });
@@ -69,8 +68,10 @@ function generateLink() {
             const url = `${location.protocol}//${location.host}${
                 location.pathname
             }?lang=${select.selected()}#${base64}`;
-            document.getElementById('copy-link').value = url;
-            copyElement.style.display = 'block';
+            const linkInput = document.getElementById('copy-link');
+            linkInput.value = url;
+            linkInput.setSelectionRange(0, url.length);
+            copyElement.style.display = 'flex';
         };
         reader.readAsDataURL(new Blob([new Uint8Array(compressed)]));
     });

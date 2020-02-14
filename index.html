@@ -26,15 +26,18 @@ npm/clipboard@2/dist/clipboard.min.js
     <body>
         <div id="editor"></div>
         <div id="footer">
-            <div class="select-wrapper d-inline-block">
-                <select id="language"></select>
-            </div>
-            <div class="d-inline-block">
-                <button onclick="generateLink()" type="button">Generate link</button>
-            </div>
+            <select id="language"></select>
+            <span class="grow"></span>
+            <button onclick="generateLink()" type="button">Generate link</button>
         </div>
         <div id="copy" style="display: none">
-            <input type="text" value="copy me" id="copy-link" onClick="this.setSelectionRange(0, this.value.length)" />
+            <input
+                type="text"
+                value="copy me"
+                id="copy-link"
+                class="grow"
+                onClick="this.setSelectionRange(0, this.value.length)"
+            />
             <button class="clipboard" data-clipboard-target="#copy-link" type="button">Copy</button>
             <button onclick="copyElement.style.display = 'none'" type="button">Cancel</button>
         </div>

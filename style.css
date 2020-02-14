@@ -1,4 +1,4 @@
-/* General app style */
+/* App layout */
 
 #editor,
 #footer,
@@ -11,43 +11,75 @@
 
 #editor {
     top: 0;
-    bottom: 36px;
+    bottom: 46px;
 }
 
 #footer,
 #copy {
-    height: 36px;
-    padding: 4px 20px 0 50px;
+    height: 38px;
+    padding: 8px 10px 0 42px;
     background-color: #3b3b47;
+    display: flex;
+    flex-wrap: wrap;
 }
-
-.d-inline-block {
-    display: inline-block;
+#footer > *,
+#copy > * {
+    margin: 0 6px;
 }
-
-.select-wrapper {
-    width: 300px;
-    font-size: 14px;
-    font-family: sans-serif;
-}
-.select-wrapper .ss-main .ss-single-selected {
-    height: 28px;
-}
-button {
-    cursor: pointer;
-    background-color: transparent;
-    color: #fff;
-    border: 1px solid #ccc;
-    border-radius: 2px;
-    height: 28px;
-    padding: 4px 8px;
-}
-button:hover {
-    background-color: rgba(255, 255, 255, 0.1);
+.grow {
+    flex-grow: 1;
 }
 
 .codeflask textarea {
     box-shadow: 5px -5px 10px rgba(0, 0, 0, 0.3) inset;
+}
+
+/* Form elements */
+
+.ss-main {
+    max-width: 300px;
+    width: calc(100% - 150px);
+    font-family: sans-serif;
+}
+
+.ss-main .ss-single-selected,
+button,
+input[type='text'],
+input[type='search'] {
+    height: 28px;
+    background-color: #3b3b47 !important;
+    color: #fff !important;
+    border-radius: 2px !important;
+    border: 1px solid #ccc !important;
+    font-size: 14px !important;
+}
+.ss-content {
+    background-color: #282936;
+    color: #dedede;
+    font-size: 14px;
+}
+.ss-content .ss-disabled {
+    background-color: #3b3b47 !important;
+}
+
+input[type='text'],
+input[type='search'] {
+    height: 26px !important;
+    padding: 0 5px;
+}
+input::-moz-selection {
+    background-color: rgba(90, 95, 128, 0.99);
+}
+input::selection {
+    background-color: rgba(90, 95, 128, 0.99);
+}
+
+button {
+    cursor: pointer;
+    padding: 4px 8px;
+}
+button:hover {
+    background-color: rgba(255, 255, 255, 0.1) !important;
 }
 
 /* Code editor theme */
@@ -67,13 +99,13 @@ button:hover {
 
 .codeflask textarea::-moz-selection,
 .codeflask textarea ::-moz-selection {
-    background-color: #5a5f80;
+    background-color: rgba(90, 95, 128, 0.99);
     color: #5a5f80;
 }
 
 .codeflask textarea::selection,
 .codeflask textarea ::selection {
-    background-color: #5a5f80;
+    background-color: rgba(90, 95, 128, 0.99);
     color: #5a5f80;
 }
 
@@ -81,6 +113,8 @@ button:hover {
     background: #3b3b47 !important;
 }
 
+/* Code editor syntax highlight */
+/* Inspiration from https://github.com/dracula/prism */
 .token.comment {
     color: rgba(98, 114, 164, 1);
 }
