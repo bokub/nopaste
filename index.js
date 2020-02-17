@@ -99,28 +99,50 @@ const buildUrl = rawData => {
 
 // Transform a compressed base64 string into a plain text string
 const decompress = (base64, cb) => {
+    const progressBar = document.getElementById('progress');
+
     const req = new XMLHttpRequest();
     req.open('GET', 'data:application/octet;base64,' + base64);
     req.responseType = 'arraybuffer';
     req.onload = e => {
-        lzma.decompress(new Uint8Array(e.target.response), cb);
+        lzma.decompress(
+            new Uint8Array(e.target.response),
+            (result, err) => {
+                progressBar.style.width = '0';
+                cb(result, err);
+            },
+            progress => {
+                progressBar.style.width = 100 * progress + '%';
+            }
+        );
     };
     req.send();
 };
 
 // Transform a plain text string into a compressed base64 string
 const compress = (str, cb) => {
-    lzma.compress(str, 1, (compressed, err) => {
-        if (err) {
-            cb(compressed, err);
-            return;
+    const progressBar = document.getElementById('progress');
+
+    lzma.compress(
+        str,
+        1,
+        (compressed, err) => {
+            if (err) {
+                progressBar.style.width = '0';
+                cb(compressed, err);
+                return;
+            }
+            const reader = new FileReader();
+            reader.onload = () => {
+                progressBar.style.width = '0';
+                cb(reader.result.substr(reader.result.indexOf(',') + 1));
+            };
+            reader.readAsDataURL(new Blob([new Uint8Array(compressed)]));
+        },
+        progress => {
+            progressBar.style.width = 100 * progress + '%';
         }
-        const reader = new FileReader();
-        reader.onload = () => {
-            cb(reader.result.substr(reader.result.indexOf(',') + 1));
-        };
-        reader.readAsDataURL(new Blob([new Uint8Array(compressed)]));
-    });
+    );
 };
 
 init();

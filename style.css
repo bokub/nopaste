@@ -2,11 +2,11 @@
 
 #editor,
 #footer,
-#copy {
+#copy,
+#progress {
     position: absolute;
     left: 0;
     right: 0;
-    bottom: 0;
 }
 
 #editor {
@@ -20,6 +20,7 @@
 
 #footer,
 #copy {
+    bottom: 0;
     height: 38px;
     padding: 8px 8px 0;
     background-color: #3b3b47;
@@ -29,6 +30,13 @@
 #footer > *,
 #copy > * {
     margin: 0 6px;
+}
+#progress {
+    top: 0;
+    height: 3px;
+    background: #ff79c6;
+    z-index: 5;
+    width: 0;
 }
 .grow {
     flex-grow: 1;
