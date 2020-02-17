@@ -1,80 +1,126 @@
-let copyElement = document.getElementById('copy');
-const flask = new CodeFlask('#editor', { language: 'javascript', lineNumbers: true, defaultTheme: false });
 const lzma = new LZMA('lzma.min.js');
-Prism.plugins.autoloader.languages_path = 'https://cdn.jsdelivr.net/npm/prismjs@1.14.0/components/';
-let select;
+let editor = null;
+let select = null;
+let clipboard = null;
 
-function init() {
+const init = () => {
+    initCodeEditor();
     initLangSelector();
     initCode();
-    const clipboard = new ClipboardJS('.clipboard');
-    clipboard.on('success', function() {
-        copyElement.style.display = 'none';
-    });
-}
+    initClipboard();
+};
 
-function initLangSelector() {
+const initCodeEditor = () => {
+    CodeMirror.modeURL = 'https://cdn.jsdelivr.net/npm/codemirror@5.51.0/mode/%N/%N.js';
+    editor = new CodeMirror(document.getElementById('editor'), {
+        lineNumbers: true,
+        theme: 'dracula'
+    });
+};
+
+const initLangSelector = () => {
     select = new SlimSelect({
         select: '#language',
-        data: Object.entries(languages).map(([value, text]) => ({ text, value })),
+        data: CodeMirror.modeInfo.map(e => ({ text: e.name })),
         showContent: 'up',
         onChange: e => {
-            flask.updateLanguage(e.value);
+            let mode = CodeMirror.findModeByName(e.text);
+            mode = mode ? mode.mode : null;
+            editor.setOption('mode', mode);
+            CodeMirror.autoLoadMode(editor, mode);
         }
     });
 
     const urlParams = new URLSearchParams(window.location.search);
-    select.set(Object.keys(languages).indexOf(urlParams.get('lang')) === -1 ? 'javascript' : urlParams.get('lang'));
-}
+    select.set(decodeURIComponent(urlParams.get('lang') || 'Plain Text'));
+};
 
-function initCode() {
+const initCode = () => {
     const base64 = location.hash.substr(1);
     if (base64.length === 0) {
         return;
     }
+    decompress(base64, (code, err) => {
+        if (err) {
+            alert('Failed to decompress data: ' + err);
+            return;
+        }
+        editor.setValue(code);
+    });
+};
 
-    if (!fetch) {
-        alert('Your browser does not support this page.  Sorry! :(');
+const initClipboard = () => {
+    clipboard = new ClipboardJS('.clipboard');
+    clipboard.on('success', () => {
+        hideCopyBar(true);
+    });
+};
+
+const generateLink = () => {
+    compress(editor.getValue(), (base64, err) => {
+        if (err) {
+            alert('Failed to compress data: ' + err);
+            return;
+        }
+        const url = buildUrl(base64);
+        showCopyBar(url);
+    });
+};
+
+// Open the "Copy" bar and select the content
+const showCopyBar = dataToCopy => {
+    const linkInput = document.getElementById('copy-link');
+    linkInput.value = dataToCopy;
+    linkInput.setSelectionRange(0, dataToCopy.length);
+    document.getElementById('copy').style.display = 'flex';
+};
+
+// Close the "Copy" bar
+const hideCopyBar = success => {
+    const copyButton = document.getElementById('copy-btn');
+    const copyBar = document.getElementById('copy');
+    if (!success) {
+        copyBar.style.display = 'none';
         return;
     }
+    copyButton.innerText = 'Copied !';
+    setTimeout(() => {
+        copyBar.style.display = 'none';
+        copyButton.innerText = 'Copy';
+    }, 800);
+};
 
-    fetch('data:application/octet-stream;base64,' + base64)
-        .then(r => r.blob())
-        .then(function(blob) {
-            const reader = new FileReader();
-            reader.onload = function() {
-                lzma.decompress(Array.from(new Uint8Array(reader.result)), function(plaintext, error) {
-                    if (error) {
-                        alert('Failed to decompress data: ' + error);
-                        return;
-                    }
-                    flask.updateCode(plaintext);
-                });
-            };
-            reader.readAsArrayBuffer(blob);
-        });
-}
+// Build a shareable URL
+const buildUrl = rawData => {
+    return `${location.protocol}//${location.host}${location.pathname}?lang=${encodeURIComponent(
+        select.selected()
+    )}#${rawData}`;
+};
 
-function generateLink() {
-    const code = flask.getCode();
-    lzma.compress(code, 1, function(compressed, error) {
-        if (error) {
-            alert('Failed to compress data: ' + error);
+// Transform a compressed base64 string into a plain text string
+const decompress = (base64, cb) => {
+    const req = new XMLHttpRequest();
+    req.open('GET', 'data:application/octet;base64,' + base64);
+    req.responseType = 'arraybuffer';
+    req.onload = e => {
+        lzma.decompress(new Uint8Array(e.target.response), cb);
+    };
+    req.send();
+};
+
+// Transform a plain text string into a compressed base64 string
+const compress = (str, cb) => {
+    lzma.compress(str, 1, (compressed, err) => {
+        if (err) {
+            cb(compressed, err);
             return;
         }
         const reader = new FileReader();
-        reader.onload = function() {
-            const base64 = reader.result.substr(reader.result.indexOf(',') + 1);
-            const url = `${location.protocol}//${location.host}${
-                location.pathname
-            }?lang=${select.selected()}#${base64}`;
-            const linkInput = document.getElementById('copy-link');
-            linkInput.value = url;
-            linkInput.setSelectionRange(0, url.length);
-            copyElement.style.display = 'flex';
+        reader.onload = () => {
+            cb(reader.result.substr(reader.result.indexOf(',') + 1));
         };
         reader.readAsDataURL(new Blob([new Uint8Array(compressed)]));
     });
-}
+};
 
 init();
