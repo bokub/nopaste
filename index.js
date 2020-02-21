@@ -21,18 +21,21 @@ const initCodeEditor = () => {
 const initLangSelector = () => {
     select = new SlimSelect({
         select: '#language',
-        data: CodeMirror.modeInfo.map(e => ({ text: e.name })),
+        data: CodeMirror.modeInfo.map(e => ({
+            text: e.name,
+            value: slugify(e.name),
+            data: { mime: e.mime, mode: e.mode }
+        })),
         showContent: 'up',
         onChange: e => {
-            let mode = CodeMirror.findModeByName(e.text);
-            mode = mode ? mode.mode : null;
-            editor.setOption('mode', mode);
-            CodeMirror.autoLoadMode(editor, mode);
+            const language = e.data || { mime: null, mode: null };
+            editor.setOption('mode', language.mime);
+            CodeMirror.autoLoadMode(editor, language.mode);
         }
     });
 
     const urlParams = new URLSearchParams(window.location.search);
-    select.set(decodeURIComponent(urlParams.get('lang') || 'Plain Text'));
+    select.set(decodeURIComponent(urlParams.get('lang') || 'plain-text'));
 };
 
 const initCode = () => {
@@ -144,5 +147,14 @@ const compress = (str, cb) => {
         }
     );
 };
+
+const slugify = str =>
+    str
+        .toString()
+        .toLowerCase()
+        .replace(/\s+/g, '-')
+        .replace(/\+/g, '-p')
+        .replace(/#/g, '-sharp')
+        .replace(/[^\w\-]+/g, '');
 
 init();
