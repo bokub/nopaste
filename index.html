@@ -13,6 +13,7 @@ npm/lzma@2.3.2/src/lzma.min.js,
 npm/slim-select@1.25.0/dist/slimselect.min.js,
 npm/clipboard@2/dist/clipboard.min.js,
 npm/codemirror@5.51.0/lib/codemirror.min.js,
+npm/codemirror@5.51.0/addon/mode/overlay.min.js,
 npm/codemirror@5.51.0/addon/mode/loadmode.min.js,
 npm/codemirror@5.51.0/mode/meta.min.js
 "></script>
@@ -34,7 +35,8 @@ npm/codemirror@5.51.0/theme/dracula.min.css
             <label for="language"></label
             ><select id="language"></select>
             <span class="grow"></span>
-            <button onclick="generateLink()" type="button">Generate link</button>
+            <button onclick="generateLink('url')" type="button">Generate link</button>
+            <button onclick="generateLink('markdown')" type="button">Generate markdown</button>
         </div>
         <div id="copy" style="display: none">
             <input

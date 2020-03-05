@@ -59,13 +59,13 @@ const initClipboard = () => {
     });
 };
 
-const generateLink = () => {
+const generateLink = mode => {
     compress(editor.getValue(), (base64, err) => {
         if (err) {
             alert('Failed to compress data: ' + err);
             return;
         }
-        const url = buildUrl(base64);
+        const url = buildUrl(base64, mode);
         showCopyBar(url);
     });
 };
@@ -94,10 +94,11 @@ const hideCopyBar = success => {
 };
 
 // Build a shareable URL
-const buildUrl = rawData => {
-    return `${location.protocol}//${location.host}${location.pathname}?lang=${encodeURIComponent(
+const buildUrl = (rawData, mode) => {
+    const url = `${location.protocol}//${location.host}${location.pathname}?lang=${encodeURIComponent(
         select.selected()
     )}#${rawData}`;
+    return mode === 'markdown' ? `[paste](${url})` : url;
 };
 
 // Transform a compressed base64 string into a plain text string
