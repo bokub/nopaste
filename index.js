@@ -13,11 +13,16 @@ const init = () => {
 };
 
 const initCodeEditor = () => {
+    const readOnly = new URLSearchParams(window.location.search).has('readonly');
     CodeMirror.modeURL = 'https://cdn.jsdelivr.net/npm/codemirror@5.51.0/mode/%N/%N.js';
     editor = new CodeMirror(document.getElementById('editor'), {
         lineNumbers: true,
-        theme: 'dracula'
+        theme: 'dracula',
+        readOnly: readOnly
     });
+    if (readOnly) {
+        document.body.classList.add('readonly');
+    }
 };
 
 const initLangSelector = () => {
@@ -36,8 +41,7 @@ const initLangSelector = () => {
         }
     });
 
-    const urlParams = new URLSearchParams(window.location.search);
-    select.set(decodeURIComponent(urlParams.get('lang') || 'plain-text'));
+    select.set(decodeURIComponent(new URLSearchParams(window.location.search).get('lang') || 'plain-text'));
 };
 
 const initCode = () => {
@@ -97,10 +101,19 @@ const hideCopyBar = success => {
 
 // Build a shareable URL
 const buildUrl = (rawData, mode) => {
-    const url = `${location.protocol}//${location.host}${location.pathname}?lang=${encodeURIComponent(
-        select.selected()
-    )}#${rawData}`;
-    return mode === 'markdown' ? `[paste](${url})` : url;
+    const url =
+        `${location.protocol}//${location.host}${location.pathname}` +
+        `?lang=${encodeURIComponent(select.selected())}` +
+        (mode === 'iframe' ? '&readonly' : '') +
+        `#${rawData}`;
+    if (mode === 'markdown') {
+        return `[paste](${url})`;
+    }
+    if (mode === 'iframe') {
+        const height = document.getElementsByClassName('CodeMirror-sizer')[0].scrollHeight;
+        return `<iframe width="100%" height="${height}" frameborder="0" src="${url}"></iframe>`;
+    }
+    return url;
 };
 
 // Transform a compressed base64 string into a plain text string

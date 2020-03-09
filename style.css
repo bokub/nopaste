@@ -13,6 +13,9 @@
     top: 0;
     bottom: 46px;
 }
+.readonly #editor {
+    bottom: 0;
+}
 
 .CodeMirror {
     height: 100%;
@@ -32,6 +35,11 @@
 #copy > * {
     margin: 0 6px;
 }
+
+.readonly #footer {
+    display: none;
+}
+
 #progress {
     top: 0;
     height: 3px;
