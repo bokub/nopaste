@@ -14,11 +14,12 @@ const init = () => {
 
 const initCodeEditor = () => {
     const readOnly = new URLSearchParams(window.location.search).has('readonly');
-    CodeMirror.modeURL = 'https://cdn.jsdelivr.net/npm/codemirror@5.51.0/mode/%N/%N.js';
+    CodeMirror.modeURL = 'https://cdn.jsdelivr.net/npm/codemirror@5.52.0/mode/%N/%N.js';
     editor = new CodeMirror(document.getElementById('editor'), {
         lineNumbers: true,
         theme: 'dracula',
-        readOnly: readOnly
+        readOnly: readOnly,
+        scrollbarStyle: 'simple'
     });
     if (readOnly) {
         document.body.classList.add('readonly');
@@ -110,7 +111,7 @@ const buildUrl = (rawData, mode) => {
         return `[paste](${url})`;
     }
     if (mode === 'iframe') {
-        const height = document.getElementsByClassName('CodeMirror-sizer')[0].scrollHeight;
+        const height = document.getElementsByClassName('CodeMirror-sizer')[0].clientHeight + 8;
         return `<iframe width="100%" height="${height}" frameborder="0" src="${url}"></iframe>`;
     }
     return url;
@@ -172,5 +173,15 @@ const slugify = str =>
         .replace(/\+/g, '-p')
         .replace(/#/g, '-sharp')
         .replace(/[^\w\-]+/g, '');
+
+/* Only for tests purposes */
+const testAllModes = () => {
+    for (const [index, language] of Object.entries(CodeMirror.modeInfo)) {
+        setTimeout(() => {
+            console.info(language.name);
+            select.set(slugify(language.name));
+        }, 1000 * index);
+    }
+};
 
 init();

@@ -19,7 +19,8 @@
 
 .CodeMirror {
     height: 100%;
-    font-size: 13px;
+    font-size: 14px;
+    font-family: JetBrainsMono, sans-serif;
 }
 
 #footer,
@@ -47,6 +48,11 @@
     z-index: 5;
     width: 0;
 }
+
+#copy-link {
+    font-family: JetBrainsMono, sans-serif;
+}
+
 .grow {
     flex-grow: 1;
 }
@@ -95,4 +101,15 @@ button:hover {
 }
 .ss-content .ss-disabled {
     background-color: #3b3b47 !important;
+}
+
+/* Fonts */
+@font-face {
+    font-family: 'JetBrainsMono';
+    src: url('https://cdn.jsdelivr.net/gh/JetBrains/JetBrainsMono/web/woff2/JetBrainsMono-Regular.woff2')
+            format('woff2'),
+        url('https://cdn.jsdelivr.net/gh/JetBrains/JetBrainsMono/web/woff/JetBrainsMono-Regular.woff') format('woff'),
+        url('https://cdn.jsdelivr.net/gh/JetBrains/JetBrainsMono/ttf/JetBrainsMono-Regular.ttf') format('truetype');
+    font-weight: 400;
+    font-style: normal;
 }
