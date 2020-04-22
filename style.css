@@ -1,7 +1,7 @@
 /* App layout */
 
 #editor,
-#footer,
+#controls,
 #copy,
 #progress {
     position: absolute;
@@ -10,11 +10,21 @@
 }
 
 #editor {
-    top: 0;
-    bottom: 46px;
+    top: 44px;
+    bottom: 0;
 }
 .readonly #editor {
-    bottom: 0;
+    top: 0;
+}
+
+#controls {
+    box-shadow: rgba(0, 0, 0, 0.15) 0 3px 10px;
+}
+#controls .title {
+    color: #fff;
+    font-family: JetBrainsMono, sans-serif;
+    font-size: 24px;
+    line-height: 30px;
 }
 
 .CodeMirror {
@@ -23,21 +33,22 @@
     font-family: JetBrainsMono, sans-serif;
 }
 
-#footer,
+#controls,
 #copy {
-    bottom: 0;
-    height: 38px;
+    top: 0;
+    height: 36px;
     padding: 8px 8px 0;
     background-color: #3b3b47;
     display: flex;
     flex-wrap: wrap;
+    z-index: 10;
 }
-#footer > *,
+#controls > *,
 #copy > * {
     margin: 0 6px;
 }
 
-.readonly #footer {
+.readonly #controls {
     display: none;
 }
 
@@ -59,10 +70,11 @@
 
 /* Form elements */
 
-.ss-main {
-    max-width: 300px;
+#controls .ss-main {
+    max-width: 230px;
     width: calc(100% - 150px);
-    font-family: sans-serif;
+    font-family: Roboto, sans-serif;
+    margin-right: 30px;
 }
 
 .ss-main .ss-single-selected,
@@ -75,11 +87,16 @@ input[type='search'] {
     border-radius: 2px !important;
     border: 1px solid #ccc !important;
     font-size: 14px !important;
+    font-family: Roboto, sans-serif;
 }
 input[type='text'],
 input[type='search'] {
     height: 26px !important;
     padding: 0 5px;
+}
+
+input::-webkit-search-cancel-button {
+    display: none;
 }
 input::-moz-selection {
     background-color: rgba(90, 95, 128, 0.99);
@@ -112,4 +129,15 @@ button:hover {
         url('https://cdn.jsdelivr.net/gh/JetBrains/JetBrainsMono/ttf/JetBrainsMono-Regular.ttf') format('truetype');
     font-weight: 400;
     font-style: normal;
+}
+
+@font-face {
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 400;
+    font-display: swap;
+    src: local('Roboto'), local('Roboto-Regular'),
+        url(https://fonts.gstatic.com/s/roboto/v20/KFOmCnqEu92Fr1Mu4mxK.woff2) format('woff2');
+    unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC,
+        U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
 }

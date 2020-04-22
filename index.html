@@ -34,17 +34,18 @@ npm/codemirror@5.52.0/theme/dracula.min.css
         <link href="favicon.ico" rel="icon" type="image/x-icon" />
     </head>
     <body>
-        <div id="progress"></div>
-        <div id="editor"></div>
-        <div id="footer">
-            <label for="language"></label
-            ><select id="language"></select>
+        <div id="controls">
+            <div class="title">{ Paste }</div>
             <span class="grow"></span>
+            <select id="language"></select>
+
             <button onclick="generateLink('url')" type="button">Generate link</button>
             <button onclick="generateLink('markdown')" type="button">Generate markdown</button>
             <button onclick="generateLink('iframe')" type="button">Embed</button>
         </div>
-        <div id="copy" style="display: none">
+        <div id="progress"></div>
+        <div id="editor"></div>
+        <div id="copy" style="display: none;">
             <input
                 type="text"
                 value="copy me"

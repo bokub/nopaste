@@ -19,7 +19,7 @@ const initCodeEditor = () => {
         lineNumbers: true,
         theme: 'dracula',
         readOnly: readOnly,
-        scrollbarStyle: 'simple'
+        scrollbarStyle: 'simple',
     });
     if (readOnly) {
         document.body.classList.add('readonly');
@@ -29,17 +29,17 @@ const initCodeEditor = () => {
 const initLangSelector = () => {
     select = new SlimSelect({
         select: '#language',
-        data: CodeMirror.modeInfo.map(e => ({
+        data: CodeMirror.modeInfo.map((e) => ({
             text: e.name,
             value: slugify(e.name),
-            data: { mime: e.mime, mode: e.mode }
+            data: { mime: e.mime, mode: e.mode },
         })),
-        showContent: 'up',
-        onChange: e => {
+        showContent: 'down',
+        onChange: (e) => {
             const language = e.data || { mime: null, mode: null };
             editor.setOption('mode', language.mime);
             CodeMirror.autoLoadMode(editor, language.mode);
-        }
+        },
     });
 
     select.set(decodeURIComponent(new URLSearchParams(window.location.search).get('lang') || 'plain-text'));
@@ -66,7 +66,7 @@ const initClipboard = () => {
     });
 };
 
-const generateLink = mode => {
+const generateLink = (mode) => {
     compress(editor.getValue(), (base64, err) => {
         if (err) {
             alert('Failed to compress data: ' + err);
@@ -78,7 +78,7 @@ const generateLink = mode => {
 };
 
 // Open the "Copy" bar and select the content
-const showCopyBar = dataToCopy => {
+const showCopyBar = (dataToCopy) => {
     const linkInput = document.getElementById('copy-link');
     linkInput.value = dataToCopy;
     linkInput.setSelectionRange(0, dataToCopy.length);
@@ -86,7 +86,7 @@ const showCopyBar = dataToCopy => {
 };
 
 // Close the "Copy" bar
-const hideCopyBar = success => {
+const hideCopyBar = (success) => {
     const copyButton = document.getElementById('copy-btn');
     const copyBar = document.getElementById('copy');
     if (!success) {
@@ -124,14 +124,14 @@ const decompress = (base64, cb) => {
     const req = new XMLHttpRequest();
     req.open('GET', 'data:application/octet;base64,' + base64);
     req.responseType = 'arraybuffer';
-    req.onload = e => {
+    req.onload = (e) => {
         lzma.decompress(
             new Uint8Array(e.target.response),
             (result, err) => {
                 progressBar.style.width = '0';
                 cb(result, err);
             },
-            progress => {
+            (progress) => {
                 progressBar.style.width = 100 * progress + '%';
             }
         );
@@ -159,13 +159,13 @@ const compress = (str, cb) => {
             };
             reader.readAsDataURL(new Blob([new Uint8Array(compressed)]));
         },
-        progress => {
+        (progress) => {
             progressBar.style.width = 100 * progress + '%';
         }
     );
 };
 
-const slugify = str =>
+const slugify = (str) =>
     str
         .toString()
         .toLowerCase()

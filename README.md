@@ -10,13 +10,11 @@ As a result, there is no risk of data being lost or deleted. Nobody will ever be
 
 > **Note:** This project is a clone of [Topaz's paste service][topaz-example], with a reworked design and additional features such as syntax highlighting, line numbers, and more
 
-
 ## How it works
 
 When you click on "Generate Link", the whole text is compressed using the [LZMA algorithm](https://en.wikipedia.org/wiki/Lempel%E2%80%93Ziv%E2%80%93Markov_chain_algorithm), encoded in [Base64](https://en.wikipedia.org/wiki/Base64), and put in the optional fragment at the end of the URL: `bokub.github.io/paste/#<data is here>`
 
 When you open a link which contains data, the fragment is decoded, decompressed, and displayed in the editor
-
 
 ## Embedded Paste snippets
 
