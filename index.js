@@ -108,7 +108,7 @@ const buildUrl = (rawData, mode) => {
         (mode === 'iframe' ? '&readonly' : '') +
         `#${rawData}`;
     if (mode === 'markdown') {
-        return `[paste](${url})`;
+        return `[NoPaste snippet](${url})`;
     }
     if (mode === 'iframe') {
         const height = document.getElementsByClassName('CodeMirror-sizer')[0].clientHeight + 8;

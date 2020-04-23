@@ -1,29 +1,29 @@
-[![Intro](https://github.com/bokub/paste/raw/images/intro.png)][intro-img]
+[![Intro](https://github.com/bokub/nopaste/raw/images/intro.png)][intro-img]
 
-> Paste is available at [`bokub.github.io/paste`](https://bokub.github.io/paste) ⚡
+[NoPaste](https://nopaste.ml/) is a client-side paste service which works with **no database**, and **no back-end code**
 
-Paste is a client-side paste service which works **without any database** or back-end code
+Instead, the pasted data is **compressed** then **stored** into a unique URL that can be decoded later. For example, [this is the HTML code of the service][example]
 
-Instead, the data is **compressed** then **stored** into a unique URL that can be decoded later. For example, [this is the HTML code of the service][example]
+As a result, there is no risk of data being lost, censored or deleted. The whole data is **in the link** and nowhere else 🤯
 
-As a result, there is no risk of data being lost or deleted. Nobody will ever be able to read your data unless you give them the link
-
-> **Note:** This project is a clone of [Topaz's paste service][topaz-example], with a reworked design and additional features such as syntax highlighting, line numbers, and more
+**Note:** This project is a fork of [Topaz's paste service][topaz-example], with a reworked design and a few additional features (syntax highlighting, line numbers, embedding...)
 
 ## How it works
 
-When you click on "Generate Link", the whole text is compressed using the [LZMA algorithm](https://en.wikipedia.org/wiki/Lempel%E2%80%93Ziv%E2%80%93Markov_chain_algorithm), encoded in [Base64](https://en.wikipedia.org/wiki/Base64), and put in the optional fragment at the end of the URL: `bokub.github.io/paste/#<data is here>`
+When you click on "Generate Link", NoPaste compresses the whole text using the
+[LZMA algorithm](https://en.wikipedia.org/wiki/Lempel%E2%80%93Ziv%E2%80%93Markov_chain_algorithm), encodes it in
+[Base64](https://en.wikipedia.org/wiki/Base64), and puts it in the optional fragment, at the end of the URL: `nopaste.ml/#<your data goes here>`
 
-When you open a link which contains data, the fragment is decoded, decompressed, and displayed in the editor
+When you open a link which contains data, NoPaste decodes the fragment, decompresses it, and displays the result in the editor
 
-## Embedded Paste snippets
+## Embedded NoPaste snippets
 
-You can include code snippets into your own website by clicking the _Embed_ button and using the generated HTML code
+You can include NoPaste code snippets into your own website by clicking the _Embed_ button and using the generated HTML code
 
 [This is what an embedded Paste snippet looks like](https://jsfiddle.net/bokub/nwtcdrph/show)
 
-Feel free to edit the generated `height` and `width` attributes so they suit your needs
+Feel free to edit the generated `height` and `width` attributes, so they suit your needs
 
-[intro-img]: https://bokub.github.io/paste/?lang=python#XQAAAQBAAwAAAAAAAAAFYH9Ev4Ly6z/HjSL9A25RBz0bkd1tSahYhX4hPnzQ0/4mR2bSHR+DYlQzBmjK5Pf8qtSY95RpMhLlPaFIgxWdmDCvjn78eJJBPIAptv2ZfAqHq/9h2ppe7XXLit9Ia5ip17plAs0BpQFZuqXAdMVascQlCUQvZ8Kh+yfSI0NxZ6LH0iGlTmdC//9/93OA
-[example]: https://bokub.github.io/paste/?lang=html#XQAAAQBICQAAAAAAAAAeCEUG0O+oKBdZ2an16qclPsVsA9xArjEo+v7wdal3Am1AsLdXzw9L86kFJA/HP3aMP31FQJprZ5BJcObQ9gG2mgk/o5ash0rBKVbyUAKaYDis7d4edb3x84EDgAqgJKRMcakcJsfTA+uQObpFvFBj4JdsawhToiw1f3rTDRF0BzhxihlMCqxRYKFQb7lOgjWPhG5X0YrIEDYqhOsPidFI+jXGLFay7Q18DShtXbTtor7HAiKD/vYrV4EftOwEhIx+9v4QIqbwBpmOJ7XkxV57CC6fb3sX+P/Tu/0qhTWxjOCVi1W1M9VepYdpS5pYNwcsMmpopEGli0YFXihb0sTTOQATnqsED8maqIRFGK22zsq3zfIe2tOvhKJMaz0KP6fSIWOMs2v73NpTNBaGR36IQJWdEk9EIZZPEtkqbaIlhC6eHJNoR7KUpEul6SIIr2oZX0Yo3rm01/KVZbpPM9Ua/SSSBT9KyqSzGjmXcx7BqFOxSpmo21R1pMOpTQYPsf/1AcyqAYo+0pv5tb0joMeqy50yJGlu42onyy8PKscboXSan7Heu5pDvl8QHaoGUWHQmbAeXk3Y9edWIVKos0OdALUk38ZWv/Iwxo62964C910663yISjuuqaUUqQ9gdQkWrONFpIf7rO7YhIfLKxE3dKU0dZFLBDNSYnv8I6GotgQWTIEDcjtKVcYH72CUda4lVdU1qFoql//LrlEUigPvSC6Tv1EUHiN/hWytcxTkbbqxTA7/8xnV3QEsMCDL+SDVB39SgZjlp/b7hbwHyR2R03IABtVRl+w9iH+Tje4FtJR+baENq36Sw3ZEudtbLZQC2PBHEkiDiQcxOMKdtA0qymNkLGcwSjMAbDh3+VY6V14wexvXT8ajNZ00q3Z9VJ3tPUloRUpBeOvuEmSGJdh+no0tja+z4djKGwu3O5Qi4a7x1UN7t+G7yStAZmZ8HAgyThCvmu4WGl0yFip3vcK6uoYIhEz0PqamVP5OGM3CdSU5oRB81/MYwHssPuRZ84QSN7NXFdlqKnxAo6JtJAEJpY1Yx+y1Vdonxzz7Xr2DKPUUFI+iH3GjfA/zpmk7FE5/iNGqqPgCK5wCdqwcDabk0LsfSaR8hpW4//FIpr0=
-[topaz-example]: https://topaz.github.io/paste/#XQAAAQCiAAAAAAAAAAAFFgvDUiqpf8dDPleMqfsqtbQYE28suCtDTB9iyFgGByXFmowl4KuT1zR0KewRAjxBzVDFlaaSzZrLsTZN82bHBNa68mD6Hhjf6r2befIMbSVBF8hxtQCVzmmFJTLWz8Bj6c+XGOhkHz+MPe8nEJ2py8kO0IU7g03WBV7fzp2WTp1jlaD/4fcYAA==
+[intro-img]: https://nopaste.ml/?lang=python#XQAAAQA6BAAAAAAAAAAFYH9Ev4Ly6wIDoAZQ25VXENWodOrWpmx8bfd8j6jeNeL/0fGICEpU6gh9GhXuFjqBBpJFOvefaxUXJquUWRQarmV+S0SHFOLUFyg/dw8OQI6RB6Y1yliOBWGL916HxAGqgwyLqjkH4w450OLk+q9oJYS6PrZfXU5uBC5DLe76OkG25ibvbsasKN51JuVyRedgoF/d7F9d6L7p02q0jHAM9pnPpKOKqlIVsNnXwYKXK10tnZ0GdiwJ3EeT//52uhw=
+[example]: https://nopaste.ml/?lang=html#XQAAAQBUCQAAAAAAAAAeCEUG0O+oKBdZ2an16qclPsVsA9xArjEo+v7wdal3Am1AsLdXzw9L86kFJA/HP3aMP31FQJprZ5BJcObQ9gG2mgk/o5ash0rBKVbyUAKaYDis7d4edb3x84EDgAqgJKRMcakcJsfTA+uQObpFvFBj4JdsawhToiw1f3rTDRF0BzhxihlMCqxRYKFQb7lOgjWPhG5X0YrIEDYqhOsPidFI+jXGLFay7Q18DShtXbTtor7HAiKD/vYrV4EftOwEhIx4+QJek98/8NI1prL34cmhuwIMl03D/F8/ijbaohNmhi34/gBcKsIXF8YeJDO38BE4arnsM5u72OLp2kNGcM4gpsjq9RXeRVGj2wDHbfuxw+swN3lcnLMEfbnfTuplO2zZIrfTJWiPOoDS4kxaIUf+1+UhffUA4nF/DSXaCy4NPENINk/9lj2lt8PWjiVcKioRIfsYNXnk0jHkPuUsd1ZnhqZME2V0xVJqp/3eENSLwYITfBWkS7HjcAC54KwLYmdFVEQkkM7hN/pEBpVpo5yjCqZJtllf3zzWh7zl+ygo/1lu3Ns/IzHvUEhvKxoS8CrydYJgEatBNcHfz7PsT0yr8DikUp0yl1Jo6uOpJ4sSVK0lxHg6/le7kpF3yAWDKp5A6dTZzJMn0wpFQn+BGYUE57wZ36ea5H9V/R/Gb85GDMGGUC3mUYA2d0hpBkZ7Lq+rnsXU3u8YWklQajdr1qhiX3YdGTMgbeczKiuxQCqNCO6hqvsmvjunmqE/nL6L864c2Kbo9mqs9gvyfsGC//xzLHxKIkhP+hNmfEItw8IHnci3pRRJge8rKUN3PiJDVBadudeCPirDTGVOOmKt8KTebwXluSp+B1lcujeTl+idLcrgq7QClPftbk0/tBlahYRtupXzX0XiTAJ7bZAzXRtUSY6RimiaGjQjem0NORR91yqUx6W572zG1hvI900/+F9lZEZ0R5boXmxUPnuJYQXlYDxAXNEpusrvquCcS8Mblu2XRqaCDQTsJjb/msVD5TcJTUADPKunwHlFiYiGC4nLNlqs0IEoblvpmP/9wp0otSPHb0gmCsEndDPMp3ezD6E0UNImrvBGGpyjLaDafWxogUaXnZxb/jYP1pGrS4sU/6xjDhv/5G6FEg==
+[topaz-example]: https://topaz.github.io/paste/#XQAAAQAAAQAAAAAAAAAFFgvDUiqpf8dDPleMqfsqtbQYE28suCtDTB9iyFgGByXgSRMepMuokjoACV4UPgBzwM3p+V/N2rCi8m90FkQfsRuMJ4LrZVFgr81wKDc2okcywbJBz7OGNPpc8xu2lAkpSekqRO+I/OYMpfHj0xXOussogYYnjDvlmjQ8IAjOjgxiGlI+IRMJvX+FWS6EgMz58UYCIp9qXpSm5RXTK1jq5KXeYI20a9i/kSiEwgldHO8txFQmZAYEH9oKJyGJLTAKsUuhuXVHxv/xxEyI
