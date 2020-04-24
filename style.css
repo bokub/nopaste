@@ -6,6 +6,7 @@ body {
     height: 100vh;
     color: #fff;
     font: normal 14px Roboto, sans-serif;
+    background-color: #282a36;
 }
 
 #editor {
@@ -29,8 +30,9 @@ footer {
     width: 0;
 }
 
-#copy:not(.hidden) + #controls,
 .hidden,
+select,
+#copy:not(.hidden) + #controls,
 .readonly .hide-readonly {
     display: none;
 }
