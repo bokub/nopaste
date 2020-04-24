@@ -24,6 +24,7 @@ npm/codemirror@5.52.0/mode/meta.min.js
             rel="stylesheet"
             type="text/css"
             href="https://cdn.jsdelivr.net/combine/
+npm/bootstrap@4.4.1/dist/css/bootstrap-grid.min.css,
 npm/slim-select@1.25.0/dist/slimselect.min.css,
 npm/codemirror@5.52.0/lib/codemirror.min.css,
 npm/codemirror@5.52.0/addon/scroll/simplescrollbars.css,
@@ -33,29 +34,50 @@ npm/codemirror@5.52.0/theme/dracula.min.css
         <link rel="stylesheet" href="style.css" />
         <link href="favicon.ico" rel="icon" type="image/x-icon" />
     </head>
-    <body>
-        <div id="controls">
-            <div class="title">{ NoPaste }</div>
-            <span class="grow"></span>
-            <select id="language"></select>
-
-            <button onclick="generateLink('url')" type="button">Generate link</button>
-            <button onclick="generateLink('markdown')" type="button">Generate markdown</button>
-            <button onclick="generateLink('iframe')" type="button">Embed</button>
+    <body class="m-0">
+        <div id="copy" class="container-fluid hidden">
+            <div class="row my-1">
+                <div class="col my-1">
+                    <input
+                        type="text"
+                        value="copy me"
+                        id="copy-link"
+                        class="px-2"
+                        onclick="this.setSelectionRange(0, this.value.length)"
+                    />
+                </div>
+                <div class="col-auto my-1">
+                    <button
+                        class="clipboard py-1 px-2 mx-1"
+                        id="copy-btn"
+                        data-clipboard-target="#copy-link"
+                        type="button"
+                    >
+                        Copy
+                    </button>
+                    <button class="py-1 px-2 mx-1" onclick="hideCopyBar(false)" type="button">Cancel</button>
+                </div>
+            </div>
+        </div>
+        <div id="controls" class="container-fluid">
+            <div class="row align-items-center justify-content-end my-1">
+                <div class="col mb-1">
+                    <h1 class="title my-0">{ NoPaste }</h1>
+                </div>
+                <div class="col-auto my-1">
+                    <select id="language"></select>
+                </div>
+                <div class="col-auto my-1">
+                    <button class="py-1 px-2 mx-0" onclick="generateLink('url')" type="button">Generate link</button>
+                    <button class="py-1 px-2 mx-1" onclick="generateLink('markdown')" type="button">
+                        Generate markdown
+                    </button>
+                    <button class="py-1 px-2 mx-0" onclick="generateLink('iframe')" type="button">Embed</button>
+                </div>
+            </div>
         </div>
         <div id="progress"></div>
         <div id="editor"></div>
-        <div id="copy" style="display: none;">
-            <input
-                type="text"
-                value="copy me"
-                id="copy-link"
-                class="grow"
-                onclick="this.setSelectionRange(0, this.value.length)"
-            />
-            <button class="clipboard" id="copy-btn" data-clipboard-target="#copy-link" type="button">Copy</button>
-            <button onclick="hideCopyBar(false)" type="button">Cancel</button>
-        </div>
     </body>
 
     <script src="index.js"></script>

@@ -1,30 +1,41 @@
 /* App layout */
 
-#editor,
-#controls,
-#copy,
-#progress {
-    position: absolute;
-    left: 0;
-    right: 0;
+body {
+    display: flex;
+    flex-flow: column;
+    height: 100vh;
 }
 
 #editor {
-    top: 44px;
-    bottom: 0;
-}
-.readonly #editor {
-    top: 0;
+    flex-grow: 1;
+    margin-top: -3px;
+    overflow: auto;
 }
 
-#controls {
+#controls,
+#copy {
+    background-color: #3b3b47;
+    z-index: 10;
     box-shadow: rgba(0, 0, 0, 0.15) 0 3px 10px;
 }
-#controls .title {
-    color: #fff;
+
+#progress {
+    min-height: 3px;
+    background: #ff79c6;
+    z-index: 15;
+    width: 0;
+}
+
+#copy:not(.hidden) + #controls,
+.hidden,
+.readonly #controls,
+.readonly #copy {
+    display: none;
+}
+
+#copy-link {
     font-family: JetBrainsMono, sans-serif;
-    font-size: 24px;
-    line-height: 30px;
+    width: 100%;
 }
 
 .CodeMirror {
@@ -33,66 +44,30 @@
     font-family: JetBrainsMono, sans-serif;
 }
 
-#controls,
-#copy {
-    top: 0;
-    height: 36px;
-    padding: 8px 8px 0;
-    background-color: #3b3b47;
-    display: flex;
-    flex-wrap: wrap;
-    z-index: 10;
-}
-#controls > *,
-#copy > * {
-    margin: 0 6px;
-}
-
-.readonly #controls {
-    display: none;
-}
-
-#progress {
-    top: 0;
-    height: 3px;
-    background: #ff79c6;
-    z-index: 5;
-    width: 0;
-}
-
-#copy-link {
-    font-family: JetBrainsMono, sans-serif;
-}
-
-.grow {
-    flex-grow: 1;
+.title {
+    color: #fff;
+    font: normal 24px JetBrainsMono, sans-serif;
+    white-space: nowrap;
 }
 
 /* Form elements */
 
 #controls .ss-main {
-    max-width: 230px;
-    width: calc(100% - 150px);
+    width: 180px;
     font-family: Roboto, sans-serif;
-    margin-right: 30px;
 }
 
 .ss-main .ss-single-selected,
 button,
 input[type='text'],
 input[type='search'] {
-    height: 28px;
     background-color: #3b3b47 !important;
     color: #fff !important;
     border-radius: 2px !important;
     border: 1px solid #ccc !important;
     font-size: 14px !important;
     font-family: Roboto, sans-serif;
-}
-input[type='text'],
-input[type='search'] {
     height: 26px !important;
-    padding: 0 5px;
 }
 
 input::-webkit-search-cancel-button {
@@ -106,7 +81,6 @@ input::selection {
 }
 button {
     cursor: pointer;
-    padding: 4px 8px;
 }
 button:hover {
     background-color: rgba(255, 255, 255, 0.1) !important;

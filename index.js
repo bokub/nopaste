@@ -82,7 +82,7 @@ const showCopyBar = (dataToCopy) => {
     const linkInput = document.getElementById('copy-link');
     linkInput.value = dataToCopy;
     linkInput.setSelectionRange(0, dataToCopy.length);
-    document.getElementById('copy').style.display = 'flex';
+    document.getElementById('copy').classList.remove('hidden');
 };
 
 // Close the "Copy" bar
@@ -90,12 +90,12 @@ const hideCopyBar = (success) => {
     const copyButton = document.getElementById('copy-btn');
     const copyBar = document.getElementById('copy');
     if (!success) {
-        copyBar.style.display = 'none';
+        copyBar.classList.add('hidden');
         return;
     }
     copyButton.innerText = 'Copied !';
     setTimeout(() => {
-        copyBar.style.display = 'none';
+        copyBar.classList.add('hidden');
         copyButton.innerText = 'Copy';
     }, 800);
 };
