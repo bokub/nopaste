@@ -7,7 +7,7 @@
             content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"
         />
         <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-        <title>NoPaste - Client-side paste service</title>
+        <title>NoPaste - No-database paste service</title>
         <script src="https://cdn.jsdelivr.net/combine/
 npm/lzma@2.3.2/src/lzma.min.js,
 npm/slim-select@1.25.0/dist/slimselect.min.js,
@@ -33,9 +33,13 @@ npm/codemirror@5.52.0/theme/dracula.min.css
         />
         <link rel="stylesheet" href="style.css" />
         <link href="favicon.ico" rel="icon" type="image/x-icon" />
+        <meta
+            name="description"
+            content="NoPaste is a client-side paste service which works with no database, and no back-end code. The whole data is stored in shareable links and nowhere else!"
+        />
     </head>
     <body class="m-0">
-        <div id="copy" class="container-fluid hidden">
+        <div id="copy" class="container-fluid hidden shadow-bottom hide-readonly">
             <div class="row my-1">
                 <div class="col my-1">
                     <input
@@ -59,7 +63,7 @@ npm/codemirror@5.52.0/theme/dracula.min.css
                 </div>
             </div>
         </div>
-        <div id="controls" class="container-fluid">
+        <div id="controls" class="container-fluid shadow-bottom hide-readonly">
             <div class="row align-items-center justify-content-end my-1">
                 <div class="col mb-1">
                     <h1 class="title my-0">{ NoPaste }</h1>
@@ -78,6 +82,24 @@ npm/codemirror@5.52.0/theme/dracula.min.css
         </div>
         <div id="progress"></div>
         <div id="editor"></div>
+        <footer class="shadow-top container-fluid">
+            <div class="row my-1">
+                <div class="col mono" id="stats"></div>
+                <div class="col-auto">
+                    <a href="javascript:void(0)" class="description-trigger">What is NoPaste?</a>
+                    <div id="description" class="hidden shadow-bottom p-3">
+                        NoPaste is a client-side paste service which works with <b>no database</b>, and
+                        <b>no back-end code</b>.<br /><br />
+                        Instead, the data is <b>compressed</b> then <b>stored</b> into a unique URL that can be decoded
+                        later.<br /><br />
+                        As a result, there is no risk of data being lost, censored or deleted. The whole data is stored
+                        <b>in the link</b> and nowhere else!
+                    </div>
+                    <div class="overlay hidden"></div>
+                </div>
+                <div class="col-auto"><a href="https://github.com/bokub/nopaste" target="_blank">Github</a></div>
+            </div>
+        </footer>
     </body>
 
     <script src="index.js"></script>

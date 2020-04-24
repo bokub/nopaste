@@ -2,9 +2,9 @@
 
 [NoPaste](https://nopaste.ml/) is a client-side paste service which works with **no database**, and **no back-end code**
 
-Instead, the pasted data is **compressed** then **stored** into a unique URL that can be decoded later. For example, [this is the CSS code used by NoPaste][example]
+Instead, the data is **compressed** then **stored** into a unique URL that can be decoded later. For example, [this is the CSS code used by NoPaste][example]
 
-As a result, there is no risk of data being lost, censored or deleted. The whole data is **in the link** and nowhere else 🤯
+As a result, there is no risk of data being lost, censored or deleted. The whole data stored is **in the link** and nowhere else! 🤯
 
 **Note:** This project is a fork of [Topaz's paste service][topaz-example], with a reworked design and a few additional features (syntax highlighting, line numbers, embedding...)
 

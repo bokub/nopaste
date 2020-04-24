@@ -4,6 +4,7 @@ const lzma = new LZMA(window.URL.createObjectURL(blob));
 let editor = null;
 let select = null;
 let clipboard = null;
+let statsEl = null;
 
 const init = () => {
     initCodeEditor();
@@ -24,6 +25,11 @@ const initCodeEditor = () => {
     if (readOnly) {
         document.body.classList.add('readonly');
     }
+
+    statsEl = document.getElementById('stats');
+    editor.on('change', () => {
+        statsEl.innerHTML = `Length: ${editor.getValue().length} |  Lines: ${editor['doc'].size}`;
+    });
 };
 
 const initLangSelector = () => {
@@ -67,12 +73,17 @@ const initClipboard = () => {
 };
 
 const generateLink = (mode) => {
-    compress(editor.getValue(), (base64, err) => {
+    const data = editor.getValue();
+    compress(data, (base64, err) => {
         if (err) {
             alert('Failed to compress data: ' + err);
             return;
         }
         const url = buildUrl(base64, mode);
+        statsEl.innerHTML = `Data length: ${data.length} |  Link length: ${
+            url.length
+        } | Compression ratio: ${Math.round((100 * url.length) / data.length)}%`;
+
         showCopyBar(url);
     });
 };

@@ -4,6 +4,8 @@ body {
     display: flex;
     flex-flow: column;
     height: 100vh;
+    color: #fff;
+    font: normal 14px Roboto, sans-serif;
 }
 
 #editor {
@@ -13,10 +15,11 @@ body {
 }
 
 #controls,
-#copy {
+#copy,
+#description,
+footer {
     background-color: #3b3b47;
     z-index: 10;
-    box-shadow: rgba(0, 0, 0, 0.15) 0 3px 10px;
 }
 
 #progress {
@@ -28,8 +31,7 @@ body {
 
 #copy:not(.hidden) + #controls,
 .hidden,
-.readonly #controls,
-.readonly #copy {
+.readonly .hide-readonly {
     display: none;
 }
 
@@ -38,23 +40,57 @@ body {
     width: 100%;
 }
 
+/* Styling */
+.shadow-bottom {
+    box-shadow: rgba(0, 0, 0, 0.15) 0 3px 10px;
+}
+.shadow-top {
+    box-shadow: rgba(0, 0, 0, 0.15) 0 -3px 10px;
+}
+a,
+a:hover,
+a:active {
+    color: #fff;
+}
 .CodeMirror {
     height: 100%;
-    font-size: 14px;
     font-family: JetBrainsMono, sans-serif;
 }
-
 .title {
-    color: #fff;
     font: normal 24px JetBrainsMono, sans-serif;
     white-space: nowrap;
+}
+.mono {
+    font-family: JetBrainsMono, sans-serif;
+}
+.description-trigger:hover + #description {
+    display: block;
+    position: fixed;
+    bottom: 20px;
+    margin: 40px;
+    right: 0;
+    max-width: 350px;
+}
+.description-trigger:hover + #description + .overlay {
+    /* Used to un-hover on mobile */
+    display: block;
+    position: fixed;
+    background: transparent;
+    right: 0;
+    top: 0;
+    left: 0;
+    bottom: 25px;
+}
+
+#description b {
+    font-weight: normal;
+    color: #ff79c6;
 }
 
 /* Form elements */
 
 #controls .ss-main {
     width: 180px;
-    font-family: Roboto, sans-serif;
 }
 
 .ss-main .ss-single-selected,
@@ -65,8 +101,7 @@ input[type='search'] {
     color: #fff !important;
     border-radius: 2px !important;
     border: 1px solid #ccc !important;
-    font-size: 14px !important;
-    font-family: Roboto, sans-serif;
+    font: normal 14px Roboto, sans-serif;
     height: 26px !important;
 }
 
