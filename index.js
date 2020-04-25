@@ -16,7 +16,7 @@ const init = () => {
 const initCodeEditor = () => {
     const readOnly = new URLSearchParams(window.location.search).has('readonly');
     CodeMirror.modeURL = 'https://cdn.jsdelivr.net/npm/codemirror@5.52.0/mode/%N/%N.js';
-    editor = new CodeMirror(document.getElementById('editor'), {
+    editor = new CodeMirror(byId('editor'), {
         lineNumbers: true,
         theme: 'dracula',
         readOnly: readOnly,
@@ -26,7 +26,7 @@ const initCodeEditor = () => {
         document.body.classList.add('readonly');
     }
 
-    statsEl = document.getElementById('stats');
+    statsEl = byId('stats');
     editor.on('change', () => {
         statsEl.innerHTML = `Length: ${editor.getValue().length} |  Lines: ${editor['doc'].size}`;
     });
@@ -90,16 +90,16 @@ const generateLink = (mode) => {
 
 // Open the "Copy" bar and select the content
 const showCopyBar = (dataToCopy) => {
-    const linkInput = document.getElementById('copy-link');
+    const linkInput = byId('copy-link');
     linkInput.value = dataToCopy;
     linkInput.setSelectionRange(0, dataToCopy.length);
-    document.getElementById('copy').classList.remove('hidden');
+    byId('copy').classList.remove('hidden');
 };
 
 // Close the "Copy" bar
 const hideCopyBar = (success) => {
-    const copyButton = document.getElementById('copy-btn');
-    const copyBar = document.getElementById('copy');
+    const copyButton = byId('copy-btn');
+    const copyBar = byId('copy');
     if (!success) {
         copyBar.classList.add('hidden');
         return;
@@ -118,7 +118,7 @@ const buildUrl = (rawData, mode) => {
         return `[NoPaste snippet](${url})`;
     }
     if (mode === 'iframe') {
-        const height = document.getElementsByClassName('CodeMirror-sizer')[0].clientHeight + 8;
+        const height = editor['doc'].size + 30;
         return `<iframe width="100%" height="${height}" frameborder="0" src="${url}&readonly"></iframe>`;
     }
     return url;
@@ -126,7 +126,7 @@ const buildUrl = (rawData, mode) => {
 
 // Transform a compressed base64 string into a plain text string
 const decompress = (base64, cb) => {
-    const progressBar = document.getElementById('progress');
+    const progressBar = byId('progress');
 
     const req = new XMLHttpRequest();
     req.open('GET', 'data:application/octet;base64,' + base64);
@@ -148,7 +148,7 @@ const decompress = (base64, cb) => {
 
 // Transform a plain text string into a compressed base64 string
 const compress = (str, cb) => {
-    const progressBar = document.getElementById('progress');
+    const progressBar = byId('progress');
 
     lzma.compress(
         str,
@@ -180,6 +180,8 @@ const slugify = (str) =>
         .replace(/\+/g, '-p')
         .replace(/#/g, '-sharp')
         .replace(/[^\w\-]+/g, '');
+
+const byId = (id) => document.getElementById(id);
 
 /* Only for tests purposes */
 const testAllModes = () => {

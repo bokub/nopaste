@@ -1,9 +1,12 @@
 /* App layout */
 
+html,
+body {
+    height: 100%;
+}
 body {
     display: flex;
     flex-flow: column;
-    height: 100vh;
     color: #fff;
     font: normal 14px Roboto, sans-serif;
     background-color: #282a36;
@@ -73,7 +76,7 @@ a:active {
     right: 0;
     max-width: 350px;
 }
-.description-trigger:hover + #description + .overlay {
+.description-trigger:hover + #description + #overlay {
     /* Used to un-hover on mobile */
     display: block;
     position: fixed;
