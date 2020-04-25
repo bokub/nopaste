@@ -52,7 +52,7 @@ const initLangSelector = () => {
 };
 
 const initCode = () => {
-    const base64 = location.hash.substr(1);
+    const base64 = location.pathname.substr(1) || location.hash.substr(1);
     if (base64.length === 0) {
         return;
     }
@@ -113,17 +113,13 @@ const hideCopyBar = (success) => {
 
 // Build a shareable URL
 const buildUrl = (rawData, mode) => {
-    const url =
-        `${location.protocol}//${location.host}${location.pathname}` +
-        `?lang=${encodeURIComponent(select.selected())}` +
-        (mode === 'iframe' ? '&readonly' : '') +
-        `#${rawData}`;
+    const url = `${location.protocol}//${location.host}/` + rawData + `?lang=${encodeURIComponent(select.selected())}`;
     if (mode === 'markdown') {
         return `[NoPaste snippet](${url})`;
     }
     if (mode === 'iframe') {
         const height = document.getElementsByClassName('CodeMirror-sizer')[0].clientHeight + 8;
-        return `<iframe width="100%" height="${height}" frameborder="0" src="${url}"></iframe>`;
+        return `<iframe width="100%" height="${height}" frameborder="0" src="${url}&readonly"></iframe>`;
     }
     return url;
 };
