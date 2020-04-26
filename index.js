@@ -20,6 +20,7 @@ const initCodeEditor = () => {
         lineNumbers: true,
         theme: 'dracula',
         readOnly: readOnly,
+        lineWrapping: true,
         scrollbarStyle: 'simple',
     });
     if (readOnly) {
@@ -90,10 +91,11 @@ const generateLink = (mode) => {
 
 // Open the "Copy" bar and select the content
 const showCopyBar = (dataToCopy) => {
+    byId('copy').classList.remove('hidden');
     const linkInput = byId('copy-link');
     linkInput.value = dataToCopy;
+    linkInput.focus();
     linkInput.setSelectionRange(0, dataToCopy.length);
-    byId('copy').classList.remove('hidden');
 };
 
 // Close the "Copy" bar
@@ -109,6 +111,18 @@ const hideCopyBar = (success) => {
         copyBar.classList.add('hidden');
         copyButton.innerText = 'Copy';
     }, 800);
+};
+
+const disableLineWrapping = () => {
+    byId('disable-line-wrapping').classList.add('hidden');
+    byId('enable-line-wrapping').classList.remove('hidden');
+    editor.setOption('lineWrapping', false);
+};
+
+const enableLineWrapping = () => {
+    byId('enable-line-wrapping').classList.add('hidden');
+    byId('disable-line-wrapping').classList.remove('hidden');
+    editor.setOption('lineWrapping', true);
 };
 
 // Build a shareable URL
