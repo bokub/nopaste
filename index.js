@@ -128,7 +128,9 @@ const openInNewTab = () => {
 
 // Build a shareable URL
 const buildUrl = (rawData, mode) => {
-    const url = `${location.protocol}//${location.host}/` + rawData + `?lang=${encodeURIComponent(select.selected())}`;
+    const base = `${location.protocol}//${location.host}/`;
+    const query = `?lang=${encodeURIComponent(select.selected())}`;
+    const url = rawData.length <= 4000 ? base + rawData + query : base + query + '#' + rawData;
     if (mode === 'markdown') {
         return `[NoPaste snippet](${url})`;
     }
