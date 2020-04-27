@@ -36,7 +36,8 @@ footer {
 .hidden,
 select,
 #copy:not(.hidden) + #controls,
-.readonly .hide-readonly {
+body.readonly .hide-readonly,
+body:not(.readonly) .show-readonly {
     display: none;
 }
 
@@ -166,4 +167,8 @@ button:hover {
     stroke-width: 0;
     stroke: currentColor;
     fill: currentColor;
+}
+.icon-edit {
+    font-size: 16px;
+    margin: -3px 0;
 }

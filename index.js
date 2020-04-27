@@ -6,31 +6,26 @@ let select = null;
 let clipboard = null;
 let statsEl = null;
 
-const init = () => {
-    initCodeEditor();
-    initLangSelector();
-    initCode();
-    initClipboard();
-};
-
-const initCodeEditor = () => {
-    const readOnly = new URLSearchParams(window.location.search).has('readonly');
+const initCodeEditor = (initialValue) => {
     CodeMirror.modeURL = 'https://cdn.jsdelivr.net/npm/codemirror@5.52.0/mode/%N/%N.js';
     editor = new CodeMirror(byId('editor'), {
         lineNumbers: true,
         theme: 'dracula',
         readOnly: readOnly,
-        lineWrapping: true,
+        lineWrapping: false,
         scrollbarStyle: 'simple',
+        value: initialValue,
     });
     if (readOnly) {
         document.body.classList.add('readonly');
     }
 
     statsEl = byId('stats');
+    statsEl.innerHTML = `Length: ${initialValue.length} |  Lines: ${editor['doc'].size}`;
     editor.on('change', () => {
         statsEl.innerHTML = `Length: ${editor.getValue().length} |  Lines: ${editor['doc'].size}`;
     });
+    initLangSelector();
 };
 
 const initLangSelector = () => {
@@ -55,14 +50,16 @@ const initLangSelector = () => {
 const initCode = () => {
     const base64 = location.pathname.substr(1) || location.hash.substr(1);
     if (base64.length === 0) {
+        initCodeEditor('');
         return;
     }
     decompress(base64, (code, err) => {
         if (err) {
             alert('Failed to decompress data: ' + err);
+            initCodeEditor('');
             return;
         }
-        editor.setValue(code);
+        initCodeEditor(code);
     });
 };
 
@@ -125,6 +122,10 @@ const enableLineWrapping = () => {
     editor.setOption('lineWrapping', true);
 };
 
+const openInNewTab = () => {
+    window.open(location.href.replace('&readonly', ''));
+};
+
 // Build a shareable URL
 const buildUrl = (rawData, mode) => {
     const url = `${location.protocol}//${location.host}/` + rawData + `?lang=${encodeURIComponent(select.selected())}`;
@@ -132,8 +133,8 @@ const buildUrl = (rawData, mode) => {
         return `[NoPaste snippet](${url})`;
     }
     if (mode === 'iframe') {
-        const height = editor['doc'].size + 30;
-        return `<iframe width="100%" height="${height}" frameborder="0" src="${url}&readonly"></iframe>`;
+        const height = Math.min(editor['doc'].height + 45, 800);
+        return `<iframe width="100%" height="${height}" frameborder="0" src="${url}"></iframe>`;
     }
     return url;
 };
@@ -207,4 +208,5 @@ const testAllModes = () => {
     }
 };
 
-init();
+initCode(); // Will decode URL, create code editor, and language selector
+initClipboard();

@@ -27,6 +27,14 @@ npm/codemirror@5.52.0/theme/dracula.min.css
         />
     </head>
     <body class="m-0">
+        <script>
+            const readOnly =
+                window.location !== window.parent.location ||
+                new URLSearchParams(window.location.search).has('readonly');
+            if (readOnly) {
+                document.body.classList.add('readonly');
+            }
+        </script>
         <div id="copy" class="container-fluid hidden shadow-bottom hide-readonly">
             <div class="row my-1">
                 <div class="col my-1">
@@ -74,7 +82,6 @@ npm/codemirror@5.52.0/theme/dracula.min.css
                         type="button"
                         id="enable-line-wrapping"
                         title="Enable line wrapping"
-                        class="hidden"
                     >
                         <svg class="icon"><use xlink:href="#icon-notes"></use></svg>
                     </button>
@@ -83,6 +90,7 @@ npm/codemirror@5.52.0/theme/dracula.min.css
                         type="button"
                         id="disable-line-wrapping"
                         title="Disable line wrapping"
+                        class="hidden"
                     >
                         <svg class="icon"><use xlink:href="#icon-wrap-text"></use></svg>
                     </button>
@@ -102,7 +110,14 @@ npm/codemirror@5.52.0/theme/dracula.min.css
         <div id="editor"></div>
         <footer id="footer" class="shadow-top container-fluid">
             <div class="row my-1">
-                <div class="col mono" id="stats"></div>
+                <div class="col mono hide-readonly" id="stats"></div>
+                <div class="col mono show-readonly">Hosted on NoPaste.ml</div>
+                <div class="col-auto mono show-readonly">
+                    <a href="javascript:void(0)" onclick="openInNewTab()">
+                        <svg class="icon icon-edit"><use xlink:href="#icon-edit"></use></svg>
+                        Edit
+                    </a>
+                </div>
             </div>
         </footer>
         <div class="hidden" id="overlay" onclick="this.classList.add('hidden')">
@@ -148,6 +163,12 @@ npm/codemirror@5.52.0/theme/dracula.min.css
                         0.219-1.687 0.453-0.375 0.266-0.75 0.641-1.672 1.797-0.125 0.156-0.313 0.25-0.484 0.25-0.141
                         0-0.266-0.047-0.391-0.125l-2.562-1.953c-0.266-0.203-0.328-0.547-0.156-0.828 1.687-2.797 4.062-4.156
                          7.25-4.156 3.344 0 7.094 2.672 7.094 6.25z"
+                    ></path>
+                </symbol>
+                <symbol id="icon-edit" viewBox="0 0 24 24">
+                    <path
+                        d="M20.719 7.031l-1.828 1.828-3.75-3.75 1.828-1.828q0.281-0.281 0.703-0.281t0.703 0.281l2.344
+                         2.344q0.281 0.281 0.281 0.703t-0.281 0.703zM3 17.25l11.063-11.063 3.75 3.75-11.063 11.063h-3.75v-3.75z"
                     ></path>
                 </symbol>
             </defs>
