@@ -6,7 +6,14 @@ let select = null;
 let clipboard = null;
 let statsEl = null;
 
-const initCodeEditor = (initialValue) => {
+const init = () => {
+    initCodeEditor();
+    initLangSelector();
+    initCode();
+    initClipboard();
+};
+
+const initCodeEditor = () => {
     CodeMirror.modeURL = 'https://cdn.jsdelivr.net/npm/codemirror@5.52.0/mode/%N/%N.js';
     editor = new CodeMirror(byId('editor'), {
         lineNumbers: true,
@@ -14,18 +21,15 @@ const initCodeEditor = (initialValue) => {
         readOnly: readOnly,
         lineWrapping: false,
         scrollbarStyle: 'simple',
-        value: initialValue,
     });
     if (readOnly) {
         document.body.classList.add('readonly');
     }
 
     statsEl = byId('stats');
-    statsEl.innerHTML = `Length: ${initialValue.length} |  Lines: ${editor['doc'].size}`;
     editor.on('change', () => {
         statsEl.innerHTML = `Length: ${editor.getValue().length} |  Lines: ${editor['doc'].size}`;
     });
-    initLangSelector();
 };
 
 const initLangSelector = () => {
@@ -50,16 +54,14 @@ const initLangSelector = () => {
 const initCode = () => {
     const base64 = location.pathname.substr(1) || location.hash.substr(1);
     if (base64.length === 0) {
-        initCodeEditor('');
         return;
     }
     decompress(base64, (code, err) => {
         if (err) {
             alert('Failed to decompress data: ' + err);
-            initCodeEditor('');
             return;
         }
-        initCodeEditor(code);
+        editor.setValue(code);
     });
 };
 
@@ -130,7 +132,7 @@ const openInNewTab = () => {
 const buildUrl = (rawData, mode) => {
     const base = `${location.protocol}//${location.host}/`;
     const query = `?lang=${encodeURIComponent(select.selected())}`;
-    const url = rawData.length <= 4000 ? base + rawData + query : base + query + '#' + rawData;
+    const url = base + query + '#' + rawData;
     if (mode === 'markdown') {
         return `[NoPaste snippet](${url})`;
     }
@@ -210,5 +212,4 @@ const testAllModes = () => {
     }
 };
 
-initCode(); // Will decode URL, create code editor, and language selector
-initClipboard();
+init();

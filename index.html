@@ -7,6 +7,7 @@
             content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"
         />
         <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+
         <title>NoPaste - No-database paste service</title>
         <link
             rel="stylesheet"
@@ -23,8 +24,9 @@ npm/codemirror@5.52.0/theme/dracula.min.css
         <link href="/favicon.ico" rel="icon" type="image/x-icon" />
         <meta
             name="description"
-            content="NoPaste is a client-side paste service which works with no database, and no back-end code. The whole data is stored in the generated links and nowhere else"
+            content="NoPaste is a client-side paste service which works with no database, and no back-end code. The data is stored entirely in the links and nowhere else"
         />
+        <link rel="canonical" href="https://nopaste.ml/" />
     </head>
     <body class="m-0">
         <script>
@@ -124,10 +126,14 @@ npm/codemirror@5.52.0/theme/dracula.min.css
             <div id="description" class="hidden shadow-bottom p-3">
                 NoPaste is a client-side paste service which works with <b>no database</b>, and
                 <b>no back-end code</b>.<br /><br />
-                Instead, the data is <b>compressed</b> then <b>stored</b> into a unique link that can be decoded
-                later.<br /><br />
-                As a result, there is no risk of data being lost, censored or deleted. The whole data is stored
-                <b>in the link</b> and nowhere else!
+                Instead, the data is <b>compressed</b> then <b>stored</b> into a unique URL that can be shared and
+                decoded later.<br /><br />
+
+                As a result, there is no risk of data being lost, censored or deleted. The data is stored entirely
+                <b>in the links</b> and nowhere else!<br /><br />
+
+                You can find more detailed information on
+                <a href="https://github.com/bokub/nopaste" rel="noopener" target="_blank">Github</a>
             </div>
         </div>
         <svg class="hidden">
