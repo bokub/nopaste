@@ -29,6 +29,7 @@ const initCodeEditor = () => {
     statsEl = byId('stats');
     editor.on('change', () => {
         statsEl.innerHTML = `Length: ${editor.getValue().length} |  Lines: ${editor['doc'].size}`;
+        hideCopyBar();
     });
 };
 
@@ -37,7 +38,7 @@ const initLangSelector = () => {
         select: '#language',
         data: CodeMirror.modeInfo.map((e) => ({
             text: e.name,
-            value: slugify(e.name),
+            value: hash(e.name),
             data: { mime: e.mime, mode: e.mode },
         })),
         showContent: 'down',
@@ -48,11 +49,24 @@ const initLangSelector = () => {
         },
     });
 
-    select.set(decodeURIComponent(new URLSearchParams(window.location.search).get('lang') || 'plain-text'));
+    // Retro-compatibility
+    const legacyLang = new URLSearchParams(window.location.search).get('lang');
+    if (legacyLang) {
+        const langObj = CodeMirror.modeInfo.find((e) => slugify(e.name) === legacyLang);
+        if (langObj) {
+            select.set(hash(langObj.name));
+            return;
+        }
+    }
+    // Set lang selector
+    select.set(window.location.hash.charAt(5) === '-' ? window.location.hash.substr(1, 4) : hash('Plain Text'));
 };
 
 const initCode = () => {
-    const base64 = location.pathname.substr(1) || location.hash.substr(1);
+    let base64 = location.pathname.substr(1) || location.hash.substr(1);
+    if (base64.charAt(4) === '-') {
+        base64 = base64.substr(5);
+    }
     if (base64.length === 0) {
         return;
     }
@@ -131,8 +145,8 @@ const openInNewTab = () => {
 // Build a shareable URL
 const buildUrl = (rawData, mode) => {
     const base = `${location.protocol}//${location.host}/`;
-    const query = `?lang=${encodeURIComponent(select.selected())}`;
-    const url = base + query + '#' + rawData;
+    const lang = hash('Plain Text') === select.selected() ? '' : select.selected() + '-';
+    const url = base + '#' + lang + rawData;
     if (mode === 'markdown') {
         return `[NoPaste snippet](${url})`;
     }
@@ -167,6 +181,10 @@ const decompress = (base64, cb) => {
 
 // Transform a plain text string into a compressed base64 string
 const compress = (str, cb) => {
+    if (str.length === 0) {
+        cb('');
+        return;
+    }
     const progressBar = byId('progress');
 
     lzma.compress(
@@ -202,6 +220,20 @@ const slugify = (str) =>
 
 const byId = (id) => document.getElementById(id);
 
+const hash = function (str, seed = 0) {
+    let h1 = 0xdeadbeef ^ seed;
+    let h2 = 0x41c6ce57 ^ seed;
+    for (let i = 0, ch; i < str.length; i++) {
+        ch = str.charCodeAt(i);
+        h1 = Math.imul(h1 ^ ch, 2654435761);
+        h2 = Math.imul(h2 ^ ch, 1597334677);
+    }
+    h1 = Math.imul(h1 ^ (h1 >>> 16), 2246822507) ^ Math.imul(h2 ^ (h2 >>> 13), 3266489909);
+    h2 = Math.imul(h2 ^ (h2 >>> 16), 2246822507) ^ Math.imul(h1 ^ (h1 >>> 13), 3266489909);
+    const h = 4294967296 * (2097151 & h2) + (h1 >>> 0);
+    return h.toString(36).substr(0, 4).toUpperCase();
+};
+
 /* Only for tests purposes */
 const testAllModes = () => {
     for (const [index, language] of Object.entries(CodeMirror.modeInfo)) {
@@ -210,6 +242,20 @@ const testAllModes = () => {
             select.set(slugify(language.name));
         }, 1000 * index);
     }
+};
+
+/* Only for tests purposes */
+const testHashCollisions = () => {
+    const hashes = {};
+    console.time('Hash test');
+    for (const lang of CodeMirror.modeInfo) {
+        const hashed = hash(lang.name);
+        if (hashes[hashed]) {
+            console.error(`${lang.name} and ${hashes[hashed]} share the same hash: ${hashed}`);
+        }
+        hashes[hashed] = lang.name;
+    }
+    console.timeEnd('Hash test');
 };
 
 init();

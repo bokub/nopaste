@@ -58,7 +58,8 @@ a:hover,
 a:active {
     color: #fff;
 }
-#controls a {
+#controls a,
+#footer a {
     text-decoration: none;
 }
 .CodeMirror {
