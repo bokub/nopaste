@@ -21,15 +21,17 @@ npm/codemirror@5.52.0/theme/dracula.min.css
 "
         />
         <link rel="stylesheet" href="/style.css" />
-        <link href="/favicon.ico" rel="icon" type="image/x-icon" />
+        <link href="favicon.ico" rel="icon" type="image/x-icon" />
         <link rel="canonical" href="https://nopaste.ml/" />
         <meta
             name="description"
+            property="og:description"
             content="NoPaste is a client-side paste service which works with no database, and no back-end code. The data is stored entirely in the links and nowhere else"
         />
         <meta property="og:title" content="NoPaste - No-database paste service" />
         <meta property="og:image" content="https://cdn.jsdelivr.net/gh/bokub/nopaste@images/logo.png" />
         <meta property="og:url" content="https://nopaste.ml/" />
+        <meta property="og:type" content="website" />
     </head>
     <body class="m-0">
         <script>
@@ -67,7 +69,7 @@ npm/codemirror@5.52.0/theme/dracula.min.css
         <div id="controls" class="container-fluid shadow-bottom hide-readonly">
             <div class="row align-items-center justify-content-end my-1">
                 <div class="col-auto mb-1">
-                    <h1 class="title my-0">{ NoPaste }</h1>
+                    <h1 class="my-0"><span>{</span> NoPaste <span>}</span></h1>
                 </div>
                 <div class="col-auto">
                     <a href="https://github.com/bokub/nopaste" rel="noopener" target="_blank" class="mx-1">

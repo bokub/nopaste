@@ -66,7 +66,7 @@ a:active {
     height: 100%;
     font-family: JetBrainsMono, sans-serif;
 }
-.title {
+h1 {
     font: normal 24px JetBrainsMono, sans-serif;
     white-space: nowrap;
 }
