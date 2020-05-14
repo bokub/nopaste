@@ -7,6 +7,7 @@ let clipboard = null;
 let statsEl = null;
 
 const init = () => {
+    handleLegacyUrl();
     initCodeEditor();
     initLangSelector();
     initCode();
@@ -38,7 +39,7 @@ const initLangSelector = () => {
         select: '#language',
         data: CodeMirror.modeInfo.map((e) => ({
             text: e.name,
-            value: hash(e.name),
+            value: shorten(e.name),
             data: { mime: e.mime, mode: e.mode },
         })),
         showContent: 'down',
@@ -49,24 +50,13 @@ const initLangSelector = () => {
         },
     });
 
-    // Retro-compatibility
-    const legacyLang = new URLSearchParams(window.location.search).get('lang');
-    if (legacyLang) {
-        const langObj = CodeMirror.modeInfo.find((e) => slugify(e.name) === legacyLang);
-        if (langObj) {
-            select.set(hash(langObj.name));
-            return;
-        }
-    }
     // Set lang selector
-    select.set(window.location.hash.charAt(5) === '-' ? window.location.hash.substr(1, 4) : hash('Plain Text'));
+    const l = new URLSearchParams(window.location.search).get('l');
+    select.set(l ? decodeURIComponent(l) : shorten('Plain Text'));
 };
 
 const initCode = () => {
-    let base64 = location.pathname.substr(1) || location.hash.substr(1);
-    if (base64.charAt(4) === '-') {
-        base64 = base64.substr(5);
-    }
+    let base64 = location.hash.substr(1);
     if (base64.length === 0) {
         return;
     }
@@ -77,6 +67,22 @@ const initCode = () => {
         }
         editor.setValue(code);
     });
+};
+
+const handleLegacyUrl = () => {
+    const lang = new URLSearchParams(window.location.search).get('lang');
+    const base = `${location.protocol}//${location.host}`;
+    if (location.hash.charAt(5) === '-') {
+        const hashedLang = location.hash.substr(1, 4);
+        const newLang = CodeMirror.modeInfo.find((e) => hash(e.name) === hashedLang);
+        const queryParams = newLang ? '?l=' + shorten(newLang.name) : '';
+        location.replace(`${base}/${queryParams}#${location.hash.substr(6)}`);
+        throw new Error('waiting for page to reload');
+    }
+    if (lang) {
+        location.replace(`${base}/${'?l=' + shorten(lang)}${location.hash}`);
+        throw new Error('waiting for page to reload');
+    }
 };
 
 const initClipboard = () => {
@@ -145,13 +151,13 @@ const openInNewTab = () => {
 // Build a shareable URL
 const buildUrl = (rawData, mode) => {
     const base = `${location.protocol}//${location.host}/`;
-    const lang = hash('Plain Text') === select.selected() ? '' : select.selected() + '-';
-    const url = base + '#' + lang + rawData;
+    const query = shorten('Plain Text') === select.selected() ? '' : `?l=${encodeURIComponent(select.selected())}`;
+    const url = base + query + '#' + rawData;
     if (mode === 'markdown') {
         return `[NoPaste snippet](${url})`;
     }
     if (mode === 'iframe') {
-        const height = Math.min(editor['doc'].height + 45, 800);
+        const height = editor['doc'].height + 45;
         return `<iframe width="100%" height="${height}" frameborder="0" src="${url}"></iframe>`;
     }
     return url;
@@ -211,6 +217,7 @@ const compress = (str, cb) => {
 
 const slugify = (str) =>
     str
+        .trim()
         .toString()
         .toLowerCase()
         .replace(/\s+/g, '-')
@@ -218,8 +225,29 @@ const slugify = (str) =>
         .replace(/#/g, '-sharp')
         .replace(/[^\w\-]+/g, '');
 
+const shorten = (name) => {
+    let n = slugify(name).replace('script', '-s').replace('python', 'py');
+    const nov = (s) => s[0] + s.substr(1).replace(/[aeiouy-]/g, '');
+    if (n.replace(/-/g, '').length <= 4) {
+        return n.replace(/-/g, '');
+    }
+    if (n.split('-').length >= 2) {
+        return n
+            .split('-')
+            .map((x) => nov(x.substr(0, 2)))
+            .join('')
+            .substr(0, 4);
+    }
+    n = nov(n);
+    if (n.length <= 4) {
+        return n;
+    }
+    return n.substr(0, 2) + n.substr(n.length - 2, 2);
+};
+
 const byId = (id) => document.getElementById(id);
 
+// Legacy code, only for retro-compatibility
 const hash = function (str, seed = 0) {
     let h1 = 0xdeadbeef ^ seed;
     let h2 = 0x41c6ce57 ^ seed;
@@ -234,28 +262,15 @@ const hash = function (str, seed = 0) {
     return h.toString(36).substr(0, 4).toUpperCase();
 };
 
-/* Only for tests purposes */
+// Only for tests purposes
 const testAllModes = () => {
     for (const [index, language] of Object.entries(CodeMirror.modeInfo)) {
+        CodeMirror.autoLoadMode(editor, language.mode);
         setTimeout(() => {
             console.info(language.name);
-            select.set(slugify(language.name));
+            select.set(shorten(language.name));
         }, 1000 * index);
     }
-};
-
-/* Only for tests purposes */
-const testHashCollisions = () => {
-    const hashes = {};
-    console.time('Hash test');
-    for (const lang of CodeMirror.modeInfo) {
-        const hashed = hash(lang.name);
-        if (hashes[hashed]) {
-            console.error(`${lang.name} and ${hashes[hashed]} share the same hash: ${hashed}`);
-        }
-        hashes[hashed] = lang.name;
-    }
-    console.timeEnd('Hash test');
 };
 
 init();
