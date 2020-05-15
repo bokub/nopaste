@@ -2,10 +2,7 @@
 <html lang="en">
     <head>
         <meta charset="UTF-8" />
-        <meta
-            name="viewport"
-            content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"
-        />
+        <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0" />
         <meta http-equiv="X-UA-Compatible" content="ie=edge" />
 
         <title>NoPaste - No-database paste service</title>
@@ -35,9 +32,7 @@ npm/codemirror@5.52.0/theme/dracula.min.css
     </head>
     <body class="m-0">
         <script>
-            const readOnly =
-                window.location !== window.parent.location ||
-                new URLSearchParams(window.location.search).has('readonly');
+            const readOnly = window.location !== window.parent.location || new URLSearchParams(window.location.search).has('readonly');
             if (readOnly) {
                 document.body.classList.add('readonly');
             }
@@ -45,21 +40,10 @@ npm/codemirror@5.52.0/theme/dracula.min.css
         <div id="copy" class="container-fluid hidden shadow-bottom hide-readonly">
             <div class="row my-1">
                 <div class="col my-1">
-                    <input
-                        type="text"
-                        value="copy me"
-                        id="copy-link"
-                        class="px-2"
-                        onclick="this.setSelectionRange(0, this.value.length)"
-                    />
+                    <input type="text" value="copy me" id="copy-link" class="px-2" onclick="this.setSelectionRange(0, this.value.length)" />
                 </div>
                 <div class="col-auto my-1">
-                    <button
-                        class="clipboard py-1 px-2 mx-1"
-                        id="copy-btn"
-                        data-clipboard-target="#copy-link"
-                        type="button"
-                    >
+                    <button class="clipboard py-1 px-2 mx-1" id="copy-btn" data-clipboard-target="#copy-link" type="button">
                         Copy
                     </button>
                     <button class="py-1 px-2 mx-1" onclick="hideCopyBar(false)" type="button">Cancel</button>
@@ -72,22 +56,11 @@ npm/codemirror@5.52.0/theme/dracula.min.css
                     <h1 class="my-0"><span>{</span> NoPaste <span>}</span></h1>
                 </div>
                 <div class="col-auto">
-                    <a
-                        href="https://github.com/bokub/nopaste"
-                        rel="noopener"
-                        target="_blank"
-                        class="mx-1"
-                        title="Source code"
-                    >
-                        <svg class="icon"><use xlink:href="#icon-github"></use></svg>
+                    <a href="https://github.com/bokub/nopaste" rel="noopener" target="_blank" class="mx-1" title="Source code">
+                        <span class="icon-github"></span>
                     </a>
-                    <a
-                        href="javascript:void(0)"
-                        onclick="byId('overlay').classList.remove('hidden')"
-                        class="mx-1"
-                        title="What is NoPaste?"
-                    >
-                        <svg class="icon mx-2"><use xlink:href="#icon-question"></use></svg>
+                    <a href="javascript:void(0)" onclick="byId('overlay').classList.remove('hidden')" class="mx-1" title="What is NoPaste?">
+                        <span class="mx-2 icon-question"></span>
                     </a>
                 </div>
                 <div class="col"></div>
@@ -95,13 +68,8 @@ npm/codemirror@5.52.0/theme/dracula.min.css
                     <select id="language"></select>
                 </div>
                 <div class="col-auto">
-                    <button
-                        onclick="enableLineWrapping()"
-                        type="button"
-                        id="enable-line-wrapping"
-                        title="Enable line wrapping"
-                    >
-                        <svg class="icon"><use xlink:href="#icon-notes"></use></svg>
+                    <button onclick="enableLineWrapping()" type="button" id="enable-line-wrapping" title="Enable line wrapping">
+                        <span class="icon-notes"></span>
                     </button>
                     <button
                         onclick="disableLineWrapping()"
@@ -110,7 +78,7 @@ npm/codemirror@5.52.0/theme/dracula.min.css
                         title="Disable line wrapping"
                         class="hidden"
                     >
-                        <svg class="icon"><use xlink:href="#icon-wrap-text"></use></svg>
+                        <span class="icon-wrap-text"></span>
                     </button>
                 </div>
                 <div class="col-auto">
@@ -132,7 +100,7 @@ npm/codemirror@5.52.0/theme/dracula.min.css
                 <div class="col mono show-readonly">Hosted on NoPaste.ml</div>
                 <div class="col-auto mono show-readonly">
                     <a href="javascript:void(0)" onclick="openInNewTab()">
-                        <svg class="icon icon-edit"><use xlink:href="#icon-edit"></use></svg>
+                        <span class="icon-edit"></span>
                         Edit
                     </a>
                 </div>
@@ -140,10 +108,8 @@ npm/codemirror@5.52.0/theme/dracula.min.css
         </footer>
         <div class="hidden" id="overlay" onclick="this.classList.add('hidden')">
             <div id="description" class="hidden shadow-bottom p-3">
-                NoPaste is a client-side paste service which works with <b>no database</b>, and
-                <b>no back-end code</b>.<br /><br />
-                Instead, the data is <b>compressed</b> then <b>stored</b> into a unique URL that can be shared and
-                decoded later.<br /><br />
+                NoPaste is a client-side paste service which works with <b>no database</b>, and <b>no back-end code</b>.<br /><br />
+                Instead, the data is <b>compressed</b> then <b>stored</b> into a unique URL that can be shared and decoded later.<br /><br />
 
                 As a result, there is no risk of data being lost, censored or deleted. The data is stored entirely
                 <b>in the links</b> and nowhere else!<br /><br />
@@ -152,49 +118,6 @@ npm/codemirror@5.52.0/theme/dracula.min.css
                 <a href="https://github.com/bokub/nopaste" rel="noopener" target="_blank">Github</a>
             </div>
         </div>
-        <svg class="hidden">
-            <defs>
-                <symbol id="icon-wrap-text" viewBox="0 0 24 24">
-                    <path
-                        d="M17.016 11.016q1.641 0 2.813 1.172t1.172 2.813-1.172 2.813-2.813 1.172h-2.016v2.016l-3-3
-                     3-3v2.016h2.25q0.797 0 1.406-0.609t0.609-1.406-0.609-1.406-1.406-0.609h-13.266v-1.969h13.031zM20.016
-                      5.016v1.969h-16.031v-1.969h16.031zM3.984 18.984v-1.969h6v1.969h-6z"
-                    ></path>
-                </symbol>
-                <symbol id="icon-notes" viewBox="0 0 24 24">
-                    <path d="M3 12.984v-1.969h18v1.969h-18zM3 6h18v2.016h-18v-2.016zM3 18v-2.016h12v2.016h-12z"></path>
-                </symbol>
-                <symbol id="icon-github" viewBox="0 0 32 32">
-                    <path
-                        d="M16 0.395c-8.836 0-16 7.163-16 16 0 7.069 4.585 13.067 10.942 15.182 0.8 0.148 1.094-0.3471.094-0.77
-                     0-0.381-0.015-1.642-0.022-2.979-4.452 0.968-5.391-1.888-5.391-1.888-0.728-1.849-1.776-2.341-1.776-2.341-1.452-0.993
-                      0.11-0.973 0.11-0.973 1.606 0.113 2.452 1.649 2.452 1.649 1.427 2.446 3.743 1.739 4.656 1.33 0.143-1.034 0.558-1.74
-                       1.016-2.14-3.554-0.404-7.29-1.777-7.29-7.907 0-1.747 0.625-3.174 1.649-4.295-0.166-0.403-0.714-2.030 0.155-4.234
-                        0 0 1.344-0.43 4.401 1.64 1.276-0.355 2.645-0.532 4.005-0.539 1.359 0.006 2.729 0.184 4.008 0.539 3.054-2.070
-                         4.395-1.64 4.395-1.64 0.871 2.204 0.323 3.831 0.157 4.234 1.026 1.12 1.647 2.548 1.647 4.295 0 6.145-3.743
-                          7.498-7.306 7.895 0.574 0.497 1.085 1.47 1.085 2.963 0 2.141-0.019 3.864-0.019 4.391 0 0.426 0.288 0.925
-                           1.099 0.768 6.354-2.118 10.933-8.113 10.933-15.18 0-8.837-7.164-16-16-16z"
-                    ></path>
-                </symbol>
-                <symbol id="icon-question" viewBox="0 0 17 28">
-                    <path
-                        d="M11 19.625v3.75c0 0.344-0.281 0.625-0.625 0.625h-3.75c-0.344 0-0.625-0.281-0.625-0.625v-3.75c0-0.344
-                     0.281-0.625 0.625-0.625h3.75c0.344 0 0.625 0.281 0.625 0.625zM15.937 10.25c0 2.969-2.016 4.109-3.5 4.937-0.922
-                      0.531-1.5 1.609-1.5 2.063v0c0 0.344-0.266 0.75-0.625 0.75h-3.75c-0.344 0-0.562-0.531-0.562-0.875v-0.703c0-1.891
-                       1.875-3.516 3.25-4.141 1.203-0.547 1.703-1.062 1.703-2.063 0-0.875-1.141-1.656-2.406-1.656-0.703 0-1.344
-                        0.219-1.687 0.453-0.375 0.266-0.75 0.641-1.672 1.797-0.125 0.156-0.313 0.25-0.484 0.25-0.141
-                        0-0.266-0.047-0.391-0.125l-2.562-1.953c-0.266-0.203-0.328-0.547-0.156-0.828 1.687-2.797 4.062-4.156
-                         7.25-4.156 3.344 0 7.094 2.672 7.094 6.25z"
-                    ></path>
-                </symbol>
-                <symbol id="icon-edit" viewBox="0 0 24 24">
-                    <path
-                        d="M20.719 7.031l-1.828 1.828-3.75-3.75 1.828-1.828q0.281-0.281 0.703-0.281t0.703 0.281l2.344
-                         2.344q0.281 0.281 0.281 0.703t-0.281 0.703zM3 17.25l11.063-11.063 3.75 3.75-11.063 11.063h-3.75v-3.75z"
-                    ></path>
-                </symbol>
-            </defs>
-        </svg>
         <script src="https://cdn.jsdelivr.net/combine/
 npm/lzma@2.3.2/src/lzma.min.js,
 npm/slim-select@1.25.0/dist/slimselect.min.js,

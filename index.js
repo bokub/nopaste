@@ -100,9 +100,9 @@ const generateLink = (mode) => {
             return;
         }
         const url = buildUrl(base64, mode);
-        statsEl.innerHTML = `Data length: ${data.length} |  Link length: ${
-            url.length
-        } | Compression ratio: ${Math.round((100 * url.length) / data.length)}%`;
+        statsEl.innerHTML = `Data length: ${data.length} |  Link length: ${url.length} | Compression ratio: ${Math.round(
+            (100 * url.length) / data.length
+        )}%`;
 
         showCopyBar(url);
     });
@@ -150,7 +150,7 @@ const openInNewTab = () => {
 
 // Build a shareable URL
 const buildUrl = (rawData, mode) => {
-    const base = `${location.protocol}//${location.host}/`;
+    const base = `${location.protocol}//${location.host}${location.pathname}`;
     const query = shorten('Plain Text') === select.selected() ? '' : `?l=${encodeURIComponent(select.selected())}`;
     const url = base + query + '#' + rawData;
     if (mode === 'markdown') {

@@ -18,6 +18,25 @@ When you open a link, NoPaste reads, decodes, and decompresses whatever is after
 
 This process is done entirely **in your browser**, and the web server hosting NoPaste [never has access to the fragment](https://en.wikipedia.org/wiki/Fragment_identifier)
 
+## Embedded NoPaste snippets
+
+You can include NoPaste code snippets into your own website by clicking the _Embed_ button and using the generated HTML code.
+
+Here is an example of generated code and how it looks (click on the screenshot to see the interactive version)
+
+```html
+<iframe
+    width="100%"
+    height="243"
+    frameborder="0"
+    src="https://nopaste.ml/?l=py#XQAAAQAbAQAAAAAAAAA0m0pnuFI8c+qagMoNTEcTIfyUWbZjtjmBYcmJSzoNwS5iVMWHzvowv3IPM0vOG5cjrtDRTSVP/0biTIrrahfmbkuMQBBeSiSGpaJOqYJiKmUDYn2Gp1RtWE6gm8fLHMB4eyZ3+rEbUQwWyMcmWqvZ7m96RUeFyZdYbE85JGvhghqF8cyPB0ZjV0OQWsDxn5O5ysMrIcL+pKPk89EtLjAHhA1LZL9F3hzAtTx7I+GlyrxhhXGxAN//CvtaAA=="
+></iframe>
+```
+
+[![iframe](https://raw.githubusercontent.com/bokub/nopaste/images/pagerank.png)](https://jsfiddle.net/cqr2kxf5/)
+
+Feel free to edit the `height` and `width` attributes, so they suit your needs
+
 ## Maximum sizes for links
 
 NoPaste is great for sharing code snippets on various platforms.
@@ -40,14 +59,6 @@ These are the maximum link lengths on some apps and browsers.
 | Microsoft Edge  | 2,083                     | Anything over 2083 will fail            |
 | Android         | 8,192                     |                                         |
 | Safari          | Lots                      |                                         |
-
-## Embedded NoPaste snippets
-
-You can include NoPaste code snippets into your own website by clicking the _Embed_ button and using the generated HTML code
-
-[This is what an embedded Paste snippet looks like](https://jsfiddle.net/bokub/nwtcdrph/show)
-
-Feel free to edit the generated `height` and `width` attributes, so they suit your needs
 
 ## Generate NoPaste links
 
