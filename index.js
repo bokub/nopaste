@@ -12,6 +12,7 @@ const init = () => {
     initLangSelector();
     initCode();
     initClipboard();
+    initModals();
 };
 
 const initCodeEditor = () => {
@@ -89,6 +90,12 @@ const initClipboard = () => {
     clipboard = new ClipboardJS('.clipboard');
     clipboard.on('success', () => {
         hideCopyBar(true);
+    });
+};
+
+const initModals = () => {
+    MicroModal.init({
+        onClose: () => editor.focus(),
     });
 };
 

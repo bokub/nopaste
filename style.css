@@ -20,7 +20,6 @@ body {
 
 #controls,
 #copy,
-#description,
 footer {
     background-color: #3b3b47;
     z-index: 10;
@@ -55,8 +54,10 @@ body:not(.readonly) .show-readonly {
 }
 a,
 a:hover,
-a:active {
+a:active,
+a:focus {
     color: #fff;
+    outline: none;
 }
 #controls a,
 #footer a {
@@ -73,28 +74,36 @@ h1 {
 .mono {
     font-family: JetBrainsMono, sans-serif;
 }
-#description {
-    display: block;
-    position: fixed;
-    top: 0;
-    margin: 45px;
-    left: 0;
-    max-width: 370px;
+.pink {
+    color: #ff79c6;
 }
-#overlay {
-    /* Used to un-hover on mobile */
+
+/* Modals */
+
+.modal {
+    display: none;
+}
+.modal.is-open {
+    display: block;
+}
+.modal-content {
+    background-color: #3b3b47;
+    max-width: 500px;
+    max-height: 100vh;
+    overflow-y: auto;
+    box-sizing: border-box;
+}
+.modal-overlay {
     position: fixed;
-    background: rgba(0, 0, 0, 0.3);
+    background: rgba(0, 0, 0, 0.2);
     right: 0;
     top: 0;
     left: 0;
     bottom: 0;
     z-index: 20;
-}
-
-#description b {
-    font-weight: normal;
-    color: #ff79c6;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 /* Form elements */

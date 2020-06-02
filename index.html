@@ -14,7 +14,8 @@ npm/bootstrap@4.4.1/dist/css/bootstrap-grid.min.css,
 npm/slim-select@1.25.0/dist/slimselect.min.css,
 npm/codemirror@5.52.0/lib/codemirror.min.css,
 npm/codemirror@5.52.0/addon/scroll/simplescrollbars.css,
-npm/codemirror@5.52.0/theme/dracula.min.css
+npm/codemirror@5.52.0/theme/dracula.min.css,
+npm/microtip@0.2.2/microtip.min.css
 "
         />
         <link rel="stylesheet" href="style.css" />
@@ -56,10 +57,25 @@ npm/codemirror@5.52.0/theme/dracula.min.css
                     <h1 class="my-0"><span>{</span> NoPaste <span>}</span></h1>
                 </div>
                 <div class="col-auto">
-                    <a href="https://github.com/bokub/nopaste" rel="noopener" target="_blank" class="mx-1" title="Source code">
+                    <a
+                        href="https://github.com/bokub/nopaste"
+                        rel="noopener"
+                        target="_blank"
+                        class="mx-1"
+                        aria-label="Source code"
+                        data-microtip-position="bottom"
+                        role="tooltip"
+                    >
                         <span class="icon-github"></span>
                     </a>
-                    <a href="javascript:void(0)" onclick="byId('overlay').classList.remove('hidden')" class="mx-1" title="What is NoPaste?">
+                    <a
+                        href="javascript:void(0)"
+                        class="mx-1"
+                        aria-label="What is NoPaste?"
+                        data-microtip-position="bottom"
+                        role="tooltip"
+                        data-micromodal-trigger="description-modal"
+                    >
                         <span class="mx-2 icon-question"></span>
                     </a>
                 </div>
@@ -68,14 +84,23 @@ npm/codemirror@5.52.0/theme/dracula.min.css
                     <select id="language"></select>
                 </div>
                 <div class="col-auto">
-                    <button onclick="enableLineWrapping()" type="button" id="enable-line-wrapping" title="Enable line wrapping">
+                    <button
+                        onclick="enableLineWrapping()"
+                        type="button"
+                        id="enable-line-wrapping"
+                        aria-label="Enable line wrapping"
+                        data-microtip-position="bottom"
+                        role="tooltip"
+                    >
                         <span class="icon-notes"></span>
                     </button>
                     <button
                         onclick="disableLineWrapping()"
                         type="button"
                         id="disable-line-wrapping"
-                        title="Disable line wrapping"
+                        aria-label="Disable line wrapping"
+                        data-microtip-position="bottom"
+                        role="tooltip"
                         class="hidden"
                     >
                         <span class="icon-wrap-text"></span>
@@ -106,22 +131,28 @@ npm/codemirror@5.52.0/theme/dracula.min.css
                 </div>
             </div>
         </footer>
-        <div class="hidden" id="overlay" onclick="this.classList.add('hidden')">
-            <div id="description" class="hidden shadow-bottom p-3">
-                NoPaste is a client-side paste service which works with <b>no database</b>, and <b>no back-end code</b>.<br /><br />
-                Instead, the data is <b>compressed</b> then <b>stored</b> into a unique URL that can be shared and decoded later.<br /><br />
+        <div id="description-modal" class="modal">
+            <div tabindex="-1" data-micromodal-close class="modal-overlay">
+                <div role="dialog" class="modal-content shadow-bottom p-3 m-3" data-micromodal-close>
+                    NoPaste is a client-side paste service which works with <span class="pink">no database</span>, and
+                    <span class="pink">no back-end code</span>.<br /><br />
+                    Instead, the data is <span class="pink">compressed</span> then <span class="pink">stored</span> into a unique URL that
+                    can be shared and decoded later.<br /><br />
 
-                As a result, there is no risk of data being lost, censored or deleted. The data is stored entirely
-                <b>in the links</b> and nowhere else!<br /><br />
+                    As a result, there is no risk of data being lost, censored or deleted. The data is stored entirely
+                    <span class="pink">in the links</span> and nowhere else!<br /><br />
 
-                You can find more detailed information on
-                <a href="https://github.com/bokub/nopaste" rel="noopener" target="_blank">Github</a>
+                    You can find more detailed information on
+                    <a href="https://github.com/bokub/nopaste" rel="noopener" target="_blank">Github</a>
+                </div>
             </div>
         </div>
+
         <script src="https://cdn.jsdelivr.net/combine/
 npm/lzma@2.3.2/src/lzma.min.js,
 npm/slim-select@1.25.0/dist/slimselect.min.js,
 npm/clipboard@2/dist/clipboard.min.js,
+npm/micromodal@0.4.6/dist/micromodal.min.js,
 npm/codemirror@5.52.0,
 npm/codemirror@5.52.0/addon/mode/loadmode.min.js,
 npm/codemirror@5.52.0/addon/mode/overlay.min.js,
