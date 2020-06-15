@@ -36,7 +36,8 @@ footer {
 select,
 #copy:not(.hidden) + #controls,
 body.readonly .hide-readonly,
-body:not(.readonly) .show-readonly {
+body:not(.readonly) .show-readonly,
+body.readonly:not(:hover) #footer {
     display: none;
 }
 
