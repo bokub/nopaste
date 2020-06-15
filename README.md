@@ -1,12 +1,20 @@
 [![Intro](https://github.com/bokub/nopaste/raw/images/intro.png)][intro-img]
 
-[NoPaste](https://nopaste.ml/) is a client-side paste service which works with **no database**, and **no back-end code**
+# What is NoPaste?
 
-Instead, the data is **compressed** then **stored** into a unique URL that can be shared and decoded later. For example, [this is the CSS code used by NoPaste][example]
+[NoPaste](https://nopaste.ml/) is a website similar to Pastebin where you can store any text or code, and generate links for easy sharing
 
-As a result, there is no risk of data being lost, censored or deleted. The data is stored entirely **in the links** and nowhere else!
+What makes NoPaste so special is that it works with **no database**, and **no back-end code**. Instead, the data is compressed and **stored entirely in the link** that you share, nowhere else!
 
-**Note:** This project is a copy of [Topaz's paste service][topaz-example], with a reworked design and a few additional features (syntax highlighting, line numbers, line wrapping, embedding...)
+### As a result:
+- 🗑️ Your data **cannot be deleted** from NoPaste
+- 🔞 Your data **cannot be censored**
+- 👁️ The server hosting NoPaste (or any clone of it) **cannot read or access** your data
+- ⏳ Your data will be accessible **forever** (as long as you have the link)
+- 🔀 You can access your data on **every NoPaste clone**, including [your own](https://github.com/bokub/nopaste/wiki/Deploy-your-own-version-of-NoPaste)
+- 🔍 Google **will not index** your data, even if your link is publically available
+
+> **Note:** This project is a copy of [Topaz's paste service][topaz-example], with a reworked design and a few additional features (syntax highlighting, line numbers, line wrapping, embedding...)
 
 ## How it works
 
@@ -17,6 +25,8 @@ When you click on "Generate Link", NoPaste compresses the whole text using the
 When you open a link, NoPaste reads, decodes, and decompresses whatever is after the `#`, and displays the result in the editor.
 
 This process is done entirely **in your browser**, and the web server hosting NoPaste [never has access to the fragment](https://en.wikipedia.org/wiki/Fragment_identifier)
+
+For example, [this is the CSS code used by NoPaste][example]
 
 ## Embedded NoPaste snippets
 
