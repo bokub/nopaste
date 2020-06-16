@@ -4,9 +4,9 @@
 
 [NoPaste](https://nopaste.ml/) is a website similar to Pastebin where you can store any text or code, and generate links for easy sharing
 
-What makes NoPaste so special is that it works with **no database**, and **no back-end code**. Instead, the data is compressed and **stored entirely in the link** that you share, nowhere else!
+However, what makes NoPaste special is that it works with **no database**, and **no back-end code**. Instead, the data is compressed and **stored entirely in the link** that you share, nowhere else!
 
-### As a result:
+### Because of this design:
 - 🗑️ Your data **cannot be deleted** from NoPaste
 - 🔞 Your data **cannot be censored**
 - 👁️ The server hosting NoPaste (or any clone of it) **cannot read or access** your data
