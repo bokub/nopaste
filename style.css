@@ -64,6 +64,10 @@ a:focus {
 #footer a {
     text-decoration: none;
 }
+#controls a:hover {
+    border-bottom: 1px solid rgba(255, 255, 255, 0.5);
+}
+
 .CodeMirror {
     height: 100%;
     font-family: JetBrainsMono, sans-serif;
@@ -89,7 +93,7 @@ h1 {
 }
 .modal-content {
     background-color: #3b3b47;
-    max-width: 500px;
+    max-width: 600px;
     max-height: 100vh;
     overflow-y: auto;
     box-sizing: border-box;

@@ -48,6 +48,7 @@ const initLangSelector = () => {
             const language = e.data || { mime: null, mode: null };
             editor.setOption('mode', language.mime);
             CodeMirror.autoLoadMode(editor, language.mode);
+            document.title = e.text && e.text !== 'Plain Text' ? `NoPaste - ${e.text} code snippet` : 'NoPaste';
         },
     });
 
@@ -63,7 +64,8 @@ const initCode = () => {
     }
     decompress(base64, (code, err) => {
         if (err) {
-            alert('Failed to decompress data: ' + err);
+            console.error('Failed to decompress data: ' + err);
+            MicroModal.show('error-modal');
             return;
         }
         editor.setValue(code);

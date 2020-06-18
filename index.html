@@ -58,26 +58,15 @@ npm/microtip@0.2.2/microtip.min.css
                 </div>
                 <div class="col-auto">
                     <a
-                        href="https://github.com/bokub/nopaste"
-                        rel="noopener"
-                        target="_blank"
-                        class="mx-1"
-                        aria-label="Source code"
-                        data-microtip-position="bottom"
-                        role="tooltip"
-                    >
-                        <span class="icon-github"></span>
-                    </a>
-                    <a
                         href="javascript:void(0)"
-                        class="mx-1"
-                        aria-label="What is NoPaste?"
+                        class="mx-3"
+                        aria-label="Click to know more about NoPaste"
                         data-microtip-position="bottom"
                         role="tooltip"
                         data-micromodal-trigger="description-modal"
+                        >About</a
                     >
-                        <span class="mx-2 icon-question"></span>
-                    </a>
+                    <a href="https://github.com/bokub/nopaste" rel="noopener" target="_blank" class="mx-3">Source</a>
                 </div>
                 <div class="col"></div>
                 <div class="col-auto my-1">
@@ -122,7 +111,7 @@ npm/microtip@0.2.2/microtip.min.css
         <footer id="footer" class="shadow-top container-fluid">
             <div class="row my-1">
                 <div class="col mono hide-readonly" id="stats">Length: 0 | Lines: 1</div>
-                <div class="col mono show-readonly">Hosted on NoPaste.ml</div>
+                <div class="col mono show-readonly">Powered by NoPaste</div>
                 <div class="col-auto mono show-readonly">
                     <a href="javascript:void(0)" onclick="openInNewTab()">
                         <span class="icon-edit"></span>
@@ -134,16 +123,37 @@ npm/microtip@0.2.2/microtip.min.css
         <div id="description-modal" class="modal">
             <div tabindex="-1" data-micromodal-close class="modal-overlay">
                 <div role="dialog" class="modal-content shadow-bottom p-3 m-3" data-micromodal-close>
-                    NoPaste is a client-side paste service which works with <span class="pink">no database</span>, and
-                    <span class="pink">no back-end code</span>.<br /><br />
-                    Instead, the data is <span class="pink">compressed</span> then <span class="pink">stored</span> into a unique URL that
-                    can be shared and decoded later.<br /><br />
+                    <h2 class="mt-0">What is NoPaste?</h2>
 
-                    As a result, there is no risk of data being lost, censored or deleted. The data is stored entirely
-                    <span class="pink">in the links</span> and nowhere else!<br /><br />
+                    <span class="pink">NoPaste</span> is an open-source website similar to Pastebin where you can store any piece of code,
+                    and generate links for easy sharing<br /><br />
 
-                    You can find more detailed information on
-                    <a href="https://github.com/bokub/nopaste" rel="noopener" target="_blank">Github</a>
+                    However, what makes NoPaste special is that it works with <span class="pink">no database</span>, and
+                    <span class="pink">no back-end code</span>.<br />
+                    Instead, the data is compressed and <span class="pink">stored entirely in the link</span> that you share, nowhere else!
+
+                    <h3>Because of this design:</h3>
+                    🗑️ Your data <span class="pink">cannot be deleted</span> from NoPaste<br />
+                    🔞 Your data <span class="pink">cannot be censored</span><br />
+                    👁️ The server hosting NoPaste (or any clone of it) <span class="pink">cannot read or access</span> your data<br />
+                    ⏳ Your data will be accessible <span class="pink">forever</span> (as long as you have the link)<br />
+                    🔀 You can access your data on <span class="pink">every NoPaste clone</span>, including
+                    <a href="https://github.com/bokub/nopaste/wiki/Deploy-your-own-version-of-NoPaste" rel="noopener" target="_blank"
+                        >your own</a
+                    ><br />
+                    🔍 Google <span class="pink">will not index</span> your data, even if your link is public<br />
+                    <br />
+                    If you want to know more, you can find more information on
+                    <a href="https://github.com/bokub/nopaste" rel="noopener" target="_blank" class="pink">Github</a>
+                </div>
+            </div>
+        </div>
+        <div id="error-modal" class="modal">
+            <div tabindex="-1" data-micromodal-close class="modal-overlay">
+                <div role="dialog" class="modal-content shadow-bottom p-3 m-3" data-micromodal-close>
+                    NoPaste cannot decompress the URL<br /><br />
+                    It's possible that you clicked on an invalid link<br /><br />
+                    Sorry about that
                 </div>
             </div>
         </div>
