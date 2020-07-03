@@ -77,12 +77,12 @@ NoPaste links can be created easily from your system's command line:
 
 ```bash
 # Linux
-echo -n 'Hello World' | lzma | base64 | xargs -0 printf "https://nopaste.ml/#%s"
-
-# Mac
 echo -n 'Hello World' | lzma | base64 -w0 | xargs -0 printf "https://nopaste.ml/#%s"
 
-# Windows / WSL
+# Mac
+echo -n 'Hello World' | lzma | base64 | xargs -0 printf "https://nopaste.ml/#%s"
+
+# Windows / WSL / Linux
 echo -n 'Hello World' | xz --format=lzma | base64 -w0 | printf "https://nopaste.ml/#%s" "$(cat -)"
 ```
 
