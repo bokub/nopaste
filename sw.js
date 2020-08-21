@@ -27,6 +27,10 @@ const PRECACHE_URLS = [
         'npm/codemirror@5.52.0/addon/scroll/simplescrollbars.css,' +
         'npm/codemirror@5.52.0/theme/dracula.min.css,' +
         'npm/microtip@0.2.2/microtip.min.css',
+    'https://cdn.jsdelivr.net/gh/JetBrains/JetBrainsMono/web/woff2/JetBrainsMono-Regular.woff2',
+    'https://cdn.jsdelivr.net/gh/JetBrains/JetBrainsMono/web/woff/JetBrainsMono-Regular.woff',
+    'https://cdn.jsdelivr.net/gh/JetBrains/JetBrainsMono/ttf/JetBrainsMono-Regular.ttf',
+    'https://fonts.gstatic.com/s/roboto/v20/KFOmCnqEu92Fr1Mu4mxK.woff2',
 ];
 
 // The install handler takes care of precaching the resources we always need.
