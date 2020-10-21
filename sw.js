@@ -4,22 +4,11 @@ const RUNTIME = 'runtime';
 // A list of local resources we always want to be cached.
 const PRECACHE_URLS = [
     '/',
-    'script.js',
-    'sw.js',
-    'style.css',
+    'js/index.js',
+    'js/vendor.min.js',
+    'css/style.css',
     'https://cdn.jsdelivr.net/npm/lzma@2.3.2/src/lzma_worker.min.js',
-    'https://cdn.jsdelivr.net/combine/' +
-        'npm/lzma@2.3.2/src/lzma.min.js,' +
-        'npm/slim-select@1.25.0/dist/slimselect.min.js,' +
-        'npm/clipboard@2/dist/clipboard.min.js,' +
-        'npm/micromodal@0.4.6/dist/micromodal.min.js,' +
-        'npm/codemirror@5.52.0,' +
-        'npm/codemirror@5.52.0/addon/mode/loadmode.min.js,' +
-        'npm/codemirror@5.52.0/addon/mode/overlay.min.js,' +
-        'npm/codemirror@5.52.0/addon/mode/multiplex.min.js,' +
-        'npm/codemirror@5.52.0/addon/mode/simple.min.js,' +
-        'npm/codemirror@5.52.0/addon/scroll/simplescrollbars.js,' +
-        'npm/codemirror@5.52.0/mode/meta.min.js',
+
     'https://cdn.jsdelivr.net/combine/' +
         'npm/bootstrap@4.4.1/dist/css/bootstrap-grid.min.css,' +
         'npm/slim-select@1.25.0/dist/slimselect.min.css,' +
@@ -67,7 +56,10 @@ self.addEventListener('activate', (event) => {
 // If no response is found, it populates the runtime cache with the response
 // from the network before returning it to the page.
 self.addEventListener('fetch', (event) => {
-    if (!event.request.url.startsWith(self.location.origin) && !event.request.url.startsWith('https://cdn.jsdelivr.net')) {
+    if (
+        !event.request.url.startsWith(self.location.origin) &&
+        !event.request.url.startsWith('https://cdn.jsdelivr.net')
+    ) {
         return;
     }
     event.respondWith(

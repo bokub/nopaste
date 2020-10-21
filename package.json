@@ -1,0 +1,29 @@
+{
+    "name": "nopaste",
+    "private": true,
+    "description": "Client-side paste service",
+    "repository": "https://github.com/bokub/nopaste.git",
+    "author": "https://github.com/bokub",
+    "license": "MIT",
+    "prettier": "@bokub/prettier-config",
+    "scripts": {
+        "prettier": "prettier --write **/*.{js,ts,json,html,md,yml}",
+        "dev": "serve",
+        "bundle": "webpack"
+    },
+    "devDependencies": {
+        "@bokub/prettier-config": "^1.0.1",
+        "clipboard": "^2.0.6",
+        "codemirror": "^5.58.1",
+        "copy-webpack-plugin": "^6.2.0",
+        "lzma": "^2.3.2",
+        "micromodal": "^0.4.6",
+        "prettier": "^2.1.2",
+        "raw-loader": "^4.0.1",
+        "serve": "^11.3.2",
+        "slim-select": "^1.26.0",
+        "webpack": "^4.44.2",
+        "webpack-cli": "^3.3.12",
+        "worker-loader": "^3.0.3"
+    }
+}

@@ -2,7 +2,10 @@
 <html lang="en">
     <head>
         <meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0" />
+        <meta
+            name="viewport"
+            content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"
+        />
         <meta http-equiv="X-UA-Compatible" content="ie=edge" />
 
         <title>NoPaste - No-database paste service</title>
@@ -18,7 +21,7 @@ npm/codemirror@5.52.0/theme/dracula.min.css,
 npm/microtip@0.2.2/microtip.min.css
 "
         />
-        <link rel="stylesheet" href="style.css" />
+        <link rel="stylesheet" href="css/style.css" />
         <link href="favicon.ico" rel="icon" type="image/x-icon" />
         <link rel="canonical" href="https://nopaste.ml/" />
         <meta
@@ -33,7 +36,9 @@ npm/microtip@0.2.2/microtip.min.css
     </head>
     <body class="m-0">
         <script>
-            const readOnly = window.location !== window.parent.location || new URLSearchParams(window.location.search).has('readonly');
+            const readOnly =
+                window.location !== window.parent.location ||
+                new URLSearchParams(window.location.search).has('readonly');
             if (readOnly) {
                 document.body.classList.add('readonly');
             }
@@ -41,10 +46,21 @@ npm/microtip@0.2.2/microtip.min.css
         <div id="copy" class="container-fluid hidden shadow-bottom hide-readonly">
             <div class="row my-1">
                 <div class="col my-1">
-                    <input type="text" value="copy me" id="copy-link" class="px-2" onclick="this.setSelectionRange(0, this.value.length)" />
+                    <input
+                        type="text"
+                        value="copy me"
+                        id="copy-link"
+                        class="px-2"
+                        onclick="this.setSelectionRange(0, this.value.length)"
+                    />
                 </div>
                 <div class="col-auto my-1">
-                    <button class="clipboard py-1 px-2 mx-1" id="copy-btn" data-clipboard-target="#copy-link" type="button">
+                    <button
+                        class="clipboard py-1 px-2 mx-1"
+                        id="copy-btn"
+                        data-clipboard-target="#copy-link"
+                        type="button"
+                    >
                         Copy
                     </button>
                     <button class="py-1 px-2 mx-1" onclick="hideCopyBar(false)" type="button">Cancel</button>
@@ -125,20 +141,25 @@ npm/microtip@0.2.2/microtip.min.css
                 <div role="dialog" class="modal-content shadow-bottom p-3 m-3" data-micromodal-close>
                     <h2 class="mt-0">What is NoPaste?</h2>
 
-                    <span class="pink">NoPaste</span> is an open-source website similar to Pastebin where you can store any piece of code,
-                    and generate links for easy sharing<br /><br />
+                    <span class="pink">NoPaste</span> is an open-source website similar to Pastebin where you can store
+                    any piece of code, and generate links for easy sharing<br /><br />
 
                     However, what makes NoPaste special is that it works with <span class="pink">no database</span>, and
                     <span class="pink">no back-end code</span>.<br />
-                    Instead, the data is compressed and <span class="pink">stored entirely in the link</span> that you share, nowhere else!
+                    Instead, the data is compressed and <span class="pink">stored entirely in the link</span> that you
+                    share, nowhere else!
 
                     <h3>Because of this design:</h3>
                     🗑️ Your data <span class="pink">cannot be deleted</span> from NoPaste<br />
                     🔞 Your data <span class="pink">cannot be censored</span><br />
-                    👁️ The server hosting NoPaste (or any clone of it) <span class="pink">cannot read or access</span> your data<br />
+                    👁️ The server hosting NoPaste (or any clone of it)
+                    <span class="pink">cannot read or access</span> your data<br />
                     ⏳ Your data will be accessible <span class="pink">forever</span> (as long as you have the link)<br />
                     🔀 You can access your data on <span class="pink">every NoPaste clone</span>, including
-                    <a href="https://github.com/bokub/nopaste/wiki/Deploy-your-own-version-of-NoPaste" rel="noopener" target="_blank"
+                    <a
+                        href="https://github.com/bokub/nopaste/wiki/Deploy-your-own-version-of-NoPaste"
+                        rel="noopener"
+                        target="_blank"
                         >your own</a
                     ><br />
                     🔍 Google <span class="pink">will not index</span> your data, even if your link is public<br />
@@ -157,20 +178,7 @@ npm/microtip@0.2.2/microtip.min.css
                 </div>
             </div>
         </div>
-
-        <script src="https://cdn.jsdelivr.net/combine/
-npm/lzma@2.3.2/src/lzma.min.js,
-npm/slim-select@1.25.0/dist/slimselect.min.js,
-npm/clipboard@2/dist/clipboard.min.js,
-npm/micromodal@0.4.6/dist/micromodal.min.js,
-npm/codemirror@5.52.0,
-npm/codemirror@5.52.0/addon/mode/loadmode.min.js,
-npm/codemirror@5.52.0/addon/mode/overlay.min.js,
-npm/codemirror@5.52.0/addon/mode/multiplex.min.js,
-npm/codemirror@5.52.0/addon/mode/simple.min.js,
-npm/codemirror@5.52.0/addon/scroll/simplescrollbars.js,
-npm/codemirror@5.52.0/mode/meta.min.js
-"></script>
-        <script src="script.js"></script>
+        <script src="js/vendor.min.js"></script>
+        <script src="js/index.js"></script>
     </body>
 </html>

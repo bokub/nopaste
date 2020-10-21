@@ -1,5 +1,5 @@
-const blob = new Blob(['importScripts("https://cdn.jsdelivr.net/npm/lzma@2.3.2/src/lzma_worker.min.js");']);
-const lzma = new LZMA(window.URL.createObjectURL(blob));
+// const blob = new Blob(['importScripts("https://cdn.jsdelivr.net/npm/lzma@2.3.2/src/lzma_worker.min.js");']);
+// const lzma = new LZMA(window.URL.createObjectURL(blob));
 
 let editor = null;
 let select = null;
@@ -16,7 +16,7 @@ const init = () => {
 };
 
 const initCodeEditor = () => {
-    CodeMirror.modeURL = 'https://cdn.jsdelivr.net/npm/codemirror@5.52.0/mode/%N/%N.js';
+    CodeMirror.modeURL = 'https://cdn.jsdelivr.net/npm/codemirror@5.58.1/mode/%N/%N.js';
     editor = new CodeMirror(byId('editor'), {
         lineNumbers: true,
         theme: 'dracula',
@@ -109,9 +109,9 @@ const generateLink = (mode) => {
             return;
         }
         const url = buildUrl(base64, mode);
-        statsEl.innerHTML = `Data length: ${data.length} |  Link length: ${url.length} | Compression ratio: ${Math.round(
-            (100 * url.length) / data.length
-        )}%`;
+        statsEl.innerHTML = `Data length: ${data.length} |  Link length: ${
+            url.length
+        } | Compression ratio: ${Math.round((100 * url.length) / data.length)}%`;
 
         showCopyBar(url);
     });
@@ -282,8 +282,8 @@ const testAllModes = () => {
     }
 };
 
-if ('serviceWorker' in navigator) {
-    navigator.serviceWorker.register('sw.js');
-}
+// if ('serviceWorker' in navigator) {
+//     navigator.serviceWorker.register('sw.js');
+// }
 
 init();
