@@ -1,11 +1,10 @@
-const PRECACHE = 'precache-20200821';
+const PRECACHE = 'precache-20201021';
 const RUNTIME = 'runtime';
 
 // A list of local resources we always want to be cached.
 const PRECACHE_URLS = [
     '/',
     'script.js',
-    'sw.js',
     'style.css',
     'https://cdn.jsdelivr.net/npm/lzma@2.3.2/src/lzma_worker.min.js',
     'https://cdn.jsdelivr.net/combine/' +
@@ -13,19 +12,19 @@ const PRECACHE_URLS = [
         'npm/slim-select@1.25.0/dist/slimselect.min.js,' +
         'npm/clipboard@2/dist/clipboard.min.js,' +
         'npm/micromodal@0.4.6/dist/micromodal.min.js,' +
-        'npm/codemirror@5.52.0,' +
-        'npm/codemirror@5.52.0/addon/mode/loadmode.min.js,' +
-        'npm/codemirror@5.52.0/addon/mode/overlay.min.js,' +
-        'npm/codemirror@5.52.0/addon/mode/multiplex.min.js,' +
-        'npm/codemirror@5.52.0/addon/mode/simple.min.js,' +
-        'npm/codemirror@5.52.0/addon/scroll/simplescrollbars.js,' +
-        'npm/codemirror@5.52.0/mode/meta.min.js',
+        'npm/codemirror@5.58.1,' +
+        'npm/codemirror@5.58.1/addon/mode/loadmode.min.js,' +
+        'npm/codemirror@5.58.1/addon/mode/overlay.min.js,' +
+        'npm/codemirror@5.58.1/addon/mode/multiplex.min.js,' +
+        'npm/codemirror@5.58.1/addon/mode/simple.min.js,' +
+        'npm/codemirror@5.58.1/addon/scroll/simplescrollbars.js,' +
+        'npm/codemirror@5.58.1/mode/meta.min.js',
     'https://cdn.jsdelivr.net/combine/' +
         'npm/bootstrap@4.4.1/dist/css/bootstrap-grid.min.css,' +
         'npm/slim-select@1.25.0/dist/slimselect.min.css,' +
-        'npm/codemirror@5.52.0/lib/codemirror.min.css,' +
-        'npm/codemirror@5.52.0/addon/scroll/simplescrollbars.css,' +
-        'npm/codemirror@5.52.0/theme/dracula.min.css,' +
+        'npm/codemirror@5.58.1/lib/codemirror.min.css,' +
+        'npm/codemirror@5.58.1/addon/scroll/simplescrollbars.css,' +
+        'npm/codemirror@5.58.1/theme/dracula.min.css,' +
         'npm/microtip@0.2.2/microtip.min.css',
     'https://cdn.jsdelivr.net/gh/JetBrains/JetBrainsMono/web/woff2/JetBrainsMono-Regular.woff2',
     'https://cdn.jsdelivr.net/gh/JetBrains/JetBrainsMono/web/woff/JetBrainsMono-Regular.woff',
