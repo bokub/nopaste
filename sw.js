@@ -1,4 +1,4 @@
-const PRECACHE = 'precache-20201021';
+const PRECACHE = 'precache-20201121';
 const RUNTIME = 'runtime';
 
 // A list of local resources we always want to be cached.
@@ -26,9 +26,8 @@ const PRECACHE_URLS = [
         'npm/codemirror@5.58.1/addon/scroll/simplescrollbars.css,' +
         'npm/codemirror@5.58.1/theme/dracula.min.css,' +
         'npm/microtip@0.2.2/microtip.min.css',
-    'https://cdn.jsdelivr.net/gh/JetBrains/JetBrainsMono/web/woff2/JetBrainsMono-Regular.woff2',
-    'https://cdn.jsdelivr.net/gh/JetBrains/JetBrainsMono/web/woff/JetBrainsMono-Regular.woff',
-    'https://cdn.jsdelivr.net/gh/JetBrains/JetBrainsMono/ttf/JetBrainsMono-Regular.ttf',
+    'https://cdn.jsdelivr.net/gh/JetBrains/JetBrainsMono@2.210/ttf/JetBrainsMonoNL-Regular.ttf',
+    'https://cdn.jsdelivr.net/gh/JetBrains/JetBrainsMono@2.210/fonts/webfonts/JetBrainsMono-Regular.woff2',
     'https://fonts.gstatic.com/s/roboto/v20/KFOmCnqEu92Fr1Mu4mxK.woff2',
 ];
 
