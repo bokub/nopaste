@@ -101,6 +101,12 @@ h1 {
     overflow-y: auto;
     box-sizing: border-box;
 }
+.modal-content .additional-info {
+    opacity: 0.75;
+    font-style: italic;
+    margin-top: 15px;
+    font-size: 0.95em;
+}
 .modal-overlay {
     position: fixed;
     background: rgba(0, 0, 0, 0.2);

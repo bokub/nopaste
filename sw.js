@@ -1,4 +1,4 @@
-const PRECACHE = 'precache-20201121b';
+const PRECACHE = 'precache-20201121c';
 const RUNTIME = 'runtime';
 
 // A list of local resources we always want to be cached.
