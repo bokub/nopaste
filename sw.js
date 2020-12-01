@@ -1,11 +1,16 @@
-const PRECACHE = 'precache-20201121c';
-const RUNTIME = 'runtime';
+const VERSION = '20201201';
+const PRECACHE = 'precache-' + VERSION;
+const MODES = 'modes-' + VERSION;
+
+// A regexp to detect mode files
+const MODE_REGEXP = /^https:\/\/cdn\.jsdelivr.net\/npm\/codemirror@.+?\/mode\//;
 
 // A list of local resources we always want to be cached.
 const PRECACHE_URLS = [
     '/',
     'script.js',
     'style.css',
+    'favicon.ico',
     'https://cdn.jsdelivr.net/npm/lzma@2.3.2/src/lzma_worker.min.js',
     'https://cdn.jsdelivr.net/combine/' +
         'npm/lzma@2.3.2/src/lzma.min.js,' +
@@ -43,7 +48,7 @@ self.addEventListener('install', (event) => {
 
 // The activate handler takes care of cleaning up old caches.
 self.addEventListener('activate', (event) => {
-    const currentCaches = [PRECACHE, RUNTIME];
+    const currentCaches = [PRECACHE, MODES];
     event.waitUntil(
         caches
             .keys()
@@ -61,7 +66,7 @@ self.addEventListener('activate', (event) => {
     );
 });
 
-// The fetch handler serves responses for same-origin resources from a cache.
+// The fetch handler serves responses from a cache.
 // If no response is found, it populates the runtime cache with the response
 // from the network before returning it to the page.
 self.addEventListener('fetch', (event) => {
@@ -74,7 +79,11 @@ self.addEventListener('fetch', (event) => {
                 return cachedResponse;
             }
 
-            return caches.open(RUNTIME).then((cache) => {
+            if (!event.request.url.match(MODE_REGEXP)) {
+                return fetch(event.request);
+            }
+
+            return caches.open(MODES).then((cache) => {
                 return fetch(event.request).then((response) => {
                     // Put a copy of the response in the runtime cache.
                     return cache.put(event.request, response.clone()).then(() => {

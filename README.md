@@ -15,7 +15,7 @@ However, what makes NoPaste special is that it works with **no database**, and *
 -   🔀 You can access your data on **every NoPaste clone**, including [your own](https://github.com/bokub/nopaste/wiki/Deploy-your-own-version-of-NoPaste)
 -   🔍 Google **will not index** your data, even if your link is public
 
-> **Note:** This project is a copy of [Topaz's paste service][topaz-example], with a reworked design and a few additional features (syntax highlighting, line numbers, line wrapping, embedding...)
+> **Note:** This project is a copy of [Topaz's paste service][topaz-example], with a reworked design and a few additional features (syntax highlighting, line numbers, offline usage, embedding...)
 
 ## How it works
 
@@ -29,7 +29,9 @@ This process is done entirely **in your browser**, and the web server hosting No
 
 For example, [this is the CSS code used by NoPaste][example]
 
-## Embedded NoPaste snippets
+## Other features
+
+### Embedded NoPaste snippets
 
 You can include NoPaste code snippets into your own website by clicking the _Embed_ button and using the generated HTML code.
 
@@ -47,6 +49,21 @@ Here is an example of generated code and how it looks (click on the screenshot t
 [![iframe](https://raw.githubusercontent.com/bokub/nopaste/images/pagerank.png)](https://jsfiddle.net/cqr2kxf5/)
 
 Feel free to edit the `height` and `width` attributes, so they suit your needs
+
+### Offline usage
+
+When you visit NoPaste for the first time, its code is saved in your browser cache. After that, every NoPaste link you open
+will load really quick, even if your internet connexion is slow.
+
+What if you have no internet connexion at all? No problem, NoPaste will still work perfectly!
+
+### Editor features
+
+-   Syntax highlighting (use the language selector)
+-   Enable / disable line wrapping (use the button next to the language selector)
+-   Delete line (`Ctrl+D`)
+-   Multiple cursors (`Ctrl+Click`)
+-   Usual keyboard shortuts (`Ctrl+A`, `Ctrl+Z`, `Ctrl+Y`...)
 
 ## Maximum sizes for links
 
