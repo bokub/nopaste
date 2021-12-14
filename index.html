@@ -6,19 +6,13 @@
         <meta http-equiv="X-UA-Compatible" content="ie=edge" />
 
         <title>NoPaste - No-database paste service</title>
-        <link
-            rel="stylesheet"
-            type="text/css"
-            href="https://cdn.jsdelivr.net/combine/
-npm/bootstrap@4.4.1/dist/css/bootstrap-grid.min.css,
-npm/slim-select@1.25.0/dist/slimselect.min.css,
-npm/codemirror@5.58.1/lib/codemirror.min.css,
-npm/codemirror@5.58.1/addon/scroll/simplescrollbars.css,
-npm/codemirror@5.58.1/theme/dracula.min.css,
-npm/microtip@0.2.2/microtip.min.css
-"
-        />
-        <link rel="stylesheet" href="style.css" />
+        <link rel="stylesheet" href="style/bootstrap-grid.css" />
+        <link rel="stylesheet" href="style/slimselect.css" />
+        <link rel="stylesheet" href="style/codemirror.css" />
+        <link rel="stylesheet" href="style/simplescrollbars.css" />
+        <link rel="stylesheet" href="style/dracula.css" />
+        <link rel="stylesheet" href="style/microtip.css" />
+        <link rel="stylesheet" href="style/style.css" />
         <link href="favicon.ico" rel="icon" type="image/x-icon" />
         <link rel="canonical" href="https://nopaste.ml/" />
         <meta
@@ -27,7 +21,7 @@ npm/microtip@0.2.2/microtip.min.css
             content="NoPaste is a client-side paste service which works with no database, and no back-end code. The data is stored entirely in the links and nowhere else"
         />
         <meta property="og:title" content="NoPaste - No-database paste service" />
-        <meta property="og:image" content="https://cdn.jsdelivr.net/gh/bokub/nopaste@images/logo.png" />
+        <meta property="og:image" content="images/logo.png" />
         <meta property="og:url" content="https://nopaste.ml/" />
         <meta property="og:type" content="website" />
     </head>
@@ -161,20 +155,17 @@ npm/microtip@0.2.2/microtip.min.css
                 </div>
             </div>
         </div>
-
-        <script src="https://cdn.jsdelivr.net/combine/
-npm/lzma@2.3.2/src/lzma.min.js,
-npm/slim-select@1.25.0/dist/slimselect.min.js,
-npm/clipboard@2/dist/clipboard.min.js,
-npm/micromodal@0.4.6/dist/micromodal.min.js,
-npm/codemirror@5.58.1,
-npm/codemirror@5.58.1/addon/mode/loadmode.min.js,
-npm/codemirror@5.58.1/addon/mode/overlay.min.js,
-npm/codemirror@5.58.1/addon/mode/multiplex.min.js,
-npm/codemirror@5.58.1/addon/mode/simple.min.js,
-npm/codemirror@5.58.1/addon/scroll/simplescrollbars.js,
-npm/codemirror@5.58.1/mode/meta.min.js
-"></script>
-        <script src="script.js"></script>
+  
+        <script src="scripts/lzma.js"></script>
+        <script src="scripts/slimselect.js"></script>
+        <script src="scripts/clipboard.js"></script>
+        <script src="scripts/micromodal.js"></script>
+        <script src="scripts/loadmode.js"></script>
+        <script src="scripts/overlay.js"></script>
+        <script src="scripts/multiplex.js"></script>
+        <script src="scripts/simple.js"></script>
+        <script src="scripts/simplescrollbars.js"></script>
+        <script src="scripts/meta.js"></script>
+        <script src="scripts/script.js"></script>
     </body>
 </html>

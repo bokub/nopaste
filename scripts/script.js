@@ -283,7 +283,7 @@ const testAllModes = () => {
 };
 
 if ('serviceWorker' in navigator) {
-    navigator.serviceWorker.register('sw.js');
+    navigator.serviceWorker.register('scripts/sw.js');
 }
 
 init();
