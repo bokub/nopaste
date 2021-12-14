@@ -1,4 +1,4 @@
-const blob = new Blob(['importScripts("scripts/lzma_worker.js");']);
+const blob = new Blob(['importScripts("./scripts/lzma_worker.js");']);
 const lzma = new LZMA(window.URL.createObjectURL(blob));
 
 let editor = null;
@@ -16,7 +16,7 @@ const init = () => {
 };
 
 const initCodeEditor = () => {
-    CodeMirror.modeURL = 'scripts/CodeMirror/mode/%N/%N.js';
+    CodeMirror.modeURL = '/scripts/CodeMirror/mode/%N/%N.js';
     editor = new CodeMirror(byId('editor'), {
         lineNumbers: true,
         theme: 'dracula',
@@ -283,7 +283,7 @@ const testAllModes = () => {
 };
 
 if ('serviceWorker' in navigator) {
-    navigator.serviceWorker.register('scripts/sw.js');
+    navigator.serviceWorker.register('/scripts/sw.js');
 }
 
 init();
