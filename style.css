@@ -165,8 +165,8 @@ button:hover {
 /* Fonts */
 @font-face {
     font-family: 'JetBrainsMono';
-    src: url('https://cdn.jsdelivr.net/gh/JetBrains/JetBrainsMono@2.210/fonts/webfonts/JetBrainsMono-Regular.woff2') format('woff2'),
-        url('https://cdn.jsdelivr.net/gh/JetBrains/JetBrainsMono@2.210/fonts/ttf/JetBrainsMonoNL-Regular.ttf') format('truetype');
+    src: url('https://cdn.jsdelivr.net/gh/JetBrains/JetBrainsMono@2.242/fonts/webfonts/JetBrainsMono-Regular.woff2') format('woff2'),
+        url('https://cdn.jsdelivr.net/gh/JetBrains/JetBrainsMono@2.242/fonts/ttf/JetBrainsMonoNL-Regular.ttf') format('truetype');
     font-weight: 400;
     font-style: normal;
 }

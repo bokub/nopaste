@@ -1,4 +1,4 @@
-const VERSION = '20201201';
+const VERSION = '20220614';
 const PRECACHE = 'precache-' + VERSION;
 const MODES = 'modes-' + VERSION;
 
@@ -14,25 +14,25 @@ const PRECACHE_URLS = [
     'https://cdn.jsdelivr.net/npm/lzma@2.3.2/src/lzma_worker.min.js',
     'https://cdn.jsdelivr.net/combine/' +
         'npm/lzma@2.3.2/src/lzma.min.js,' +
-        'npm/slim-select@1.25.0/dist/slimselect.min.js,' +
-        'npm/clipboard@2/dist/clipboard.min.js,' +
-        'npm/micromodal@0.4.6/dist/micromodal.min.js,' +
-        'npm/codemirror@5.58.1,' +
-        'npm/codemirror@5.58.1/addon/mode/loadmode.min.js,' +
-        'npm/codemirror@5.58.1/addon/mode/overlay.min.js,' +
-        'npm/codemirror@5.58.1/addon/mode/multiplex.min.js,' +
-        'npm/codemirror@5.58.1/addon/mode/simple.min.js,' +
-        'npm/codemirror@5.58.1/addon/scroll/simplescrollbars.js,' +
-        'npm/codemirror@5.58.1/mode/meta.min.js',
+        'npm/slim-select@1.27.1/dist/slimselect.min.js,' +
+        'npm/clipboard@2.0.11/dist/clipboard.min.js,' +
+        'npm/micromodal@0.4.10/dist/micromodal.min.js,' +
+        'npm/codemirror@5.65.5,' +
+        'npm/codemirror@5.65.5/addon/mode/loadmode.min.js,' +
+        'npm/codemirror@5.65.5/addon/mode/overlay.min.js,' +
+        'npm/codemirror@5.65.5/addon/mode/multiplex.min.js,' +
+        'npm/codemirror@5.65.5/addon/mode/simple.min.js,' +
+        'npm/codemirror@5.65.5/addon/scroll/simplescrollbars.js,' +
+        'npm/codemirror@5.65.5/mode/meta.min.js',
     'https://cdn.jsdelivr.net/combine/' +
-        'npm/bootstrap@4.4.1/dist/css/bootstrap-grid.min.css,' +
-        'npm/slim-select@1.25.0/dist/slimselect.min.css,' +
-        'npm/codemirror@5.58.1/lib/codemirror.min.css,' +
-        'npm/codemirror@5.58.1/addon/scroll/simplescrollbars.css,' +
-        'npm/codemirror@5.58.1/theme/dracula.min.css,' +
+        'npm/bootstrap@4.6.1/dist/css/bootstrap-grid.min.css,' +
+        'npm/slim-select@1.27.1/dist/slimselect.min.css,' +
+        'npm/codemirror@5.65.5/lib/codemirror.min.css,' +
+        'npm/codemirror@5.65.5/addon/scroll/simplescrollbars.css,' +
+        'npm/codemirror@5.65.5/theme/dracula.min.css,' +
         'npm/microtip@0.2.2/microtip.min.css',
-    'https://cdn.jsdelivr.net/gh/JetBrains/JetBrainsMono@2.210/fonts/webfonts/JetBrainsMono-Regular.woff2',
-    'https://cdn.jsdelivr.net/gh/JetBrains/JetBrainsMono@2.210/fonts/ttf/JetBrainsMonoNL-Regular.ttf',
+    'https://cdn.jsdelivr.net/gh/JetBrains/JetBrainsMono@2.242/fonts/webfonts/JetBrainsMono-Regular.woff2',
+    'https://cdn.jsdelivr.net/gh/JetBrains/JetBrainsMono@2.242/fonts/ttf/JetBrainsMonoNL-Regular.ttf',
     'https://fonts.gstatic.com/s/roboto/v20/KFOmCnqEu92Fr1Mu4mxK.woff2',
 ];
 
