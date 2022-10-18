@@ -121,8 +121,9 @@ npm/microtip@0.2.2/microtip.min.css
             </div>
         </footer>
         <div id="description-modal" data-micromodal-close class="modal">
-            <div tabindex="-1"  class="modal-overlay">
+            <div tabindex="-1" class="modal-overlay">
                 <div role="dialog" class="modal-content shadow-bottom p-3 m-3">
+                    <div class="modal-close" data-micromodal-close><span class="icon-close"></span></div>
                     <h2 class="mt-0">What is NoPaste?</h2>
 
                     <span class="pink">NoPaste</span> is an open-source website similar to Pastebin where you can store any piece of code,
@@ -144,7 +145,7 @@ npm/microtip@0.2.2/microtip.min.css
                     🔍 Google <span class="pink">will not index</span> your data, even if your link is public<br />
                     <br />
                     If you want to know more, you can find more information on
-                    <a href="https://github.com/bokub/nopaste" rel="noopener" target="_blank" class="pink">Github</a>
+                    <a href="https://github.com/bokub/nopaste" rel="noopener" target="_blank" class="pink">GitHub</a>
                     <div class="additional-info">
                         Note: NoPaste is an improved version of Topaz's
                         <a href="https://topaz.github.io/paste" rel="noopener" target="_blank">Paste</a>
@@ -155,6 +156,7 @@ npm/microtip@0.2.2/microtip.min.css
         <div id="error-modal" class="modal" data-micromodal-close>
             <div tabindex="-1" class="modal-overlay">
                 <div role="dialog" class="modal-content shadow-bottom p-3 m-3">
+                    <div class="modal-close" data-micromodal-close><span class="icon-close"></span></div>
                     NoPaste cannot decompress the URL<br /><br />
                     It's possible that you clicked on an invalid link<br /><br />
                     Sorry about that
