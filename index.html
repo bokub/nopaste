@@ -120,9 +120,9 @@ npm/microtip@0.2.2/microtip.min.css
                 </div>
             </div>
         </footer>
-        <div id="description-modal" class="modal">
-            <div tabindex="-1" data-micromodal-close class="modal-overlay">
-                <div role="dialog" class="modal-content shadow-bottom p-3 m-3" data-micromodal-close>
+        <div id="description-modal" data-micromodal-close class="modal">
+            <div tabindex="-1"  class="modal-overlay">
+                <div role="dialog" class="modal-content shadow-bottom p-3 m-3">
                     <h2 class="mt-0">What is NoPaste?</h2>
 
                     <span class="pink">NoPaste</span> is an open-source website similar to Pastebin where you can store any piece of code,
@@ -152,9 +152,9 @@ npm/microtip@0.2.2/microtip.min.css
                 </div>
             </div>
         </div>
-        <div id="error-modal" class="modal">
-            <div tabindex="-1" data-micromodal-close class="modal-overlay">
-                <div role="dialog" class="modal-content shadow-bottom p-3 m-3" data-micromodal-close>
+        <div id="error-modal" class="modal" data-micromodal-close>
+            <div tabindex="-1" class="modal-overlay">
+                <div role="dialog" class="modal-content shadow-bottom p-3 m-3">
                     NoPaste cannot decompress the URL<br /><br />
                     It's possible that you clicked on an invalid link<br /><br />
                     Sorry about that

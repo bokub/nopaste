@@ -100,6 +100,7 @@ h1 {
     max-height: 100vh;
     overflow-y: auto;
     box-sizing: border-box;
+    cursor: initial;
 }
 .modal-content .additional-info {
     opacity: 0.75;
@@ -118,6 +119,7 @@ h1 {
     display: flex;
     justify-content: center;
     align-items: center;
+    cursor: pointer;
 }
 
 /* Form elements */
