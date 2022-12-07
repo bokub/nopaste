@@ -7,7 +7,7 @@ body {
 body {
     display: flex;
     flex-flow: column;
-    color: #fff;
+    color: #f00;
     font: normal 14px Roboto, sans-serif;
     background-color: #282a36;
 }
@@ -24,7 +24,7 @@ body {
 #controls,
 #copy,
 footer {
-    background-color: #3b3b47;
+    background-color: #1c0505;
     z-index: 10;
 }
 
@@ -139,8 +139,8 @@ h1 {
 button,
 input[type='text'],
 input[type='search'] {
-    background-color: #3b3b47 !important;
-    color: #fff !important;
+    background-color: #3b3b4740 !important;
+    color: #ccc !important;
     border-radius: 2px !important;
     border: 1px solid #ccc !important;
     font: normal 14px Roboto, sans-serif;
@@ -160,15 +160,15 @@ button {
     cursor: pointer;
 }
 button:hover {
-    background-color: rgba(255, 255, 255, 0.1) !important;
+    background-color: rgba(255, 128, 128, 0.3) !important;
 }
 .ss-content {
-    background-color: #282936;
-    color: #dedede;
+    background-color: #282936c0;
+    color: #ccc;
     font-size: 14px;
 }
 .ss-content .ss-disabled {
-    background-color: #3b3b47 !important;
+    background-color: #1b1b27c0 !important;
 }
 
 /* Fonts */
@@ -194,7 +194,6 @@ button:hover {
 
 @font-face {
     font-family: 'icomoon';
-    /* Can be updated using the JSON data from https://github.com/bokub/nopaste/issues/11 */
     src: url('data:application/x-font-woff;charset=utf-8;base64,AAEAAAALAIAAAwAwT1MvMg8SBccAAAC8AAAAYGNtYXAXVtKKAAABHAAAAFRnYXNwAAAAEAAAAXAAAAAIZ2x5ZkmZnrUAAAF4AAABVGhlYWQhhmIeAAACzAAAADZoaGVhB0IDyQAAAwQAAAAkaG10eBYAAoAAAAMoAAAAIGxvY2EBLgDcAAADSAAAABJtYXhwAAwAIwAAA1wAAAAgbmFtZZlKCfsAAAN8AAABhnBvc3QAAwAAAAAFBAAAACAAAwOaAZAABQAAApkCzAAAAI8CmQLMAAAB6wAzAQkAAAAAAAAAAAAAAAAAAAABEAAAAAAAAAAAAAAAAAAAAABAAADpAwPA/8AAQAPAAEAAAAABAAAAAAAAAAAAAAAgAAAAAAADAAAAAwAAABwAAQADAAAAHAADAAEAAAAcAAQAOAAAAAoACAACAAIAAQAg6QP//f//AAAAAAAg6QD//f//AAH/4xcEAAMAAQAAAAAAAAAAAAAAAQAB//8ADwABAAAAAAAAAAAAAgAANzkBAAAAAAEAAAAAAAAAAAACAAA3OQEAAAAAAQAAAAAAAAAAAAIAADc5AQAAAAABANYAgQMqAtUACwAAAQcXBycHJzcnNxc3Ayru7jzu7jzu7jzu7gKZ7u487u487u487u4AAgCAACsDgAMrAAsAEAAAAQcnNzYzMh8BFhUUCQEXASMDdE6gTgwSEgxkDP0AAdig/iigAn9OoE4MDGQMEhL+QAHYoP4oAAAAAwCqACsDgALVABgAHAAgAAABMhcWFRQHBisBFSc3FTMyNzY1NCcmIyE1ARUhNRE1IRUC1kYyMjIyRlaAgGAiGhoaGiL9ygKs/VQBAAHVMjJGRjIyVoCAVhoaIiIaGlQBAFRU/axUVAADAIAAqwOAAqsAAwAHAAsAABM1IRUBIRUhETUhFYADAP0AAwD9AAIAAYFUVAEqVv5WVlYAAQAAAAEAAKuSQ39fDzz1AAsEAAAAAADfdA77AAAAAN90DvsAAAAAA4ADKwAAAAgAAgAAAAAAAAABAAADwP/AAAAEAAAAAAADgAABAAAAAAAAAAAAAAAAAAAACAQAAAAAAAAAAAAAAAIAAAAEAADWBAAAgAQAAKoEAACAAAAAAAAKABQAHgA4AFwAkACqAAAAAQAAAAgAIQADAAAAAAACAAAAAAAAAAAAAAAAAAAAAAAAAA4ArgABAAAAAAABAAcAAAABAAAAAAACAAcAYAABAAAAAAADAAcANgABAAAAAAAEAAcAdQABAAAAAAAFAAsAFQABAAAAAAAGAAcASwABAAAAAAAKABoAigADAAEECQABAA4ABwADAAEECQACAA4AZwADAAEECQADAA4APQADAAEECQAEAA4AfAADAAEECQAFABYAIAADAAEECQAGAA4AUgADAAEECQAKADQApGljb21vb24AaQBjAG8AbQBvAG8AblZlcnNpb24gMS4wAFYAZQByAHMAaQBvAG4AIAAxAC4AMGljb21vb24AaQBjAG8AbQBvAG8Abmljb21vb24AaQBjAG8AbQBvAG8AblJlZ3VsYXIAUgBlAGcAdQBsAGEAcmljb21vb24AaQBjAG8AbQBvAG8AbkZvbnQgZ2VuZXJhdGVkIGJ5IEljb01vb24uAEYAbwBuAHQAIABnAGUAbgBlAHIAYQB0AGUAZAAgAGIAeQAgAEkAYwBvAE0AbwBvAG4ALgAAAAMAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=')
         format('truetype');
     font-weight: normal;

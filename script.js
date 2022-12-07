@@ -16,10 +16,10 @@ const init = () => {
 };
 
 const initCodeEditor = () => {
-    CodeMirror.modeURL = 'https://cdn.jsdelivr.net/npm/codemirror@5.65.5/mode/%N/%N.js';
+    CodeMirror.modeURL = 'https://cdn.jsdelivr.net/npm/codemirror@6.65.7/mode/%N/%N.js';
     editor = new CodeMirror(byId('editor'), {
         lineNumbers: true,
-        theme: 'dracula',
+        theme: '3024-night',
         readOnly: readOnly,
         lineWrapping: false,
         scrollbarStyle: 'simple',
@@ -30,7 +30,7 @@ const initCodeEditor = () => {
 
     statsEl = byId('stats');
     editor.on('change', () => {
-        statsEl.innerHTML = `Length: ${editor.getValue().length} |  Lines: ${editor['doc'].size}`;
+        statsEl.innerHTML = `${editor.getValue().length} chars, ${editor.getValue().split(' ').length} words`;
         hideCopyBar();
     });
 };
@@ -48,7 +48,7 @@ const initLangSelector = () => {
             const language = e.data || { mime: null, mode: null };
             editor.setOption('mode', language.mime);
             CodeMirror.autoLoadMode(editor, language.mode);
-            document.title = e.text && e.text !== 'Plain Text' ? `NoPaste - ${e.text} code snippet` : 'NoPaste';
+            document.title = e.text && e.text !== 'Plain Text' ? `Paste - ${e.text} snippet` : 'Paste';
         },
     });
 
@@ -109,10 +109,6 @@ const generateLink = (mode) => {
             return;
         }
         const url = buildUrl(base64, mode);
-        statsEl.innerHTML = `Data length: ${data.length} |  Link length: ${url.length} | Compression ratio: ${Math.round(
-            (100 * url.length) / data.length
-        )}%`;
-
         showCopyBar(url);
     });
 };
@@ -138,7 +134,7 @@ const hideCopyBar = (success) => {
     setTimeout(() => {
         copyBar.classList.add('hidden');
         copyButton.innerText = 'Copy';
-    }, 800);
+    }, 400);
 };
 
 const disableLineWrapping = () => {
@@ -163,7 +159,7 @@ const buildUrl = (rawData, mode) => {
     const query = shorten('Plain Text') === select.selected() ? '' : `?l=${encodeURIComponent(select.selected())}`;
     const url = base + query + '#' + rawData;
     if (mode === 'markdown') {
-        return `[NoPaste snippet](${url})`;
+        return `[Paste snippet](${url})`;
     }
     if (mode === 'iframe') {
         const height = editor['doc'].height + 45;

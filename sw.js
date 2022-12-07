@@ -17,19 +17,19 @@ const PRECACHE_URLS = [
         'npm/slim-select@1.27.1/dist/slimselect.min.js,' +
         'npm/clipboard@2.0.11/dist/clipboard.min.js,' +
         'npm/micromodal@0.4.10/dist/micromodal.min.js,' +
-        'npm/codemirror@5.65.5,' +
-        'npm/codemirror@5.65.5/addon/mode/loadmode.min.js,' +
-        'npm/codemirror@5.65.5/addon/mode/overlay.min.js,' +
-        'npm/codemirror@5.65.5/addon/mode/multiplex.min.js,' +
-        'npm/codemirror@5.65.5/addon/mode/simple.min.js,' +
-        'npm/codemirror@5.65.5/addon/scroll/simplescrollbars.js,' +
-        'npm/codemirror@5.65.5/mode/meta.min.js',
+        'npm/codemirror@6.65.7,' +
+        'npm/codemirror@6.65.7/addon/mode/loadmode.min.js,' +
+        'npm/codemirror@6.65.7/addon/mode/overlay.min.js,' +
+        'npm/codemirror@6.65.7/addon/mode/multiplex.min.js,' +
+        'npm/codemirror@6.65.7/addon/mode/simple.min.js,' +
+        'npm/codemirror@6.65.7/addon/scroll/simplescrollbars.js,' +
+        'npm/codemirror@6.65.7/mode/meta.min.js',
     'https://cdn.jsdelivr.net/combine/' +
         'npm/bootstrap@4.6.1/dist/css/bootstrap-grid.min.css,' +
         'npm/slim-select@1.27.1/dist/slimselect.min.css,' +
-        'npm/codemirror@5.65.5/lib/codemirror.min.css,' +
-        'npm/codemirror@5.65.5/addon/scroll/simplescrollbars.css,' +
-        'npm/codemirror@5.65.5/theme/dracula.min.css,' +
+        'npm/codemirror@6.65.7/lib/codemirror.min.css,' +
+        'npm/codemirror@6.65.7/addon/scroll/simplescrollbars.css,' +
+        'npm/codemirror@6.65.7/theme/3024-night.min.css,' +
         'npm/microtip@0.2.2/microtip.min.css',
     'https://cdn.jsdelivr.net/gh/JetBrains/JetBrainsMono@2.242/fonts/webfonts/JetBrainsMono-Regular.woff2',
     'https://cdn.jsdelivr.net/gh/JetBrains/JetBrainsMono@2.242/fonts/ttf/JetBrainsMonoNL-Regular.ttf',
