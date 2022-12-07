@@ -71,12 +71,16 @@ a:focus {
     border-bottom: 1px solid rgba(255, 255, 255, 0.5);
 }
 
+#controls a h1 {
+    color: #D6001C;
+}
+
 .CodeMirror {
     height: 100%;
     font-family: JetBrainsMono, sans-serif;
 }
 h1 {
-    font: normal 24px JetBrainsMono, sans-serif;
+    font: normal 24px JetBrainsMono, sans-serif; 
     white-space: nowrap;
 }
 .mono {
