@@ -58,8 +58,20 @@ const initLangSelector = () => {
 };
 
 const initCode = () => {
-    let base64 = location.hash.substr(1);
-    if (base64.length === 0) {
+    let base64 = location.hash;
+
+    const gist = new URLSearchParams(window.location.search).get('gist');
+    if (gist) {
+        fetch('https://gist.githubusercontent.com/' + gist + "/raw").then(res => res.text()).then(text => editor.setValue(text));
+        return;
+    }
+
+    base64 = base64.substring(1);
+    if (base64.length == 0)
+        return;
+
+    if (base64.startsWith('gist/')) {
+        fetch('https://gist.githubusercontent.com/' + base64.substring(5) + "/raw").then(res => res.text()).then(text => editor.setValue(text));
         return;
     }
     decompress(base64, (code, err) => {
