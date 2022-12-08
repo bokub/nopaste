@@ -127,26 +127,40 @@ const generateLink = (mode) => {
 
 // Open the "Copy" bar and select the content
 const showCopyBar = (dataToCopy) => {
-    byId('copy').classList.remove('hidden');
-    const linkInput = byId('copy-link');
-    linkInput.value = dataToCopy;
-    linkInput.focus();
-    linkInput.setSelectionRange(0, dataToCopy.length);
+    copyToClipboard(dataToCopy);
+    // await (navigator.clipboard).write(dataToCopy);
+    let orig = byId("copy-button").innerText;
+    byId("copy-button").innerText = "Copied!";
+    setTimeout(() => {
+        byId("copy-button").innerText = orig;
+    }, 400);
 };
 
-// Close the "Copy" bar
-const hideCopyBar = (success) => {
-    const copyButton = byId('copy-btn');
-    const copyBar = byId('copy');
-    if (!success) {
-        copyBar.classList.add('hidden');
-        return;
+// return a promise
+function copyToClipboard(textToCopy) {
+    // navigator clipboard api needs a secure context (https)
+    if (navigator.clipboard && window.isSecureContext) {
+        // navigator clipboard api method'
+        return navigator.clipboard.writeText(textToCopy);
+    } else {
+        // text area method
+        let textArea = document.createElement("textarea");
+        textArea.value = textToCopy;
+        // make the textarea out of viewport
+        textArea.style.position = "absolute"; textArea.style.opacity = 0;
+        document.body.appendChild(textArea);
+        textArea.select();
+        return new Promise((res, rej) => {
+            // here the magic happens
+            document.execCommand('copy') ? res() : rej();
+            textArea.remove();
+        });
     }
-    copyButton.innerText = 'Copied !';
-    setTimeout(() => {
-        copyBar.classList.add('hidden');
-        copyButton.innerText = 'Copy';
-    }, 400);
+}
+
+// Close the "Copy" bar
+const hideCopyBar = async (success) => {
+
 };
 
 const disableLineWrapping = () => {
