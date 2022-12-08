@@ -51,13 +51,15 @@ npm/microtip@0.2.2/microtip.min.css
     <div id="controls" class="container-fluid shadow-bottom hide-readonly">
         <div class="row align-items-center justify-content-end my-1">
             <div class="col-auto mb-1">
-               <a href = "/"><h1 class="my-0">Paste</h1></a>
+                <a href="/">
+                    <h1 class="my-0">Paste</h1>
+                </a>
             </div>
             <div class="col"></div>
             <div class="col-auto my-1">
                 <select id="language"></select>
             </div>
-            <div class="col-auto">
+            <div>
                 <button onclick="enableLineWrapping()" type="button" id="enable-line-wrapping" aria-label="Wrap Lines"
                     data-microtip-position="bottom" role="tooltip">
                     <span class="icon-notes"></span>
@@ -69,7 +71,7 @@ npm/microtip@0.2.2/microtip.min.css
             </div>
             <div class="col-auto">
                 <button class="py-1 px-2 mx-0 my-1" onclick="generateLink('url')" type="button" id="copy-button">
-                    Copy Link
+                    Copy
                 </button>
             </div>
         </div>
