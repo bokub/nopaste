@@ -57,7 +57,6 @@ const initLangSelector = () => {
         showContent: 'down',
         onChange: (e) => {
             const language = e.data || { mime: null, mode: null };
-            console.log(language.mime, language.mode);
             editor.setOption('mode', language.mime);
             CodeMirror.autoLoadMode(editor, language.mode);
             document.title = e.text && e.text !== 'Plain Text' ? `Paste - ${e.text} Snippet` : 'Paste';
