@@ -56,7 +56,6 @@ const initLangSelector = () => {
         data: data,
         showContent: 'down',
         onChange: (e) => {
-            console.log("Using language: " + e.text + " (" + e.value + ") " + e.mode);
             const language = e.data || { mime: null, mode: null };
             console.log(language.mime, language.mode);
             editor.setOption('mode', language.mime);
