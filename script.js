@@ -22,7 +22,6 @@ const initCodeEditor = () => {
         theme: '3024-night',
         readOnly: readOnly,
         lineWrapping: false,
-        scrollbarStyle: 'simple',
     });
     if (readOnly) {
         document.body.classList.add('readonly');
@@ -36,13 +35,25 @@ const initCodeEditor = () => {
 };
 
 const initLangSelector = () => {
+    var data = CodeMirror.modeInfo.map((e) => ({
+        text: e.name,
+        value: shorten(e.name),
+        data: { mime: e.mime, mode: e.mode },
+    }));
+    data.push({ text: 'Jailbreak Logs', value: 'jblogs', data: { mime: "jblogs", mode: "jblogs" } });
+
+    // Push popular langs to top
+    for (const lang of ['Plain Text', 'Markdown', 'Java', 'C#', 'C++', 'HTML', 'CSS', 'JSON', 'Jailbreak Logs', 'SQL', 'YAML', 'BASH'].reverse()) {
+        const index = data.findIndex((e) => e.text === lang);
+        if (index > -1) {
+            const [e] = data.splice(index, 1);
+            data.unshift(e);
+        }
+    }
+
     select = new SlimSelect({
         select: '#language',
-        data: CodeMirror.modeInfo.map((e) => ({
-            text: e.name,
-            value: shorten(e.name),
-            data: { mime: e.mime, mode: e.mode },
-        })),
+        data: data,
         showContent: 'down',
         onChange: (e) => {
             const language = e.data || { mime: null, mode: null };
