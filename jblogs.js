@@ -46,7 +46,7 @@
           return "header";
         }
 
-        if (stream.match(/\((Guard|Warden)\)/)) {
+        if (stream.match(/\((Guard|Warden)\)/i)) {
           state.matchedPlayer = false;
           if (state.matchedPlayerTeam)
             state.matchedTarget = true;
