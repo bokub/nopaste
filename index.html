@@ -5,7 +5,7 @@
         <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0" />
         <meta http-equiv="X-UA-Compatible" content="ie=edge" />
 
-        <title>NoPaste - No-database paste service</title>
+        <title>NoPaste - blank_dvth</title>
         <link
             rel="stylesheet"
             type="text/css"
@@ -20,15 +20,15 @@ npm/microtip@0.2.2/microtip.min.css
         />
         <link rel="stylesheet" href="style.css" />
         <link href="favicon.ico" rel="icon" type="image/x-icon" />
-        <link rel="canonical" href="https://nopaste.ml/" />
+        <link rel="canonical" href="https://nopaste.blankdvth.com/" />
         <meta
             name="description"
             property="og:description"
-            content="NoPaste is a client-side paste service which works with no database, and no back-end code. The data is stored entirely in the links and nowhere else"
+            content="Modified version of NoPaste, a client-side paste service with no database, and no back-end code. The data is stored entirely in the links -- not a server."
         />
-        <meta property="og:title" content="NoPaste - No-database paste service" />
+        <meta property="og:title" content="NoPaste - blank_dvth" />
         <meta property="og:image" content="https://cdn.jsdelivr.net/gh/bokub/nopaste@images/logo.png" />
-        <meta property="og:url" content="https://nopaste.ml/" />
+        <meta property="og:url" content="https://nopaste.blankdvth.com/" />
         <meta property="og:type" content="website" />
     </head>
     <body class="m-0">
@@ -66,7 +66,7 @@ npm/microtip@0.2.2/microtip.min.css
                         data-micromodal-trigger="description-modal"
                         >About</a
                     >
-                    <a href="https://github.com/bokub/nopaste" rel="noopener" target="_blank" class="mx-3">Source</a>
+                    <a href="https://github.com/blankdvth/nopaste" rel="noopener" target="_blank" class="mx-3">Source</a>
                 </div>
                 <div class="col"></div>
                 <div class="col-auto my-1">
@@ -97,10 +97,7 @@ npm/microtip@0.2.2/microtip.min.css
                 </div>
                 <div class="col-auto">
                     <button class="py-1 px-2 mx-0 my-1" onclick="generateLink('url')" type="button">
-                        Generate link
-                    </button>
-                    <button class="py-1 px-2 mx-1 my-1" onclick="generateLink('markdown')" type="button">
-                        Generate markdown
+                        Link
                     </button>
                     <button class="py-1 px-2 mx-0 my-1" onclick="generateLink('iframe')" type="button">Embed</button>
                 </div>
@@ -144,12 +141,13 @@ npm/microtip@0.2.2/microtip.min.css
                     ><br />
                     🔍 Google <span class="pink">will not index</span> your data, even if your link is public<br />
                     <br />
+                    
+                    <h2 class="mt-0">What Changed?</h2>
+                    This fork of NoPaste adds additional functionality that I personally find useful, as well as additional Syntax
+                    Highlighting languages for custom formats.
+                    
                     If you want to know more, you can find more information on
-                    <a href="https://github.com/bokub/nopaste" rel="noopener" target="_blank" class="pink">GitHub</a>
-                    <div class="additional-info">
-                        Note: NoPaste is an improved version of Topaz's
-                        <a href="https://topaz.github.io/paste" rel="noopener" target="_blank">Paste</a>
-                    </div>
+                    <a href="https://github.com/blankdvth/nopaste" rel="noopener" target="_blank" class="pink">GitHub</a>
                 </div>
             </div>
         </div>
