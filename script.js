@@ -16,13 +16,12 @@ const init = () => {
 };
 
 const initCodeEditor = () => {
-    CodeMirror.modeURL = 'https://cdn.jsdelivr.net/npm/codemirror@5.65.5/mode/%N/%N.js';
+    CodeMirror.modeURL = 'https://cdn.jsdelivr.net/npm/codemirror@6.65.7/mode/%N/%N.js';
     editor = new CodeMirror(byId('editor'), {
         lineNumbers: true,
         theme: 'dracula',
         readOnly: readOnly,
         lineWrapping: false,
-        scrollbarStyle: 'simple',
     });
     if (readOnly) {
         document.body.classList.add('readonly');
@@ -30,25 +29,40 @@ const initCodeEditor = () => {
 
     statsEl = byId('stats');
     editor.on('change', () => {
-        statsEl.innerHTML = `Length: ${editor.getValue().length} |  Lines: ${editor['doc'].size}`;
+        var wordCount = editor.getValue().split(' ').concat(editor.getValue().split('\n')).filter(function (str) {return str != ''}).length;
+        wordCount -= (wordCount > 0 ? 1 : 0);
+        statsEl.innerHTML = `Characters: ${editor.getValue().length} | Words: ${wordCount} |  Lines: ${editor.lineCount()}`;
         hideCopyBar();
     });
 };
 
 const initLangSelector = () => {
+    var data = CodeMirror.modeInfo.map((e) => ({
+        text: e.name,
+        value: shorten(e.name),
+        data: { mime: e.mime, mode: e.mode },
+    }));
+    // Add custom languages
+    data.push({ text: 'Jailbreak Logs', value: 'jblogs', data: { mime: "jblogs", mode: "jblogs" } });
+
+    // Push popular languages to the top
+    for (const lang of ['Plain Text', 'Python', 'Java', 'Markdown', 'JSON', 'C#', 'C++', 'HTML', 'CSS', 'TTT Logs', 'Jailbreak Logs', 'YAML', 'BASH'].reverse()) {
+        const index = data.findIndex((e) => e.text === lang);
+        if (index > -1) {
+            const [e] = data.splice(index, 1);
+            data.unshift(e);
+        }
+    }
+
     select = new SlimSelect({
         select: '#language',
-        data: CodeMirror.modeInfo.map((e) => ({
-            text: e.name,
-            value: shorten(e.name),
-            data: { mime: e.mime, mode: e.mode },
-        })),
+        data: data,
         showContent: 'down',
         onChange: (e) => {
             const language = e.data || { mime: null, mode: null };
             editor.setOption('mode', language.mime);
             CodeMirror.autoLoadMode(editor, language.mode);
-            document.title = e.text && e.text !== 'Plain Text' ? `NoPaste - ${e.text} code snippet` : 'NoPaste';
+            document.title = e.text && e.text !== 'Plain Text' ? `NoPaste+ - ${e.text} Snippet - blank_dvth` : 'NoPaste+';
         },
     });
 
@@ -58,10 +72,25 @@ const initLangSelector = () => {
 };
 
 const initCode = () => {
-    let base64 = location.hash.substr(1);
-    if (base64.length === 0) {
+    let base64 = location.hash;
+
+    // Note: Syntax highlighting can still be done with the ?lang= query param
+    // Allow pulling from a GitHub Gist with the syntax nopaste.blankdvth.com/#gist/username/gistid
+    base64 = base64.substring(1);
+    if (base64.length == 0)
+        return;
+
+    if (base64.startsWith('gist/')) {
+        fetch('https://gist.githubusercontent.com/' + base64.substring(5) + "/raw").then(res => res.text()).then(text => editor.setValue(text));
         return;
     }
+
+    // Allow pulling from my own Hastebin instance with the syntax nopaste.blankdvth.com/#haste/hastebinid
+    if (base64.startsWith('haste/')) {
+        fetch('https://hastebin.blankdvth.com/raw/' + base64.substring(6)).then(res => res.text()).then(text => editor.setValue(text));
+        return;
+    }
+
     decompress(base64, (code, err) => {
         if (err) {
             console.error('Failed to decompress data: ' + err);
@@ -109,36 +138,46 @@ const generateLink = (mode) => {
             return;
         }
         const url = buildUrl(base64, mode);
-        statsEl.innerHTML = `Data length: ${data.length} |  Link length: ${url.length} | Compression ratio: ${Math.round(
-            (100 * url.length) / data.length
-        )}%`;
-
         showCopyBar(url);
     });
 };
 
 // Open the "Copy" bar and select the content
 const showCopyBar = (dataToCopy) => {
-    byId('copy').classList.remove('hidden');
-    const linkInput = byId('copy-link');
-    linkInput.value = dataToCopy;
-    linkInput.focus();
-    linkInput.setSelectionRange(0, dataToCopy.length);
+    copyToClipboard(dataToCopy);
+    // await (navigator.clipboard).write(dataToCopy);
+    let orig = byId("copy-button").innerText;
+    byId("copy-button").innerText = "Copied!";
+    setTimeout(() => {
+        byId("copy-button").innerText = orig;
+    }, 400);
 };
 
-// Close the "Copy" bar
-const hideCopyBar = (success) => {
-    const copyButton = byId('copy-btn');
-    const copyBar = byId('copy');
-    if (!success) {
-        copyBar.classList.add('hidden');
-        return;
+// return a promise
+function copyToClipboard(textToCopy) {
+    // navigator clipboard api needs a secure context (https)
+    if (navigator.clipboard && window.isSecureContext) {
+        // navigator clipboard api method'
+        return navigator.clipboard.writeText(textToCopy);
+    } else {
+        // text area method
+        let textArea = document.createElement("textarea");
+        textArea.value = textToCopy;
+        // make the textarea out of viewport
+        textArea.style.position = "absolute"; textArea.style.opacity = 0;
+        document.body.appendChild(textArea);
+        textArea.select();
+        return new Promise((res, rej) => {
+            // here the magic happens
+            document.execCommand('copy') ? res() : rej();
+            textArea.remove();
+        });
     }
-    copyButton.innerText = 'Copied !';
-    setTimeout(() => {
-        copyBar.classList.add('hidden');
-        copyButton.innerText = 'Copy';
-    }, 800);
+}
+
+// Close the "Copy" bar
+const hideCopyBar = async (success) => {
+
 };
 
 const disableLineWrapping = () => {
@@ -163,7 +202,7 @@ const buildUrl = (rawData, mode) => {
     const query = shorten('Plain Text') === select.selected() ? '' : `?l=${encodeURIComponent(select.selected())}`;
     const url = base + query + '#' + rawData;
     if (mode === 'markdown') {
-        return `[NoPaste snippet](${url})`;
+        return `[NoPaste+ snippet](${url})`;
     }
     if (mode === 'iframe') {
         const height = editor['doc'].height + 45;
