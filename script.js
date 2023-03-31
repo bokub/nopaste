@@ -103,12 +103,15 @@ const initModals = () => {
 
 const generateLink = (mode) => {
     const data = editor.getValue();
-    compress(data, (base64, err) => {
+    compress(data, async (base64, err) => {
         if (err) {
             alert('Failed to compress data: ' + err);
             return;
         }
-        const url = buildUrl(base64, mode);
+        let url = buildUrl(base64, mode);
+        if (mode === 'shortUrl') {
+            url = await shortenUrl(url);
+        }
         statsEl.innerHTML = `Data length: ${data.length} |  Link length: ${url.length} | Compression ratio: ${Math.round(
             (100 * url.length) / data.length
         )}%`;
@@ -155,6 +158,26 @@ const enableLineWrapping = () => {
 
 const openInNewTab = () => {
     window.open(location.href.replace(/[?&]readonly/, ''));
+};
+
+// Shorten the shareable URL
+const shortenUrl = (url) => {
+    return new Promise((resolve, reject) => {
+        window.shortenUrlCallback = (data) => {
+            document.body.removeChild(script);
+            if (data.shorturl) {
+                resolve(data.shorturl);
+            } else {
+                reject(data.errormessage);
+            }
+        };
+        let script = document.createElement('script');
+        script.src = 'https://v.gd/create.php?format=json&callback=shortenUrlCallback&url=' + encodeURIComponent(url);
+        document.body.appendChild(script);
+    }).catch((err) => {
+        alert('Failed to shorten URL: ' + err);
+        return url;
+    });
 };
 
 // Build a shareable URL
