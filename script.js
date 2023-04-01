@@ -13,6 +13,7 @@ const init = () => {
     initCode();
     initClipboard();
     initModals();
+    initSaveListener();
 };
 
 const initCodeEditor = () => {
@@ -178,6 +179,29 @@ function copyToClipboard(textToCopy) {
             textArea.remove();
         });
     }
+}
+
+function initSaveListener() {
+    document.addEventListener('keydown', e => {
+        if (e.ctrlKey && e.key === 's') {
+            e.preventDefault();
+            sendPost();
+        }
+    });
+}
+
+function sendPost() {
+    fetch("https://haste.msws.xyz/documents", {
+        method: "POST",
+        body: editor.getValue()
+    }).then(res => res.json()).then(json => {
+        const base = `${location.protocol}//${location.host}${location.pathname}`;
+        const query = (shorten('Plain Text') === select.selected()) ? '' : `?l=${encodeURIComponent(select.selected())}`;
+        const url = base + query + '#haste/' + json.key;
+        showCopyBar(url);
+    }).catch(err => {
+        console.error(err);
+    });
 }
 
 // Close the "Copy" bar
