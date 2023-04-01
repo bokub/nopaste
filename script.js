@@ -85,6 +85,17 @@ const initCode = () => {
         fetch('https://gist.githubusercontent.com/' + base64.substring(5) + "/raw").then(res => res.text()).then(text => editor.setValue(text));
         return;
     }
+
+    if (base64.startsWith('haste/')) {
+        fetch('https://haste.msws.xyz/raw/' + base64.substring(6)).then(res => res.text()).then(text => editor.setValue(text));
+        return;
+    }
+
+    if (base64.startsWith('raw/')) {
+        fetch(base64.substring(4)).then(res => res.text()).then(text => editor.setValue(text));
+        return;
+    }
+
     decompress(base64, (code, err) => {
         if (err) {
             console.error('Failed to decompress data: ' + err);
