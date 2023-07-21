@@ -54,7 +54,7 @@ const initLangSelector = () => {
 
     // Set lang selector
     const l = new URLSearchParams(window.location.search).get('l');
-    select.set(l ? decodeURIComponent(l) : shorten('Plain Text'));
+    select.set(l ? decodeURIComponent(fileExtToLang(l)) : shorten('Plain Text'));
 };
 
 const initCode = () => {
@@ -270,6 +270,19 @@ const hash = function (str, seed = 0) {
     const h = 4294967296 * (2097151 & h2) + (h1 >>> 0);
     return h.toString(36).substr(0, 4).toUpperCase();
 };
+
+const fileExtToLang = function (str) {
+    const mapping = new Map();
+    mapping.set("shll", ["sh", "bash", "zsh"]);
+    mapping.set("pwll", ["ps1"]);
+    mapping.set("perl", ["pl"]);
+    for (const [lang, fileExt] of mapping.entries()) {
+        if (fileExt.includes(str)) {
+            return lang;
+        }
+    }
+    return str;
+}
 
 // Only for tests purposes
 const testAllModes = () => {
