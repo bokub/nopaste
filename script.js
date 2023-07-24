@@ -5,8 +5,12 @@ let editor = null;
 let select = null;
 let clipboard = null;
 let statsEl = null;
+var fileExtToLangMap = null;
 
 const init = () => {
+    Object.entries({
+        'fileExtToLangMap': 'file-extension-to-lang.json',
+    }).forEach(([varName, resource]) => this[varName] = loadResource(resource))
     handleLegacyUrl();
     initCodeEditor();
     initLangSelector();
@@ -54,7 +58,9 @@ const initLangSelector = () => {
 
     // Set lang selector
     const l = new URLSearchParams(window.location.search).get('l');
-    select.set(l ? decodeURIComponent(fileExtToLang(l)) : shorten('Plain Text'));
+    fileExtToLang(l)
+        .then((lang) => select.set(decodeURIComponent(lang)))
+        .catch(select.set(shorten('Plain Text')));
 };
 
 const initCode = () => {
@@ -271,17 +277,31 @@ const hash = function (str, seed = 0) {
     return h.toString(36).substr(0, 4).toUpperCase();
 };
 
-const fileExtToLang = function (str) {
-    const mapping = new Map();
-    mapping.set("shll", ["sh", "bash", "zsh"]);
-    mapping.set("pwll", ["ps1"]);
-    mapping.set("perl", ["pl"]);
-    for (const [lang, fileExt] of mapping.entries()) {
-        if (fileExt.includes(str)) {
-            return lang;
+const fileExtToLang = (str) => {
+    return new Promise((resolve, reject) => {
+        if (str) {
+            fileExtToLangMap.then((mapping) => {
+                for (const [lang, fileExt] of Object.entries(mapping)) {
+                    if (fileExt.includes(str)) {
+                        resolve(lang);
+                        return;
+                    }
+                }
+                resolve(str);
+            });
+        } else {
+            reject(str);
         }
-    }
-    return str;
+    })
+}
+
+const loadResource = (resource) => {
+    return fetch(`./resources/${resource}`)
+        .then(response => response.json())
+        .catch(error => {
+            console.log(error);
+            MicroModal.show('resource-error-modal');
+        });
 }
 
 // Only for tests purposes

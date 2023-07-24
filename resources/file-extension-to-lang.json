@@ -1,0 +1,16 @@
+{
+  "shll": [
+    "sh",
+    "bash",
+    "zsh"
+  ],
+  "pwll": [
+    "ps1"
+  ],
+  "perl": [
+    "pl"
+  ],
+  "mrwn": [
+    "md"
+  ]
+}
