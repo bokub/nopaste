@@ -5,12 +5,8 @@ let editor = null;
 let select = null;
 let clipboard = null;
 let statsEl = null;
-var fileExtToLangMap = null;
 
 const init = () => {
-    Object.entries({
-        'fileExtToLangMap': 'file-extension-to-lang.json',
-    }).forEach(([varName, resource]) => this[varName] = loadResource(resource))
     handleLegacyUrl();
     initCodeEditor();
     initLangSelector();
@@ -57,10 +53,14 @@ const initLangSelector = () => {
     });
 
     // Set lang selector
-    const l = new URLSearchParams(window.location.search).get('l');
-    fileExtToLang(l)
-        .then((lang) => select.set(decodeURIComponent(lang)))
-        .catch(select.set(shorten('Plain Text')));
+    new Promise((resolve, reject, l = new URLSearchParams(window.location.search).get('l')) => {
+        l ? resolve(l) : reject()
+    })
+    .then(l => select.set(decodeURIComponent(l)))
+    .catch((ext = new URLSearchParams(window.location.search).get('e')) => {
+        fileExtToSelectValue(ext).then(e => select.set(decodeURIComponent(e)))
+    })
+    .catch(select.set(shorten('Plain Text')))
 };
 
 const initCode = () => {
@@ -277,31 +277,19 @@ const hash = function (str, seed = 0) {
     return h.toString(36).substr(0, 4).toUpperCase();
 };
 
-const fileExtToLang = (str) => {
-    return new Promise((resolve, reject) => {
-        if (str) {
-            fileExtToLangMap.then((mapping) => {
-                for (const [lang, fileExt] of Object.entries(mapping)) {
-                    if (fileExt.includes(str)) {
-                        resolve(lang);
-                        return;
+const fileExtToSelectValue = (ext) => {
+    return new Promise(resolve => {
+        if (ext) {
+            const info = CodeMirror.findModeByExtension(ext);
+            if (info) {
+                for (const el of select.data.data) {
+                    if (el.data.mode === info.mode) {
+                        resolve(el.value);
                     }
                 }
-                resolve(str);
-            });
-        } else {
-            reject(str);
+            }
         }
     })
-}
-
-const loadResource = (resource) => {
-    return fetch(`./resources/${resource}`)
-        .then(response => response.json())
-        .catch(error => {
-            console.log(error);
-            MicroModal.show('resource-error-modal');
-        });
 }
 
 // Only for tests purposes
