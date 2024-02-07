@@ -61,7 +61,7 @@ Feel free to edit the `height` and `width` attributes, so they suit your needs
 ### Offline usage
 
 When you visit NoPaste for the first time, its code is saved in your browser cache. After that, every NoPaste link you open
-will load really quick, even if your internet connexion is slow.
+will load really quick, even if your internet connection is slow.
 
 What if you have no internet connexion at all? No problem, NoPaste will still work perfectly!
 
