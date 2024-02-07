@@ -86,6 +86,7 @@ These are the maximum link lengths on some apps and browsers.
 | Slack   | 4,000      |
 | QR Code | 2,610      |
 | Bitly   | 2,048      |
+| tinyyrk | 32000      |
 
 | Browser         | Max length                | Notes                                   |
 | --------------- | ------------------------- | --------------------------------------- |
