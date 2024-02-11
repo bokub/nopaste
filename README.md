@@ -61,7 +61,7 @@ Feel free to edit the `height` and `width` attributes, so they suit your needs
 ### Offline usage
 
 When you visit NoPaste for the first time, its code is saved in your browser cache. After that, every NoPaste link you open
-will load really quick, even if your internet connexion is slow.
+will load really quick, even if your internet connection is slow.
 
 What if you have no internet connexion at all? No problem, NoPaste will still work perfectly!
 
@@ -86,6 +86,7 @@ These are the maximum link lengths on some apps and browsers.
 | Slack   | 4,000      |
 | QR Code | 2,610      |
 | Bitly   | 2,048      |
+| TinyURL | 32,000     |
 
 | Browser         | Max length                | Notes                                   |
 | --------------- | ------------------------- | --------------------------------------- |
