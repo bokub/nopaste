@@ -6,7 +6,8 @@
 
 However, what makes NoPaste special is that it works with **no database**, and **no back-end code**. Instead, the data is compressed and **stored entirely in the link** that you share, nowhere else!
 
-> **N.B:** Because all `.ml` domains have been taken down on July 17th, 2023, NoPaste has moved from [nopaste.ml](https://nopaste.ml/) to [nopaste.boris.sh](https://nopaste.boris.sh/)
+> [!NOTE]  
+> Because all `.ml` domains have been taken down on July 17th, 2023, NoPaste has moved from [nopaste.ml](https://nopaste.ml/) to [nopaste.boris.sh](https://nopaste.boris.sh/)
 >
 > You may still be able to visit [nopaste.ml](https://nopaste.ml/) if your visited it **before** with the **same browser** (thanks to the offline usage feature), but it will not work for new visitors.
 >
