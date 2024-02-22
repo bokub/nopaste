@@ -53,8 +53,14 @@ const initLangSelector = () => {
     });
 
     // Set lang selector
-    const l = new URLSearchParams(window.location.search).get('l');
-    select.set(l ? decodeURIComponent(l) : shorten('Plain Text'));
+    new Promise((resolve, reject, l = new URLSearchParams(window.location.search).get('l')) => {
+        l ? resolve(l) : reject()
+    })
+    .then(l => select.set(decodeURIComponent(l)))
+    .catch((ext = new URLSearchParams(window.location.search).get('e')) => {
+        fileExtToSelectValue(ext).then(e => select.set(decodeURIComponent(e)))
+    })
+    .catch(select.set(shorten('Plain Text')))
 };
 
 const initCode = () => {
@@ -270,6 +276,21 @@ const hash = function (str, seed = 0) {
     const h = 4294967296 * (2097151 & h2) + (h1 >>> 0);
     return h.toString(36).substr(0, 4).toUpperCase();
 };
+
+const fileExtToSelectValue = (ext) => {
+    return new Promise(resolve => {
+        if (ext) {
+            const info = CodeMirror.findModeByExtension(ext);
+            if (info) {
+                for (const el of select.data.data) {
+                    if (el.data.mode === info.mode) {
+                        resolve(el.value);
+                    }
+                }
+            }
+        }
+    })
+}
 
 // Only for tests purposes
 const testAllModes = () => {
