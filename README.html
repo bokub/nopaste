@@ -1,0 +1,162 @@
+<span id="markdown-mermaid" aria-hidden="true" data-config="{&quot;darkModeTheme&quot;:&quot;vscode&quot;,&quot;lightModeTheme&quot;:&quot;vscode&quot;,&quot;maxTextSize&quot;:50000,&quot;clickDrag&quot;:&quot;alt&quot;,&quot;showControls&quot;:&quot;onHoverOrFocus&quot;,&quot;resizable&quot;:true,&quot;maxHeight&quot;:&quot;&quot;}"></span>
+				<h1 id="nopaste">NoPaste</h1>
+<p><a href="https://nopaste.boris.sh/?l=tcl#XQAAAQA6BAAAAAAAAAAFYH9MXlzSsUdj4vga48M86Ff/Bo1HzNmlXzjCWCN1Q/EliRJg00jhrYF9eDKWzDi+Su+Pv1o8yGz3V06CtGOt8u9dUN10KuOrmkUrjI/kUqitUUD34YXmq9twyrkxmOl5kaHPNqE2PWTRhnKWCEntngrOOlXC4kxxnXuGB2v4zJ75fIM0htURHr9ysHH+1nHvSRng4zpcYju3Y/RqpGTIowXGoUcIOeKKG8PpYf/9t33i"><img src="https://github.com/bokub/nopaste/raw/images/intro.png" alt="Intro"></a></p>
+<h2 id="was-ist-nopaste">Was ist NoPaste?</h2>
+<h3 id="nopaste-ist-eine-open-source-website-ähnlich-wie-pastebin-auf-der-du-jeden-code-speichern-und-links-zum-einfachen-teilen-generieren-kannst"><a href="https://nopaste.boris.sh/">NoPaste</a> ist eine Open-Source-Website ähnlich wie Pastebin, auf der du jeden Code speichern und Links zum einfachen Teilen generieren kannst</h3>
+<p>Was NoPaste besonders macht, ist, dass es mit <strong>keiner Datenbank</strong> und
+<strong>keinem Back-End-Code</strong> funktioniert. Stattdessen werden die Daten komprimiert
+und <strong>vollständig im Link</strong> gespeichert, den du teilst, nirgendwo sonst!</p>
+<h3 id="wegen-dieser-gestaltung">Wegen dieser Gestaltung</h3>
+<pre><code>- 🗑️ Deine Daten **können nicht gelöscht** werden von NoPaste
+- 🔞 Deine Daten **können nicht zensiert** werden
+- 👁️ Der Server, der NoPaste hostet (oder einen Klon davon) **kann deine
+  Daten nicht lesen oder zugreifen**
+- ⏳ Deine Daten sind **für immer** zugänglich (solange du den Link hast)
+- 🔀 Du kannst auf deine Daten auf **jedem NoPaste-Klon** zugreifen,
+  einschließlich [deinem eigenen](https://github.com/bokub/nopaste/wiki/Deploy-your-own-version-of-NoPaste)
+- 🔍 Google wird deine Daten **nicht indexieren**, auch wenn dein Link
+  öffentlich ist
+</code></pre>
+<blockquote>
+<p><strong>Hinweis:</strong> Dieses Projekt ist eine Kopie von <a href="https://topaz.github.io/paste/#XQAAAQAJAQAAAAAAAAAFFgvDUiqpf8dDPleMqfsqtbQYE28suCtDTB9iyFgGByXgSRMepMuokjoACV4UPgBzwM3p+V/N2rCi8m90FkQfsRuMJ4LrZVFgr81wKDc2okcywbJBz7OGNPpc8xu2lAkpSekqRO+I/OYUUvgB2ckKBp+2avxmAKn6H73WV3t1D5Ip9hwthecGUnLwFSGpPFNI0zb4Ettx7QnIu6NiftBuencR3Bn/l3BNoh8Cb9/uIt3FrH30NrlH01bYPAXPUiTF+44uiFU+zc+owfgB+JPKg/wm72I=">Topaz's Paste-Dienst</a>,
+mit überarbeitetem Design und ein paar zusätzlichen Funktionen (Syntax-Highlighting,
+Zeilennummern, Offline-Nutzung, Einbettung...)</p>
+</blockquote>
+<h2 id="wie-es-funktioniert">Wie es funktioniert</h2>
+<p>Wenn du auf &quot;Link generieren&quot; klickst, komprimiert NoPaste den ganzen Text mit dem
+<a href="https://en.wikipedia.org/wiki/Lempel%E2%80%93Ziv%E2%80%93Markov_chain_algorithm">LZMA-Algorithmus</a>,
+kodiert ihn in <a href="https://en.wikipedia.org/wiki/Base64">Base64</a> und fügt ihn in
+das optionale URL-Fragment nach dem <code>#</code>-Symbol ein:
+<code>nopaste.boris.sh/#&lt;deine Daten gehen hier hin&gt;</code></p>
+<p>Wenn du einen Link öffnest, liest NoPaste, dekodiert und dekomprimiert das,
+was nach dem <code>#</code> kommt, und zeigt das Ergebnis im Editor an.</p>
+<p>Dieser Prozess wird vollständig <strong>in deinem Browser</strong> durchgeführt, und der
+Webserver, der NoPaste hostet, <a href="https://en.wikipedia.org/wiki/Fragment_identifier">hat nie Zugriff auf das Fragment</a></p>
+<p>Zum Beispiel, <a href="https://nopaste.boris.sh/?l=css#XQAAAQB2DQAAAAAAAAAXioAj/ZZaukKWizx++f8w08qY+xe+w0AeNB0EtEDMR1jPECOrMSz2rcy5XqUVTzusmFXo407ujwufsB1Va3cy02BV4Chx15I+SbM8Ei2WS8/MaZa0wIOjHf0s6B9Kcwi1J73qYeIcKm39PEWGnBM4Ym5aXFOF1Irrn1N95vEcl4YI+98rydudZHmsNCmt995GvCpLImwH7yj3SlMadWaQA0jHCrY1ZBvhjSJ9mAAdYjCJLduITZuXomgpqtr3sYI1WKeRGNmPSD8J8WRLtCx0BZl3yWZZrUxJbmVod8cYiPJnlO+CzQA03qA/GZnxhMYd9TPc2Xlq8UIhBX6gmvo/xhHJc/WHnuBFB32xJ37O5FZlZuXGy6wFE/lakVteoqEqgvyan4LfaiL0pMfYapWjV8YoPa/KyVGugANNjvtRw0hRr+Z1IgKoVL2a1xqvQiB65vIXkw68/ui82O1ko9HTbsLMHX/2/CgWZ8TkTEvgr0+dzVqQYIpaWpB3hDnUTHMkG2UehM5iJyJXAgODNqk8IiWCJn5k/j2FeFpchSTWdgi7AeaCowubmWnFTNgNFXLf5zzARWBUGQFT55TiC0ah4HL17jG3rY6fXvAXlm6CWc88ne7wF0opHkLnhfPslssDYo75hDmCfYwJ6asQ/YBkSuuLJjdCEXVjF7Pdw2FhsOiiB0gNXC6ehieM28M+PMGSDRqt0Q0KveMgE44YJ8zFOvpu2Gg41qDkrsYS7Xb/iMnHz66tt69I1rGzrHx88PuI2/CZx+kv+z7a+/Eiq4JC3KTDx4IbNUYptmrIOC2bxGrcjd8TBKGe+dNi8a/PEnXrUXc/OD7D680/Awo+scE8VKuRVN5R7OPg0tmKVQSQkyCf+I3//kGmREyhh6/bCv6tvbEc7hNPNE1js2svlVBF001JlLY7g1w6ls2pjxrKxuCLrkjba1n4s5WlfrbwcX18rqgbfL2tVibHggsy3Lgq4i7fXtuO3JifxfauO66YIRjEWFnACrHbZ14FbHDMylN7GMvo5TusxestU0s6+kiibWq2qZVpi7C5JVKURNQrGEabICn5nUDoOPMZSfNrdmlTOhu4qjKW09XdQPNazTMc83KjG1YOKNjRP23i1oav5muBFRGMDkSXt7wCgv5PCpLZM9w2jC5GCa5oHuH92IWJu5d80fvTRw3GxNQzfMRxgjzfH6xxrzu+EghhbzayUhb3U5aSRSxOtPTPfjT9mxgk7j3f1mRlbYheuhko4/LBIKYvfA5CnN2Yr3VyBYqoZ/ZgP871LU0ix8ZLeaecao0SDj6V35bZ6RB53mcU8BRPfcyZhj0H6BrFcrcfXKVwnNVro/cIrwnoG3GwlpCXGYJmDDeUdlbBj2HrVmvMncd3w8SzPtxw5RAWQP9YPJdE4Tc490BMX4zAkPqirRHLcxG/K5ECLtKtGsnCkg24+XwFo4XRcGfMsbkSSYD7oZ2HkD+1NXYqJKgk+7uee+yrYCZF6xbsb0ca/7r3w8nU9DueSa6XPiaCLSeJ+phw8iK1U4+FcCzqLW4LzgfcGjz64+HM+Xst0YuqzrAI2RU80H2Mr0FnC/qL+klbM+p0yNUBxBd4IQ64SJmh6Irgi7fZq2wfuTuVEAI1qKKwGwBQ6x9UDyY/OqkD63mtRL//oHeipA==">dies ist der CSS-Code, der von NoPaste verwendet wird</a></p>
+<h2 id="weitere-funktionen">Weitere Funktionen</h2>
+<h3 id="eingebettete-nopaste-snippets">Eingebettete NoPaste-Snippets</h3>
+<p>Du kannst NoPaste-Code-Snippets auf deine eigene Website einbinden, indem du
+auf die <em>Einbetten</em>-Schaltfläche klickst und den generierten HTML-Code
+verwendest.</p>
+<p>Hier ist ein Beispiel für generierten Code und wie er aussieht (klick auf den Screenshot
+um die interaktive Version zu sehen)</p>
+<pre><code>&lt;iframe
+    width=&quot;100%&quot;
+    height=&quot;243&quot;
+    frameborder=&quot;0&quot;
+    src=&quot;https://nopaste.boris.sh/?l=py#XQAAAQAbAQAAAAAAAAA0m0pnuFI8c+qagMoNTEcTIfyUWbZjtjmBYcmJSzoNwS5iVMWHzvowv3IPM0vOG5cjrtDRTSVP/0biTIrrahfmbkuMQBBeSiSGpaJOqYJiKmUDYn2Gp1RtWE6gm8fLHMB4eyZ3+rEbUQwWyMcmWqvZ7m96RUeFyZdYbE85JGvhghqF8cyPB0ZjV0OQWsDxn5O5ysMrIcL+pKPk89EtLjAHhA1LZL9F3hzAtTx7I+GlyrxhhXGxAN//CvtaAA==&quot;
+&gt;&lt;/iframe&gt;
+</code></pre>
+<p><a href="https://jsfiddle.net/cqr2kxf5/"><img src="https://raw.githubusercontent.com/bokub/nopaste/images/pagerank.png" alt="iframe"></a></p>
+<p>Fühle dich frei, die <code>height</code>- und <code>width</code>-Attribute zu bearbeiten,
+um sie deinen Anforderungen anzupassen</p>
+<h3 id="offline-nutzung">Offline-Nutzung</h3>
+<p>Wenn du NoPaste zum ersten Mal besuchst, wird sein Code in deinem Browser
+Cache gespeichert. Nach dem Laden alle NoPaste-Links, die du öffnest,
+werden wirklich schnell geladen, auch wenn deine Internetverbindung langsam ist.</p>
+<p>Was ist, wenn du überhaupt keine Internetverbindung hast? Kein Problem,
+NoPaste funktioniert immer noch perfekt!</p>
+<h3 id="editor-funktionen">Editor-Funktionen</h3>
+<pre><code>- Syntax-Hervorhebung (verwende den Sprachselektor)
+- Zeilenumbruch aktivieren / deaktivieren (verwende die Schaltfläche neben
+  dem Sprachselektor)
+- Zeile löschen (`Strg+D`)
+- Mehrere Cursor (`Strg+Klick`)
+- Übliche Tastenkombinationen (`Strg+A`, `Strg+Z`, `Strg+Y`...)
+</code></pre>
+<h2 id="maximale-größen-für-links">Maximale Größen für Links</h2>
+<p>NoPaste ist großartig zum Teilen von Code-Snippets auf verschiedenen Plattformen.</p>
+<p>Dies sind die maximalen Link-Längen auf einigen Apps und Browsern.</p>
+<table>
+<thead>
+<tr>
+<th>App</th>
+<th>Max. Länge</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Reddit</td>
+<td>10.000</td>
+</tr>
+<tr>
+<td>Twitter</td>
+<td>4.088</td>
+</tr>
+<tr>
+<td>Slack</td>
+<td>4.000</td>
+</tr>
+<tr>
+<td>QR-Code</td>
+<td>2.610</td>
+</tr>
+<tr>
+<td>Bitly</td>
+<td>2.048</td>
+</tr>
+<tr>
+<td>TinyURL</td>
+<td>32.000</td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th>Browser</th>
+<th>Max. Länge</th>
+<th>Hinweise</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Google Chrome</td>
+<td>(win) 32779</td>
+<td>(mac) 10000, längere nicht</td>
+</tr>
+<tr>
+<td>Firefox</td>
+<td>&gt;64000</td>
+<td></td>
+</tr>
+<tr>
+<td>Microsoft IE 11</td>
+<td>4043</td>
+<td>Zeigt &gt;2083 nicht an</td>
+</tr>
+<tr>
+<td>Microsoft Edge</td>
+<td>2083</td>
+<td>Alles &gt;2083 schlägt fehl</td>
+</tr>
+<tr>
+<td>Android</td>
+<td>8192</td>
+<td></td>
+</tr>
+<tr>
+<td>Safari</td>
+<td>Viel</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h2 id="nopaste-links-generieren">NoPaste-Links generieren</h2>
+<p>NoPaste-Links können einfach von der Befehlszeile deines Systems erstellt werden:</p>
+<pre><code># Linux
+echo -n 'Hello World' | lzma | base64 -w0 | xargs -0 printf &quot;https://nopaste.boris.sh/#%s\n&quot;
+
+# Mac
+echo -n 'Hello World' | lzma | base64 | xargs -0 printf &quot;https://nopaste.boris.sh/#%s\n&quot;
+
+# Windows / WSL / Linux
+echo -n 'Hello World' | xz --format=lzma | base64 -w0 | \
+  printf &quot;https://nopaste.boris.sh/#%s\n&quot; &quot;$(cat -)&quot;
+</code></pre>
+<h2 id="stellen-sie-ihre-eigene-version-von-nopaste-bereit">Stellen Sie Ihre eigene Version von NoPaste bereit</h2>
+<p>NoPaste ist nur eine Menge statischer Dateien, was es wirklich einfach macht, auf
+jede Art von Dateiserver bereitzustellen.</p>
+<p>Lies <a href="https://github.com/bokub/nopaste/wiki/Deploy-your-own-version-of-NoPaste">das Wiki</a>
+um zu sehen, wie du deine eigene Version von NoPaste kostenlos mithilfe von Github
+Pages bereitgestellt kannst</p>
