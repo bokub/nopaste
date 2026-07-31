@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0" />
+        <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+
+        <title>NoPaste - No-database paste service</title>
+        <link
+            rel="stylesheet"
+            type="text/css"
+            href="https://cdn.jsdelivr.net/combine/
+npm/bootstrap@4.6.1/dist/css/bootstrap-grid.min.css,
+npm/slim-select@1.27.1/dist/slimselect.min.css,
+npm/codemirror@5.65.5/lib/codemirror.min.css,
+npm/codemirror@5.65.5/addon/scroll/simplescrollbars.css,
+npm/codemirror@5.65.5/theme/dracula.min.css,
+npm/microtip@0.2.2/microtip.min.css
+"
+        />
+        <link rel="stylesheet" href="style.css" />
+        <link href="favicon.ico" rel="icon" type="image/x-icon" />
+        <link rel="canonical" href="https://nopaste.boris.sh/" />
+        <meta
+            name="description"
+            property="og:description"
+            content="NoPaste is a client-side paste service which works with no database, and no back-end code. The data is stored entirely in the links and nowhere else"
+        />
+        <meta property="og:title" content="NoPaste - No-database paste service" />
+        <meta property="og:image" content="https://cdn.jsdelivr.net/gh/bokub/nopaste@images/logo.png" />
+        <meta property="og:url" content="https://nopaste.boris.sh/" />
+        <meta property="og:type" content="website" />
+    </head>
+    <body class="m-0">
+        <script>
+            const readOnly = window.location !== window.parent.location || new URLSearchParams(window.location.search).has('readonly');
+            if (readOnly) {
+                document.body.classList.add('readonly');
+            }
+        </script>
+        <div id="copy" class="container-fluid hidden shadow-bottom hide-readonly">
+            <div class="row my-1">
+                <div class="col my-1">
+                    <input type="text" value="copy me" id="copy-link" class="px-2" onclick="this.setSelectionRange(0, this.value.length)" />
+                </div>
+                <div class="col-auto my-1">
+                    <button class="clipboard py-1 px-2 mx-1" id="copy-btn" data-clipboard-target="#copy-link" type="button">
+                        Copy
+                    </button>
+                    <button class="py-1 px-2 mx-1" onclick="hideCopyBar(false)" type="button">Cancel</button>
+                </div>
+            </div>
+        </div>
+        <div id="controls" class="container-fluid shadow-bottom hide-readonly">
+            <div class="row align-items-center justify-content-end my-1">
+                <div class="col-auto mb-1">
+                    <h1 class="my-0"><span>{</span> NoPaste <span>}</span></h1>
+                </div>
+                <div class="col-auto">
+                    <a
+                        href="javascript:void(0)"
+                        class="mx-3"
+                        aria-label="Click to know more about NoPaste"
+                        data-microtip-position="bottom"
+                        role="tooltip"
+                        data-micromodal-trigger="description-modal"
+                        >About</a
+                    >
+                    <a href="https://github.com/bokub/nopaste" rel="noopener" target="_blank" class="mx-3">Source</a>
+                </div>
+                <div class="col"></div>
+                <div class="col-auto my-1">
+                    <select id="language"></select>
+                </div>
+                <div class="col-auto">
+                    <button
+                        onclick="enableLineWrapping()"
+                        type="button"
+                        id="enable-line-wrapping"
+                        aria-label="Enable line wrapping"
+                        data-microtip-position="bottom"
+                        role="tooltip"
+                    >
+                        <span class="icon-notes"></span>
+                    </button>
+                    <button
+                        onclick="disableLineWrapping()"
+                        type="button"
+                        id="disable-line-wrapping"
+                        aria-label="Disable line wrapping"
+                        data-microtip-position="bottom"
+                        role="tooltip"
+                        class="hidden"
+                    >
+                        <span class="icon-wrap-text"></span>
+                    </button>
+                </div>
+                <div class="col-auto">
+                    <button class="py-1 px-2 mx-0 my-1" onclick="generateLink('url')" type="button">
+                        Generate link
+                    </button>
+                    <button class="py-1 px-2 mx-1 my-1" onclick="generateLink('markdown')" type="button">
+                        Generate markdown
+                    </button>
+                    <button class="py-1 px-2 mx-0 my-1" onclick="generateLink('iframe')" type="button">Embed</button>
+                </div>
+            </div>
+        </div>
+        <div id="progress"></div>
+        <div id="editor"></div>
+        <footer id="footer" class="shadow-top container-fluid">
+            <div class="row my-1">
+                <div class="col mono hide-readonly" id="stats">Length: 0 | Lines: 1</div>
+                <div class="col mono show-readonly">Powered by NoPaste</div>
+                <div class="col-auto mono show-readonly">
+                    <a href="javascript:void(0)" onclick="openInNewTab()">
+                        <span class="icon-edit"></span>
+                        Edit
+                    </a>
+                </div>
+            </div>
+        </footer>
+        <div id="description-modal" data-micromodal-close class="modal">
+            <div tabindex="-1" class="modal-overlay">
+                <div role="dialog" class="modal-content shadow-bottom p-3 m-3">
+                    <div class="modal-close" data-micromodal-close><span class="icon-close"></span></div>
+                    <h2 class="mt-0">What is NoPaste?</h2>
+
+                    <span class="pink">NoPaste</span> is an open-source website similar to Pastebin where you can store any piece of code,
+                    and generate links for easy sharing<br /><br />
+
+                    However, what makes NoPaste special is that it works with <span class="pink">no database</span>, and
+                    <span class="pink">no back-end code</span>.<br />
+                    Instead, the data is compressed and <span class="pink">stored entirely in the link</span> that you share, nowhere else!
+
+                    <h3>Because of this design:</h3>
+                    🗑️ Your data <span class="pink">cannot be deleted</span> from NoPaste<br />
+                    🔞 Your data <span class="pink">cannot be censored</span><br />
+                    👁️ The server hosting NoPaste (or any clone of it) <span class="pink">cannot read or access</span> your data<br />
+                    ⏳ Your data will be accessible <span class="pink">forever</span> (as long as you have the link)<br />
+                    🔀 You can access your data on <span class="pink">every NoPaste clone</span>, including
+                    <a href="https://github.com/bokub/nopaste/wiki/Deploy-your-own-version-of-NoPaste" rel="noopener" target="_blank"
+                        >your own</a
+                    ><br />
+                    🔍 Google <span class="pink">will not index</span> your data, even if your link is public<br />
+                    <br />
+                    If you want to know more, you can find more information on
+                    <a href="https://github.com/bokub/nopaste" rel="noopener" target="_blank" class="pink">GitHub</a>
+                    <div class="additional-info">
+                        Note: NoPaste is an improved version of Topaz's
+                        <a href="https://topaz.github.io/paste" rel="noopener" target="_blank">Paste</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="error-modal" class="modal" data-micromodal-close>
+            <div tabindex="-1" class="modal-overlay">
+                <div role="dialog" class="modal-content shadow-bottom p-3 m-3">
+                    <div class="modal-close" data-micromodal-close><span class="icon-close"></span></div>
+                    NoPaste cannot decompress the URL<br /><br />
+                    It's possible that you clicked on an invalid link<br /><br />
+                    Sorry about that
+                </div>
+            </div>
+        </div>
+
+        <script src="https://cdn.jsdelivr.net/combine/
+npm/lzma@2.3.2/src/lzma.min.js,
+npm/slim-select@1.27.1/dist/slimselect.min.js,
+npm/clipboard@2.0.11/dist/clipboard.min.js,
+npm/micromodal@0.4.10/dist/micromodal.min.js,
+npm/codemirror@5.65.5,
+npm/codemirror@5.65.5/addon/mode/loadmode.min.js,
+npm/codemirror@5.65.5/addon/mode/overlay.min.js,
+npm/codemirror@5.65.5/addon/mode/multiplex.min.js,
+npm/codemirror@5.65.5/addon/mode/simple.min.js,
+npm/codemirror@5.65.5/addon/scroll/simplescrollbars.js,
+npm/codemirror@5.65.5/mode/meta.min.js
+"></script>
+        <script src="script.js"></script>
+    </body>
+</html>

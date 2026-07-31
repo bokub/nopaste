@@ -1,11 +1,11 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="de">
     <head>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0" />
         <meta http-equiv="X-UA-Compatible" content="ie=edge" />
 
-        <title>NoPaste - No-database paste service</title>
+        <title>NoPaste - Paste-Service ohne Datenbank</title>
         <link
             rel="stylesheet"
             type="text/css"
@@ -24,9 +24,9 @@ npm/microtip@0.2.2/microtip.min.css
         <meta
             name="description"
             property="og:description"
-            content="NoPaste is a client-side paste service which works with no database, and no back-end code. The data is stored entirely in the links and nowhere else"
+            content="NoPaste ist ein clientseitiger Paste-Service, der ohne Datenbank und ohne Backend-Code funktioniert. Die Daten werden vollständig im Link gespeichert – und nirgendwo sonst."
         />
-        <meta property="og:title" content="NoPaste - No-database paste service" />
+        <meta property="og:title" content="NoPaste - Paste-Service ohne Datenbank" />
         <meta property="og:image" content="https://cdn.jsdelivr.net/gh/bokub/nopaste@images/logo.png" />
         <meta property="og:url" content="https://nopaste.boris.sh/" />
         <meta property="og:type" content="website" />
@@ -41,13 +41,13 @@ npm/microtip@0.2.2/microtip.min.css
         <div id="copy" class="container-fluid hidden shadow-bottom hide-readonly">
             <div class="row my-1">
                 <div class="col my-1">
-                    <input type="text" value="copy me" id="copy-link" class="px-2" onclick="this.setSelectionRange(0, this.value.length)" />
+                    <input type="text" value="kopiere mich" id="copy-link" class="px-2" onclick="this.setSelectionRange(0, this.value.length)" />
                 </div>
                 <div class="col-auto my-1">
                     <button class="clipboard py-1 px-2 mx-1" id="copy-btn" data-clipboard-target="#copy-link" type="button">
-                        Copy
+                        Kopieren
                     </button>
-                    <button class="py-1 px-2 mx-1" onclick="hideCopyBar(false)" type="button">Cancel</button>
+                    <button class="py-1 px-2 mx-1" onclick="hideCopyBar(false)" type="button">Abbrechen</button>
                 </div>
             </div>
         </div>
@@ -60,13 +60,13 @@ npm/microtip@0.2.2/microtip.min.css
                     <a
                         href="javascript:void(0)"
                         class="mx-3"
-                        aria-label="Click to know more about NoPaste"
+                        aria-label="Klicke hier, um mehr über NoPaste zu erfahren"
                         data-microtip-position="bottom"
                         role="tooltip"
                         data-micromodal-trigger="description-modal"
-                        >About</a
+                        >Über</a
                     >
-                    <a href="https://github.com/bokub/nopaste" rel="noopener" target="_blank" class="mx-3">Source</a>
+                    <a href="https://github.com/bokub/nopaste" rel="noopener" target="_blank" class="mx-3">Quellcode</a>
                 </div>
                 <div class="col"></div>
                 <div class="col-auto my-1">
@@ -77,7 +77,7 @@ npm/microtip@0.2.2/microtip.min.css
                         onclick="enableLineWrapping()"
                         type="button"
                         id="enable-line-wrapping"
-                        aria-label="Enable line wrapping"
+                        aria-label="Zeilenumbruch aktivieren"
                         data-microtip-position="bottom"
                         role="tooltip"
                     >
@@ -87,7 +87,7 @@ npm/microtip@0.2.2/microtip.min.css
                         onclick="disableLineWrapping()"
                         type="button"
                         id="disable-line-wrapping"
-                        aria-label="Disable line wrapping"
+                        aria-label="Zeilenumbruch deaktivieren"
                         data-microtip-position="bottom"
                         role="tooltip"
                         class="hidden"
@@ -97,12 +97,12 @@ npm/microtip@0.2.2/microtip.min.css
                 </div>
                 <div class="col-auto">
                     <button class="py-1 px-2 mx-0 my-1" onclick="generateLink('url')" type="button">
-                        Generate link
+                        Link generieren
                     </button>
                     <button class="py-1 px-2 mx-1 my-1" onclick="generateLink('markdown')" type="button">
-                        Generate markdown
+                        Markdown generieren
                     </button>
-                    <button class="py-1 px-2 mx-0 my-1" onclick="generateLink('iframe')" type="button">Embed</button>
+                    <button class="py-1 px-2 mx-0 my-1" onclick="generateLink('iframe')" type="button">Einbetten</button>
                 </div>
             </div>
         </div>
@@ -110,12 +110,12 @@ npm/microtip@0.2.2/microtip.min.css
         <div id="editor"></div>
         <footer id="footer" class="shadow-top container-fluid">
             <div class="row my-1">
-                <div class="col mono hide-readonly" id="stats">Length: 0 | Lines: 1</div>
-                <div class="col mono show-readonly">Powered by NoPaste</div>
+                <div class="col mono hide-readonly" id="stats">Länge: 0 | Zeilen: 1</div>
+                <div class="col mono show-readonly">Bereitgestellt von NoPaste</div>
                 <div class="col-auto mono show-readonly">
                     <a href="javascript:void(0)" onclick="openInNewTab()">
                         <span class="icon-edit"></span>
-                        Edit
+                        Bearbeiten
                     </a>
                 </div>
             </div>
@@ -124,59 +124,14 @@ npm/microtip@0.2.2/microtip.min.css
             <div tabindex="-1" class="modal-overlay">
                 <div role="dialog" class="modal-content shadow-bottom p-3 m-3">
                     <div class="modal-close" data-micromodal-close><span class="icon-close"></span></div>
-                    <h2 class="mt-0">What is NoPaste?</h2>
+                    <h2 class="mt-0">Was ist NoPaste?</h2>
 
-                    <span class="pink">NoPaste</span> is an open-source website similar to Pastebin where you can store any piece of code,
-                    and generate links for easy sharing<br /><br />
+                    <span class="pink">NoPaste</span> ist eine Open-Source-Website ähnlich wie Pastebin, auf der du beliebige
+                    Codeausschnitte speichern und Links zum einfachen Teilen erzeugen kannst.<br /><br />
 
-                    However, what makes NoPaste special is that it works with <span class="pink">no database</span>, and
-                    <span class="pink">no back-end code</span>.<br />
-                    Instead, the data is compressed and <span class="pink">stored entirely in the link</span> that you share, nowhere else!
+                    Das Besondere an NoPaste ist jedoch, dass es <span class="pink">ohne Datenbank</span> und
+                    <span class="pink">ohne Backend-Code</span> funktioniert.<br />
+                    Stattdessen werden die Daten komprimiert und <span class="pink">vollständig im Link gespeichert</span>, den du teilst – nirgendwo sonst.
 
-                    <h3>Because of this design:</h3>
-                    🗑️ Your data <span class="pink">cannot be deleted</span> from NoPaste<br />
-                    🔞 Your data <span class="pink">cannot be censored</span><br />
-                    👁️ The server hosting NoPaste (or any clone of it) <span class="pink">cannot read or access</span> your data<br />
-                    ⏳ Your data will be accessible <span class="pink">forever</span> (as long as you have the link)<br />
-                    🔀 You can access your data on <span class="pink">every NoPaste clone</span>, including
-                    <a href="https://github.com/bokub/nopaste/wiki/Deploy-your-own-version-of-NoPaste" rel="noopener" target="_blank"
-                        >your own</a
-                    ><br />
-                    🔍 Google <span class="pink">will not index</span> your data, even if your link is public<br />
-                    <br />
-                    If you want to know more, you can find more information on
-                    <a href="https://github.com/bokub/nopaste" rel="noopener" target="_blank" class="pink">GitHub</a>
-                    <div class="additional-info">
-                        Note: NoPaste is an improved version of Topaz's
-                        <a href="https://topaz.github.io/paste" rel="noopener" target="_blank">Paste</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div id="error-modal" class="modal" data-micromodal-close>
-            <div tabindex="-1" class="modal-overlay">
-                <div role="dialog" class="modal-content shadow-bottom p-3 m-3">
-                    <div class="modal-close" data-micromodal-close><span class="icon-close"></span></div>
-                    NoPaste cannot decompress the URL<br /><br />
-                    It's possible that you clicked on an invalid link<br /><br />
-                    Sorry about that
-                </div>
-            </div>
-        </div>
-
-        <script src="https://cdn.jsdelivr.net/combine/
-npm/lzma@2.3.2/src/lzma.min.js,
-npm/slim-select@1.27.1/dist/slimselect.min.js,
-npm/clipboard@2.0.11/dist/clipboard.min.js,
-npm/micromodal@0.4.10/dist/micromodal.min.js,
-npm/codemirror@5.65.5,
-npm/codemirror@5.65.5/addon/mode/loadmode.min.js,
-npm/codemirror@5.65.5/addon/mode/overlay.min.js,
-npm/codemirror@5.65.5/addon/mode/multiplex.min.js,
-npm/codemirror@5.65.5/addon/mode/simple.min.js,
-npm/codemirror@5.65.5/addon/scroll/simplescrollbars.js,
-npm/codemirror@5.65.5/mode/meta.min.js
-"></script>
-        <script src="script.js"></script>
-    </body>
-</html>
+                    <h3>Durch dieses Design:</h3>
+                    🗑
